@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Clases - Leaflet</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+	
+</head>
+<body>
+
+<div id="map" style="width: 100%; height: 100%;"></div>
+<script type="text/javascript" src="geojson/us-states.geojson"></script>
+<script type="text/javascript" src="geojson/ags_puntos.geojson"></script>
+
+<!-- Marker Cluster -->
+    <link rel="stylesheet" href="css/MarkerCluster.css" />
+    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+    <script type="text/javascript" src="js/leaflet.markercluster-src.js"></script>
+
+<!-- Control Layers Tree -->
+	<link rel="stylesheet" href="css/L.Control.Layers.Tree.css" />
+    <script type="text/javascript" src="js/L.Control.Layers.Tree.js"></script>
+
+<!-- Easy Button -->
+	<link rel="stylesheet" href="css/easy-button.css" />
+    <script type="text/javascript" src="js/easy-button.js"></script>
+
+<!-- Context Menu -->
+	<link rel="stylesheet" href="css/leaflet.contextmenu.css" />
+    <script type="text/javascript" src="js/leaflet.contextmenu.js"></script>
+
+
+<!-- <script type="text/javascript" src="js/app.js"></script> -->
+<!-- <script type="text/javascript" src="js/clase_clusters.js"></script> -->
+<!-- <script type="text/javascript" src="js/control_layers.js"></script> -->
+<!-- <script type="text/javascript" src="js/clase_easy_button.js"></script> -->
+<script type="text/javascript" src="js/context_menu.js"></script>
+
+
+
+</body>
+</html>
