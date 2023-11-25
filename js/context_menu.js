@@ -1,3 +1,4 @@
+//Clase 25 de Noviembre de 2023
 //variable mapa
 const map = L.map('map',{
 	contextmenu: true,
