@@ -4,6 +4,7 @@
 const map = L.map('map',{
     contextmenu: true,
 	contextmenuWidth: 160,
+	attributionControl: false,
 	contextmenuItems: [{
         text: 'Show coordinates',
         //callback: hello
@@ -57,11 +58,12 @@ function popup(feature, layer) {
         // popup por propiedades especificas
 		//let popupContent = '<b>Estado:</b> ' + feature.properties.name + '<br>' + '<b>Densidad: </b>' + feature.properties.density;
 
-        let popupContent = '';
-		
-		for (let p in feature.properties) {
-			popupContent += '<tr><td><b>' + p + ': </b></td><td>'+ feature.properties[p] + '</td></tr><br>';
-		}
+		//Ejemplo pop up generico
+			let popupContent = '';
+			
+			for (let p in feature.properties) {
+				popupContent += '<tr><td><b>' + p + ': </b></td><td>'+ feature.properties[p] + '</td></tr><br>';
+			}
 
 		layer.bindPopup(popupContent);
 	}
@@ -86,7 +88,7 @@ const capa_eua = L.geoJson(statesData,{
 let l_clusters = L.markerClusterGroup();
 
 const capa_puntos = L.geoJson(ags_data,{
-
+	onEachFeature: popup
 }).addTo(l_clusters);
 
 l_clusters.addTo(map);
@@ -116,18 +118,18 @@ let btn_switch = L.easyButton({
 	position: 'topright',
 	states: [{
 		stateName: 'add-markers',
-		icon: '<img clas="icon" src="img/folder.svg"> width="24" height="24"',
+		icon: '<img clas="icon" src="img/open_folder.svg"> width="24" height="24"',
 		title: 'Ocultar',
 		onClick: function(control){
-			map.removeControl(layer_control);
+			layer_control.addTo(map);
 			control.state('remove-markers');
 		}
 	},{
 			stateName: 'remove-markers',
 			icon: '<img clas="icon" src="img/open_folder.svg"> width="24" height="24"',
 			title: 'Mostrar',
-			onClick: function(control){
-				layer_control.addTo(map);
+			onClick: function(control){			
+				map.removeControl(layer_control);
 				control.state('add-markers');
 			}
 	}]
@@ -146,7 +148,7 @@ var layer_control = L.control.layers.tree(capas_base, capas_json, {
 
 });
 
-layer_control.addTo(map);
+//layer_control.addTo(map);
 
 const miniMapa = new L.Control.MiniMap(lyr_mini,{
 	autoToggleDisplay: false,
