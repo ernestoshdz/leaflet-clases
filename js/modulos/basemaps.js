@@ -11,6 +11,6 @@ const esri_satelite = new L.tileLayer('https://server.arcgisonline.com/ArcGIS/re
 });
 
 export {
-    osm,
-    esri_satelite
+  osm,
+  esri_satelite
 }
