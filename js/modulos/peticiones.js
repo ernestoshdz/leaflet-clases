@@ -1,25 +1,24 @@
 import {
-    estilo_eua,
     estiloLocalidades
 } from './estilos.js';
 
 import {
-    popup,
-    euaPopup,
     agsPopup
 } from './popup.js'
 
-const getCapaEUA = async (layer, req, res) => {
-    const response = await fetch('geojson/us-states_es6.geojson');
+import * as layers from './layers.js';
+
+const getCapas = async (layer, folder, nombre_archivo, estilo, pop, req, res) => {
+    const response = await fetch('geojson/'+ folder +'/'+ nombre_archivo + '.geojson');
     const data = await response.json();
     
     //console.log(data);
     let geojsonLayer = L.geoJson(data, {
-        style: estilo_eua,
-        onEachFeature: euaPopup
+        style: estilo,
+        onEachFeature: pop
     });
 
-    layer.addLayer(geojsonLayer);
+    layers[layer].addLayer(geojsonLayer);
 }
 
 const getAgsPts = async (layer, req, res) => {
@@ -32,10 +31,9 @@ const getAgsPts = async (layer, req, res) => {
     });
 
     layer.addLayer(geojsonLayer);
-
 }
 
 export {
-    getCapaEUA,
+    getCapas,
     getAgsPts
 }

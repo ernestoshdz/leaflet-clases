@@ -15,7 +15,10 @@ const capas_json = [
 		label: 'Capas',
 		children: [
 			{label: 'Estados Unidos', layer: layers.eua},
-            {label: 'Puntos', layer: layers.ags_pts},
+			{label: 'México Estados', layer: layers.mex_edos},
+			{label: 'México Hidrografia', layer: layers.mex_rios},
+			{label: 'México Vialidades', layer: layers.mex_vial},
+            {label: 'Aguascalientes Puntos', layer: layers.ags_pts},
 		]
 	}
 ];

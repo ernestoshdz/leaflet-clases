@@ -10,6 +10,18 @@ const estilo_eua = (feature) => {
   }
 }
 
+const estilo_mx = (feature) => {
+  return {
+    weight: 2,
+    opacity: 1,
+    color: 'black',
+    dashArray: '1',
+    fillOpacity: 0.3,
+    //clickable: false,
+    fillColor: '#008631'
+  }
+}
+
 const estiloLocalidades = (feature, latlng) => {
   let smallIcon = new L.Icon({
     iconSize: [32, 32],
@@ -22,5 +34,6 @@ const estiloLocalidades = (feature, latlng) => {
 
   export {
     estilo_eua,
+    estilo_mx,
     estiloLocalidades
   }
