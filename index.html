@@ -28,18 +28,49 @@
 			max-height: 100%;
 		}
 
-		#informacion {
+		.banner {
 			float: left;
-			/* background-color: blue; */
+			background-color: lightsalmon;
+		}
+
+		.subBanner {
+			float: left;
+			background-color: brown;
+			height: 10%;
+			width: 40%;
+		}
+
+		.panel {
+			float: left;
+			background-color: lightgreen;
+			height: 80%;
+			width: 60%;
+		}
+
+		.map {
+			float: left;
+			height: 70%;
+			width: 40%;
+		}
+
+		.footer {
+			float: left;
+			height: 10%;
+			width: 100%;
+			background-color: lightcoral;
 		}
 	</style>
 	
 </head>
 <body>
-<!-- <div id="informacion" style="width: 50%; height: 100%">
+<div class="banner" style="width: 100%; height: 10%">
 	Tabla de Contenidos
-</div> -->
-<div id="map" style="width: 100%; height: 100%;"></div>
+</div>
+
+<div class="panel"></div>
+<div class="subBanner"></div>
+<div class="map" id="map"></div>
+<div class="footer"></div>
 <script type="text/javascript" src="geojson/us-states.geojson"></script>
 <script type="text/javascript" src="geojson/ags_puntos.geojson"></script>
 
