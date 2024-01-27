@@ -5,9 +5,8 @@ import {
 } from './modulos/basemaps.js';
 
 import {
-    //getCapaEUA,
     getCapas,
-    getAgsPts
+    getCapaPts
 } from './modulos/peticiones.js';
 
 import * as layers from './modulos/layers.js';
@@ -27,17 +26,18 @@ osm.addTo(layers.osm);
 osm2.addTo(layers.minimapa);
 esri_satelite.addTo(layers.esri);
 
-//getCapaEUA(layers.eua);
-
 layers.capas.forEach(capa => {
     getCapas(capa.layer, capa.folder, capa.nombre_archivo, capa.estilo, capa.pop)
 });
 
-getAgsPts(layers.ags_pts);
+layers.capas_pts.forEach(capa => {
+    getCapaPts(capa.layer, capa.folder, capa.nombre_archivo, capa.estilo, capa.pop)
+});
 
 //se cargan al iniciar el mapa
 layers.osm.addTo(map);
-layers.eua.addTo(map);
+//layers.eua.addTo(map);
+layers.mex_edos.addTo(map);
 layers.ags_pts.addTo(map);
 
 //Control de layers
