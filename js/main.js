@@ -1,4 +1,4 @@
-import App from "./src/leaflet/app.js";
+import App from "./app.js";
 
 //Crear el objeto app
 const app = new App();
