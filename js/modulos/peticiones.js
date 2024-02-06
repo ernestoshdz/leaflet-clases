@@ -1,7 +1,7 @@
 export default class Peticiones{
     
     constructor(){
-
+        
     }
 
     getCapas = async(lyr, folder, nombre_archivo, estilo, pop, req, res) => {
@@ -14,9 +14,6 @@ export default class Peticiones{
         });
 
         lyr.addLayer(geojsonLayer);
-    }
-
-    
-
+    }    
 
 }

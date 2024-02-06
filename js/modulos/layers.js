@@ -17,11 +17,11 @@ export default class Layers{
         let mx = new Capas();
 
         this.capas.ingresar(
-            usa.crearObjeto(this.eua,"USA","us-states_es6",this.estilos.estilo_eua(),this.popup.pop())
+            usa.crearObjeto(this.eua,"USA","us-states_es6",this.estilos.estilo_eua(),this.popup.euaPopup)
         );
 
         this.capas.ingresar(
-            mx.crearObjeto(this.mx_edos,"MX","México_Estados",this.estilos.estilo_mx(),this.popup.pop())
+            mx.crearObjeto(this.mx_edos,"MX","México_Estados",this.estilos.estilo_mx(),this.popup.popGenerico)
         );
 
     }
