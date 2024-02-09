@@ -9,7 +9,7 @@ export default class App{
     load(){
         console.log('La aplicación ha sido inicializada')
 
-        const map = L.map('map').setView([33.548165, -98.833008], 4);
+        const map = L.map('map').setView([38.548165, -98.833008], 4);
 
         this.basemaps.osm.addTo(map);
     }
