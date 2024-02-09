@@ -26,5 +26,39 @@ export default class App{
         this.basemaps.osm.addTo(map);
         this.layers.eua.addTo(map);
         this.layers.mx_edos.addTo(map);
+
+        const capas_base = [
+            {
+                label: 'Mapas Base',
+                children: [
+                    {label: 'OSM', layer: this.basemaps.osm},
+                    {label: 'Esri Wordl Map', layer: this.basemaps.esri_satelite}
+                ]
+            }
+        ];
+
+        this.layers.getLayers().forEach(i => {
+            this.layers.ingresarArbol(this.layers.crearArbol(i.layer,i.folder));
+        });
+        
+        const capas_json = [
+            {
+                label: 'Capas',
+                children: this.layers.consultarArbolBase()
+            }
+        ];
+
+        var layer_control = L.control.layers.tree(capas_base, capas_json, {
+            namedbtn_draw: true,
+            closedSymbol: '+',
+            openedSymbol: '-',
+            collapseAll: 'Colapsar todos',
+            expandAll: 'Expandir todos',
+            namedToggle: true,
+            collapsed: false,
+        
+        });
+        
+        layer_control.addTo(map);
     }
 }

@@ -9,6 +9,7 @@ export default class Layers{
         this.capas = new Capas();
         this.estilos = new Estilos();
         this.popup = new Popup();
+        this.arrayBase = [];
     }
 
     setLayers(){
@@ -28,6 +29,23 @@ export default class Layers{
 
     getLayers(){
         return this.capas.consultar();
+    }
+
+    ingresarArbol(capa){
+        this.arrayBase.push(capa)
+    }
+
+    crearArbol(lyr,nombre){
+        this.obj = {
+            label: nombre,
+            layer: lyr
+        }
+
+        return this.obj;
+    }
+
+    consultarArbolBase(){
+        return this.arrayBase;
     }
 
 }
