@@ -20,14 +20,7 @@
 	
 </head>
 <body>
-<div class="banner" style="width: 100%; height: 10%">
-	Banner
-</div>
 
-<div class="panel"></div>
-<div class="subBanner"></div>
-<div class="map" id="map"></div>
-<div class="footer"></div>
 <script type="text/javascript" src="geojson/us-states.geojson"></script>
 <script type="text/javascript" src="geojson/ags_puntos.geojson"></script>
 
@@ -70,6 +63,49 @@
 
 <script type="module" src="js/main.js" defer></script>
 
+<div class="grid-layout">
+
+	<div class="caja c1">
+		<nav>
+			<ul>
+				<li><a href="home.html">Inicio</a></li>
+				<li><a href="arp.html">ARP</a></li>
+				<li><a href="power_bi2.html" target="_parent">Mapeo Fitosanitario</a></li>	
+			</ul>
+		</nav>
+	</div>
+
+	<div class="caja c2">
+		<p><b><i>Xylosandrus compactus</i></b></p>
+	</div>
+
+	<div class="caja c2_5">
+	</div>
+
+	<div class="caja c3">
+		<p><b>Condición Fitosanitaria: Presente en México</b></p>
+		<p>(no está ampliamente distribuida y no se encuentra bajo control oficial)</p>
+		<p>Categorización: No cuarentenaria</p>
+		<p>Tipo de acción operativa: Exploración para vigilancia</p>
+
+		<img src="img/grafica1.jpg">
+		<img src="img/grafica.jpg">
+
+	</div>
+
+	<div class="caja c4">
+		<div id="map" class="caja mapa">
+			Mapa
+		</div>
+
+		<div class="caja derechos">
+			Derechos Reservados
+		</div>
+	</div>
+
+	<div class="caja c5">
+	</div>
+</div>
 
 </body>
 </html>
