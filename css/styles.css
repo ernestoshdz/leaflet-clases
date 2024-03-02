@@ -1,42 +1,54 @@
-html, body {
-    height: 100%;
+/* Estilos Generales */
+html, body{
+    background: #d1defa;
+    font-family: sans-serif, Arial, Helvetica;
+    text-align: center;
     margin: 0;
-}
-.leaflet-container {
-    height: 400px;
-    width: 600px;
-    max-width: 100%;
-    max-height: 100%;
+    padding: 0;
+    height: 99%;
 }
 
-.banner {
-    float: left;
-    background-color: lightsalmon;
-}
-
-.subBanner {
-    float: left;
-    background-color: brown;
-    height: 10%;
-    width: 90%;
-}
-
-.panel {
-    float: left;
+.grid-layout{
+    height: 100%;
+    display: grid;
+    grid-template-areas:'cabecera cabecera'
+                        'menu menu'
+                        'contenido lateral'
+                        'footer footer';
+    grid-template-rows: 20% 10% auto 10% ;
     background-color: lightgreen;
-    height: 80%;
-    width: 10%;
+    border: 1px solid black;
 }
 
-.map {
-    float: left;
-    height: 70%;
-    width: 90%;
+.caja{
+    border: 4px solid black;
+    background-color: lightgray;
+    text-align: center;
+    padding: 20px;
 }
 
-.footer {
-    float: left;
-    height: 10%;
-    width: 100%;
+.c1{
+    grid-area: cabecera;
+    background-color: lightblue;
+}
+
+.c2{
+    grid-area: menu;
+    background-color: lightyellow;
+}
+
+.c3{
+    grid-area: contenido;
+    background-color: lightgoldenrodyellow;
+}
+
+.c4{
+    grid-area: lateral;
+    background-color: lightpink;
+}
+
+.c5{
+    grid-area: footer;
     background-color: lightcoral;
 }
+
