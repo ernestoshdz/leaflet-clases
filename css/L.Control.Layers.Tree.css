@@ -62,6 +62,7 @@
 
 .leaflet-control-layers {
     /*modify layer control*/
+    align-content: start;
     width: 290px;
     height: 60%;
 }

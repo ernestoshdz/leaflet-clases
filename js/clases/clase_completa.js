@@ -1,22 +1,22 @@
 //Clase de 16 de Diciembre
 
 //variable mapa
-const map = L.map('map',{
-    contextmenu: true,
+const map = L.map('map', {
+	contextmenu: true,
 	contextmenuWidth: 160,
 	attributionControl: false,
 	contextmenuItems: [{
-        text: 'Show coordinates',
-        //callback: hello
-        }, '-', 
-        {
-            text: '<img clas="icon" src="img/folder.svg" width="12" height="12">  Mostrar Google Maps',
-            callback: getCoords
-        },{
-            text: '<img clas="icon" src="img/red_marker.svg" width="12" height="12">  Mostrar Coordenadas',
-            callback: mostrarCoords
-        }
-    ]
+		text: 'Show coordinates',
+		//callback: hello
+	}, '-',
+	{
+		text: '<img clas="icon" src="img/folder.svg" width="12" height="12">  Mostrar Google Maps',
+		callback: getCoords
+	}, {
+		text: '<img clas="icon" src="img/red_marker.svg" width="12" height="12">  Mostrar Coordenadas',
+		callback: mostrarCoords
+	}
+	]
 }).setView([38.548165, -98.833008], 4);
 
 //variable capa osm
@@ -27,8 +27,8 @@ const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 //capa base esri
 const esri_satelite = new L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-  maxZoom: 18
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+	maxZoom: 18
 });
 
 let lyr_mini = L.layerGroup();
@@ -41,64 +41,100 @@ const osm_minimapa = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png
 //funcion estilo eua
 function estilo_eua(feature) {
 	return {
-	  weight: 2,
-	  opacity: 1,
-	  color: 'black',
-	  dashArray: '1',
-	  fillOpacity: 0.3,
-	  //clickable: false,
-	  fillColor: '#FFF799'
+		weight: 2,
+		opacity: 1,
+		color: 'black',
+		dashArray: '1',
+		fillOpacity: 0.3,
+		//clickable: false,
+		fillColor: '#FFF799'
 	};
 }
 
 // funcion popup
 function popup(feature, layer) {
-	if(feature.properties) {
-		
-        // popup por propiedades especificas
+	if (feature.properties) {
+
+		// popup por propiedades especificas
 		//let popupContent = '<b>Estado:</b> ' + feature.properties.name + '<br>' + '<b>Densidad: </b>' + feature.properties.density;
 
 		//Ejemplo pop up generico
-			let popupContent = '';
-			
-			for (let p in feature.properties) {
-				popupContent += '<tr><td><b>' + p + ': </b></td><td>'+ feature.properties[p] + '</td></tr><br>';
-			}
+		let popupContent = '';
+
+		for (let p in feature.properties) {
+			popupContent += '<tr><td><b>' + p + ': </b></td><td>' + feature.properties[p] + '</td></tr><br>';
+		}
 
 		layer.bindPopup(popupContent);
 	}
 }
 
-function getCoords(e){
+function getCoords(e) {
 
-	window.open("https://maps.google.com.mx/maps?q=&layer=c&cbll="+e.latlng.lat+","+e.latlng.lng+"", "_blank", "toolbar=no,scrollbars=yes,resizable=no,top=100,left=100,width=600,height=400,location=no")
+	window.open("https://maps.google.com.mx/maps?q=&layer=c&cbll=" + e.latlng.lat + "," + e.latlng.lng + "", "_blank", "toolbar=no,scrollbars=yes,resizable=no,top=100,left=100,width=600,height=400,location=no")
 
 }
 
-function mostrarCoords(e){
-	alert('Hola las cooordenadas son: ' +e.latlng.lat+","+e.latlng.lng);
+function mostrarCoords(e) {
+	alert('Hola las cooordenadas son: ' + e.latlng.lat + "," + e.latlng.lng);
 }
 
 //Capa de Estados Unidos
-const capa_eua = L.geoJson(statesData,{
+const capa_eua = L.geoJson(statesData, {
 	style: estilo_eua,
 	onEachFeature: popup
 }).addTo(map);
 
 let l_clusters = L.markerClusterGroup();
+let l_mex_cds =  L.markerClusterGroup();
 
-const capa_puntos = L.geoJson(ags_data,{
-	onEachFeature: popup
+function st_pts_ags(feature, latlng) {
+
+	let icon = "";
+
+	//console.log(feature.properties)
+
+	switch(feature.properties.CVE_MUN){
+		case "010":
+		icon = "red_marker.svg";
+		break;
+
+		case "011":
+		icon = "green-marker-md.png";
+		break;
+
+		default:
+			icon = "city-life.png";
+	}
+	let smallIcon = new L.Icon({
+		iconSize: [32, 32],
+		iconAnchor: [16, 16],
+		popupAnchor: [0.65, -24],
+		iconUrl: 'img/'+ icon
+	});
+	return L.marker(latlng, { icon: smallIcon });
+
+}
+
+const capa_puntos = L.geoJson(ags_data, {
+	onEachFeature: popup,
+	pointToLayer: st_pts_ags
 }).addTo(l_clusters);
 
-l_clusters.addTo(map);
+const capa_mex_cds = L.geoJson(mex_cds_data, {
+	onEachFeature: popup,
+	//pointToLayer: st_pts_ags
+}).addTo(l_mex_cds);
+
+//l_clusters.addTo(map);
+l_mex_cds.addTo(map);
 
 const capas_base = [
 	{
 		label: 'Mapas Base',
 		children: [
-			{label: 'OSM', layer: osm},
-			{label: 'Esri Wordl Map', layer: esri_satelite}
+			{ label: 'OSM', layer: osm },
+			{ label: 'Esri Wordl Map', layer: esri_satelite }
 		]
 	}
 ];
@@ -107,8 +143,9 @@ const capas_json = [
 	{
 		label: 'Capas',
 		children: [
-			{label: 'Estados Unidos', layer: capa_eua},
-            {label: 'Puntos', layer: l_clusters},
+			{ label: 'Estados Unidos', layer: capa_eua },
+			{ label: 'Ciudades de México', layer: l_mex_cds },
+			{ label: 'Puntos', layer: l_clusters },
 		]
 	}
 ];
@@ -120,18 +157,18 @@ let btn_switch = L.easyButton({
 		stateName: 'add-markers',
 		icon: '<img clas="icon" src="img/open_folder.svg"> width="24" height="24"',
 		title: 'Ocultar',
-		onClick: function(control){
+		onClick: function (control) {
 			layer_control.addTo(map);
 			control.state('remove-markers');
 		}
-	},{
-			stateName: 'remove-markers',
-			icon: '<img clas="icon" src="img/open_folder.svg"> width="24" height="24"',
-			title: 'Mostrar',
-			onClick: function(control){			
-				map.removeControl(layer_control);
-				control.state('add-markers');
-			}
+	}, {
+		stateName: 'remove-markers',
+		icon: '<img clas="icon" src="img/open_folder.svg"> width="24" height="24"',
+		title: 'Mostrar',
+		onClick: function (control) {
+			map.removeControl(layer_control);
+			control.state('add-markers');
+		}
 	}]
 });
 
@@ -148,19 +185,19 @@ var layer_control = L.control.layers.tree(capas_base, capas_json, {
 
 });
 
-//layer_control.addTo(map);
+layer_control.addTo(map);
 
-const miniMapa = new L.Control.MiniMap(lyr_mini,{
+const miniMapa = new L.Control.MiniMap(lyr_mini, {
 	autoToggleDisplay: false,
- 	position: 'bottomleft',// posición en el mapa
- 	centerFixed: [22.780180555185304, -103.3572947221724],//centro del minimapa
- 	zoomLevelFixed: 3,
- 	width: 200,	// ancho
- 	height: 200, // alto
- 	minimized: false,
- 	strings: {hideText: 'Ocultar mapa', showText: 'Mostrar mapa'},
- 	aimingRectOptions: {color: '#ff0000', weight: 1, clickable: false, fillOpacity: 0},
-	shadowRectOptions: {color: '#000000', weight: 1, clickable: false, opacity: 0, fillOpacity: 0},
+	position: 'bottomleft',// posición en el mapa
+	centerFixed: [22.780180555185304, -103.3572947221724],//centro del minimapa
+	zoomLevelFixed: 3,
+	width: 200,	// ancho
+	height: 200, // alto
+	minimized: false,
+	strings: { hideText: 'Ocultar mapa', showText: 'Mostrar mapa' },
+	aimingRectOptions: { color: '#ff0000', weight: 1, clickable: false, fillOpacity: 0 },
+	shadowRectOptions: { color: '#000000', weight: 1, clickable: false, opacity: 0, fillOpacity: 0 },
 }).addTo(map);
 
 L.control.mouseCoordinate({
@@ -178,7 +215,7 @@ let btn_easy = L.easyButton({
 		stateName: 'add-markers',
 		icon: '<img clas="icon" src="img/red_marker.svg"> width="24" height="24"',
 		title: 'Boton Easy Button',
-		onClick: function(control){
+		onClick: function (control) {
 			window.open("pdf/libro_pdf.pdf", "_blank", "toolbar=no,scrollbars=yes,resizable=no,top=100,left=100,width=600,height=400,location=no")
 		}
 	}]
