@@ -11,26 +11,39 @@ export default class Lista{
         return layer;
     }
 
+    createMarkerCluster(layer) {
+        layer = L.markerClusterGroup();
+
+        return layer;
+    }
+
     getCapas(){
 
         let capas = [
             {
                 layer: this.basemaps.osm,
-                name: "Open Street Maps (OSM)",
+                label: "Open Street Maps (OSM)",
                 file: "osm",
                 folder: "base"
             },
             {
                 layer: this.basemaps.esri_satelite,
-                name: "ESRI World Imagery",
+                label: "ESRI World Imagery",
                 file: "esri",
                 folder: "base"   
             },
             {
                 layer: this.createLayer("eua"),
-                name: "Estados Unidos",
+                label: "Estados Unidos",
                 file: "us-states_es6",
                 folder: "USA",
+                ext: ".geojson"
+            },
+            {
+                layer: this.createMarkerCluster("cdmx_cds"),
+                label: "México Ciudades",
+                file: "México_Ciudades",
+                folder: "",
                 ext: ".geojson"
             }
         ];

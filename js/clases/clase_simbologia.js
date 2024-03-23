@@ -28,8 +28,35 @@ function estilo_eua(feature) {
 		dashArray: '1',
 		fillOpacity: 0.3,
 		//clickable: false,
-		fillColor: '#FFF799'
+		fillColor: getColorEua(feature.properties.density)
 	};
+}
+
+//funcion estilo eua por estados
+function estilo_euaEdos(feature) {
+	return {
+		weight: 2,
+		opacity: 1,
+		color: 'black',
+		dashArray: '1',
+		fillOpacity: 0.3,
+		//clickable: false,
+		fillColor: getColorEuaEdos(feature.properties.name)
+	};
+}
+
+function getColorEua(d) {
+	return d >= 100 ? '#381608' :
+    d >= 80 ? '#d63c41' :
+	d >= 60 ? '#a35f07' :
+	d >= 40 ? '#fec981' :
+	'#00FF00';
+}
+
+function getColorEuaEdos(d) {
+	return d == "Utah" ? '#ff0000' :
+	//Valor por default
+	'#00FF00';
 }
 
 // funcion popup
@@ -75,6 +102,10 @@ function st_pts_ags(feature, latlng) {
 		iconUrl: 'img/' + icon
 	});
 	return L.marker(latlng, { icon: smallIcon });
+
+}
+
+function st_EuxEdo (feature) {
 
 }
 
@@ -126,7 +157,7 @@ let l_mex_cds = L.markerClusterGroup();
 
 //Capa de Estados Unidos
 const capa_eua = L.geoJson(statesData, {
-	style: estilo_eua,
+	style: estilo_euaEdos,
 	onEachFeature: popup
 }).addTo(map);
 
@@ -158,7 +189,14 @@ const capas_json = [
 		label: 'Capas',
 		children: [
 			{ label: 'Estados Unidos', layer: capa_eua },
-			setSimbologia(simbologia_elementos_A,"Nombre Plagas"),
+			{ 
+				label: "<b>Simbología Extendida</b>",
+				collapsed: true,
+				children: [
+					setSimbologia(simbologia_elementos_A,"Nombre Plagas"),
+				]
+			},
+			
 			{ label: 'Ciudades de México', layer: l_mex_cds },
 			setSimbologia(simbologia_elementos_B,"Especies"),
 			{ label: 'Puntos', layer: l_clusters },
@@ -168,8 +206,8 @@ const capas_json = [
 
 var layer_control = L.control.layers.tree(capas_base, capas_json, {
 	namedbtn_draw: true,
-	closedSymbol: '+',
-	openedSymbol: '-',
+	closedSymbol: '<img src="images/plus.png" width="16" height="16"> <img src="img/folder-svgrepo-com.svg" width="16" height="16">',
+   openedSymbol: '<img src="images/minus.png" width="16" height="16"> <img src="img/open-file-folder-svgrepo-com.svg" width="16" height="16">',
 	collapseAll: 'Colapsar todos',
 	expandAll: 'Expandir todos',
 	namedToggle: true,

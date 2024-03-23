@@ -1,4 +1,4 @@
-var mex_cds_data = {"type":"FeatureCollection", "features": [
+{"type":"FeatureCollection", "features": [
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-100.31708526611328,25.677352905273438]},"properties":{"CIUDAD":"Monterrey","CAPITAL":"S","ESTADO":"Nuevo León"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-106.41606903076172,23.203832626342773]},"properties":{"CIUDAD":"Mazatlán","CAPITAL":"N","ESTADO":"Sinaloa"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-103.34379577636719,20.67359161376953]},"properties":{"CIUDAD":"Guadalajara","CAPITAL":"S","ESTADO":"Jalisco"}},

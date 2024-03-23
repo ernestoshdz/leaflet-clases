@@ -34,21 +34,4 @@ export default class Capas{
         return this.capasJson;
     }
 
-
-
-    crearControlLayers(){
-        let layer_control = L.control.layers.tree(this.consultarCapasBase(), this.consultarCapasJson(), {
-            namedbtn_draw: true,
-            closedSymbol: '+',
-            openedSymbol: '-',
-            collapseAll: 'Colapsar todos',
-            expandAll: 'Expandir todos',
-            namedToggle: true,
-            collapsed: false,
-        
-        });
-        
-        return layer_control;
-    }
-
 }
