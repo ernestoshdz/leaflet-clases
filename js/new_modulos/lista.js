@@ -1,8 +1,10 @@
-import Basemaps from "./basemaps.js"
+import Basemaps from "./basemaps.js";
+import Estilos from "./estilos.js";
 
 export default class Lista{
     constructor(){
-        this.basemaps = new Basemaps
+        this.basemaps = new Basemaps();
+        this.estilos = new Estilos();
     }
 
     createLayer(layer){
@@ -37,6 +39,7 @@ export default class Lista{
                 label: "Estados Unidos",
                 file: "us-states_es6",
                 folder: "USA",
+                estilo: this.estilos.estilo_eua, 
                 ext: ".geojson"
             },
             {

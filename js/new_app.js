@@ -1,10 +1,8 @@
-import Lista from "./new_modulos/lista.js";
 import Controles from "./new_modulos/controles.js";
 
 export default class App{
     constructor(){
         //Inicializar propiedades
-        this.lista = new Lista();
         this.controles = new Controles();
     }
 
@@ -17,10 +15,12 @@ export default class App{
 
         this.controles.cargarArbol(map);
 
-        document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
+        this.controles.cargarCoordenadas(map);
+
+        this.controles.cargarMiniMapa(map);
 
         //hide control layers tree
-      
-        
+        document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
+
     }
 }
