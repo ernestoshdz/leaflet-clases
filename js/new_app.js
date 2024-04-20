@@ -18,9 +18,8 @@ export default class App{
         this.controles.cargarCoordenadas(map);
 
         this.controles.cargarMiniMapa(map);
-
-        //hide control layers tree
-        document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
+        
+        //this.controles.getLayer("Estados Unidos").layer.addTo(map);
 
     }
 }

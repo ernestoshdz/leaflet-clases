@@ -3,6 +3,7 @@ import Capas from "./capas.js";
 import Peticiones from "./peticiones.js";
 import Basemaps from "./basemaps.js";
 import Estilos from "./estilos.js";
+import Simbologia from "./simbologia.js";
 
 export default class Controles {
     constructor() {
@@ -11,6 +12,7 @@ export default class Controles {
         this.peticiones = new Peticiones();
         this.basemaps = new Basemaps();
         this.estilos = new Estilos();
+        this.simbologia = new Simbologia();
     }
 
     crearBotonCapas(map) {
@@ -36,11 +38,29 @@ export default class Controles {
         }).addTo(map);
     }
 
+    getLayer(name){
+
+        let filtro = this.lista.getCapas().filter((i) => i.folder != "base");
+
+        let capa = filtro.filter((i) => i.label == name);
+
+        console.log(capa)
+
+        capa.forEach(i => {
+            this.obj = {
+                label: i.label,
+                layer: i.layer
+            }
+        })
+
+        return this.obj;
+    }
+
     cargarArbol(map) {
 
         //crear variables base y json
         let capas_base = this.lista.getCapas().filter((i) => i.folder == "base");
-        let capas_json = this.lista.getCapas().filter((i) => i.folder != "base");
+        //let capas_json = this.lista.getCapas().filter((i) => i.folder != "base");
 
         capas_base.forEach(i => {
 
@@ -48,19 +68,15 @@ export default class Controles {
 
         });
 
-        capas_json.forEach(capa => {
+        /* capas_json.forEach(capa => {
 
             this.capas.agregarCapasJson(capa.label,capa.layer);
 
             this.peticiones.setCapas(capa.layer,capa.folder,capa.file,capa.estilo,capa.pop,capa.ext);
 
-        });
+        }); */
 
         capas_base[0].layer.addTo(map);
-
-        capas_json[0].layer.addTo(map);
-
-        console.log(capas_json)
 
         let overlaysTree = [
             {
@@ -71,17 +87,19 @@ export default class Controles {
                         label: 'Enero',
                         collapsed: false,
                         children:[
-                            {label:"Estados Unidos",layer:capas_json[0].layer},
-                            {label:"sjsjssj"}
+                            this.getLayer("Estados Unidos"),
+                            this.simbologia.getEuaSymb()
                         ]
                     },
-                    {
+                    /* {
                         label: 'Febrero',
-                        collapsed: false,
+                        collapsed: true,
                         children:[
-                            {label:"México Ciudades",layer:capas_json[1].layer}
+                            this.getLayer("México Ciudades"),
+                            this.simbologia.getMexCdSymb()
+
                         ]
-                    }
+                    } */
                     
                 ]
             }
@@ -100,6 +118,8 @@ export default class Controles {
 
 
         layer_control.addTo(map)
+
+        this.esconderLayersTree();
 
     }
 
@@ -126,6 +146,13 @@ export default class Controles {
             position: 'bottomleft',
             zoomLevelFixed: 2,
         }).addTo(map);
+
+        
+    }
+
+    esconderLayersTree(){
+        //hide control layers tree
+        document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
     }
 
 }

@@ -42,13 +42,13 @@ export default class Lista{
                 estilo: this.estilos.estilo_eua, 
                 ext: ".geojson"
             },
-            {
+            /* {
                 layer: this.createMarkerCluster("cdmx_cds"),
                 label: "México Ciudades",
                 file: "México_Ciudades",
                 folder: "",
                 ext: ".geojson"
-            }
+            } */
         ];
 
         return capas;
