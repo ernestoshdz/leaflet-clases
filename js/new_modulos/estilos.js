@@ -3,7 +3,7 @@ export default class Estilos {
 
     }
 
-    st_polEstudio = (feature) => {
+    st_pol = (feature) => {
         return {
             weight: 3,
             opacity: 1,

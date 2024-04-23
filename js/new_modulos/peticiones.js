@@ -4,8 +4,8 @@ export default class Peticiones{
         
     }
 
-    setCapas = async(lyr, folder, nombre_archivo, estilo, pop, ext, req, res) => {
-        const response = await fetch('geojson/'+ folder + '/' + nombre_archivo + ext);
+    getCapas = async(lyr, folder, nombre_archivo, estilo, pop, ext, req, res) => {
+        const response = await fetch('geojson/'+ folder + nombre_archivo + ext);
         const data = await response.json();
 
         let geojsonLayer = L.geoJson(data,{

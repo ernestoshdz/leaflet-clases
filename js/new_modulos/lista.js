@@ -19,36 +19,37 @@ export default class Lista{
         return layer;
     }
 
-    getCapas(){
+    getLista(){
 
         let capas = [
             {
                 layer: this.basemaps.osm,
-                label: "Open Street Maps (OSM)",
+                name: "Open Street Maps",
                 file: "osm",
-                folder: "base"
+                tema: 'basemaps'
             },
             {
                 layer: this.basemaps.esri_satelite,
-                label: "ESRI World Imagery",
+                name: "ESRI World Imagery",
                 file: "esri",
-                folder: "base"   
+                tema: 'basemaps'   
             },
             {
                 layer: this.createLayer("eua"),
-                label: "Estados Unidos",
+                folder: "USA/",
+                name: "Estados Unidos",
+                ext: ".geojson",
                 file: "us-states_es6",
-                folder: "USA",
-                estilo: this.estilos.estilo_eua, 
-                ext: ".geojson"
+                style: this.estilos.estilo_eua,
+                
             },
-            /* {
+            {
                 layer: this.createMarkerCluster("cdmx_cds"),
-                label: "México Ciudades",
+                folder: "MX/",
+                name: "México Ciudades",
+                ext: ".geojson",
                 file: "México_Ciudades",
-                folder: "",
-                ext: ".geojson"
-            } */
+            }
         ];
 
         return capas;
