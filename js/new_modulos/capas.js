@@ -9,16 +9,6 @@ export default class Capas {
         this.simbologia = new Simbologia();
         this.lista = new Lista();
         this.peticiones = new Peticiones();
-
-        this.elev_ne = 'Elevación de Nivel Estático';
-        this.esp_fl = 'Espesor de Fase Libre';
-        this.prof_ne = 'Profundidad de Nivel Estático';
-        this.ce = 'Corriente Eléctrica';
-        this.od = 'Oxígeno Disuelto';
-        this.orp = 'Óxido Reducción'
-        this.ph = 'PH';
-        this.temp = 'Temperatura';
-        this.std = 'Sólidos Disueltos Totales';
     }
 
     getCapasBase() {
@@ -72,35 +62,6 @@ export default class Capas {
         return this.capasBase;
     }
 
-    getUrlmapa(tema, subtema, camp, prof, tipo) {
-
-        let ruta_mapa = "";
-
-        if (tipo != "puntos") {
-            switch (tema) {
-                case "FL":
-                    ruta_mapa = ` <a href="mapas/${subtema}/B-001 PLANO DE CUADRO DE CONSTR. REV.C - ${subtema} ${camp}.pdf" target=_blank">Ver</a>`;
-                    break;
-                case "PFQ":
-                    ruta_mapa = ` <a href="mapas/${tema}/${subtema}/B-001 PLANO DE CUADRO DE CONSTR. REV.C - ${subtema} ${camp}.pdf" target=_blank">Ver</a>`;
-                    break;
-                case "BTX":
-                    ruta_mapa = ` <a href="mapas/FDA/SUP/B-001 PLANO DE CUADRO DE CONSTR. REV.C - FDA_SUP_${subtema}.pdf" target=_blank">Ver</a>`;
-                    break;
-                case "Hidrocarburos":
-                    ruta_mapa = ` <a href="mapas/FDA/P1/B-001 PLANO DE CUADRO DE CONSTR. REV.C - FDA_P1_${subtema}.pdf" target=_blank">Ver</a>`;
-                    break;
-                case "SUELO":
-                    ruta_mapa = ` <a href="mapas/${tema}/${subtema}/B-001 PLANO DE CUADRO DE CONSTR. REV.C - ${subtema}_${prof}.pdf" target=_blank">Ver</a>`;
-                    break;
-            }
-        }
-
-        //let url_mapa = `<a href="mapas/${ruta_mapa}/B-001 PLANO DE CUADRO DE CONSTR. REV.C - ${ruta_mapa} ${camp}.pdf" target=_blank">Ver</a>`;
-        return ruta_mapa;
-
-    }
-
     getBaseLayer(label) {
         let capa = this.capasBase.filter((i) => i.label == label);
 
@@ -123,17 +84,9 @@ export default class Capas {
 
         capa.forEach(i => {
 
-            if (i.tema != "") {
-
-                this.obj = {
-                    label: i.label + this.getUrlmapa(i.tema, i.subtema, i.campaña, i.prof, i.tipo),
-                    layer: i.layer
-                }
-            } else {
-                this.obj = {
-                    label: i.label,
-                    layer: i.layer
-                }
+            this.obj = {
+                label: i.label,
+                layer: i.layer
             }
         });
 
@@ -165,7 +118,6 @@ export default class Capas {
 
                         ]
                     }
-
                 ]
             }
         ]
