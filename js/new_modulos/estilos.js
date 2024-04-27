@@ -23,7 +23,19 @@ export default class Estilos {
             dashArray: '1',
             fillOpacity: 0.3,
             clickable: true,
-            fillColor: '#FFF799'
+            fillColor: '#00ff7f'
+        };
+    }
+
+    estilo_mx = (feature) => {
+        return {
+            weight: 2,
+            opacity: 1,
+            color: 'blue',
+            dashArray: '3',
+            fillOpacity: 0.3,
+            clickable: true,
+            fillColor: '#FF00FF'
         };
     }
 

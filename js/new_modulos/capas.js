@@ -14,6 +14,8 @@ export default class Capas {
     getCapasBase() {
         let capas_base = this.lista.getLista().filter((i) => i.tema == "basemaps");
 
+        /* console.log(capas_base) */
+        
         capas_base.forEach(i => {
 
             this.agregarCapasBase(i.name, i.layer);
@@ -24,10 +26,14 @@ export default class Capas {
     getCapasJson() {
         let capas_json = this.lista.getLista().filter((i) => i.tema != "basemaps");
 
+        /* console.log(capas_json) */
+
         capas_json.forEach(i => {
 
+            /* atributos de la lista */
             this.peticiones.getCapas(i.layer, i.folder, i.file, i.style, i.pop, i.ext, i.tema);
-            this.agregarCapasJson(i.name, i.layer, i.tema, i.subtema, i.campaña, i.prof, i.tipo)
+            
+            this.agregarCapasJson(i.name, i.layer, i.tema);
 
         });
     }
@@ -42,16 +48,12 @@ export default class Capas {
         this.capasBase.push(this.obj);
     }
 
-    agregarCapasJson(name, layer, tema, subtema, camp, prof, tipo) {
+    agregarCapasJson(name, layer, tema) {
 
         this.obj = {
             label: name,
             layer: layer,
-            tema: tema,
-            subtema: subtema,
-            campaña: camp,
-            prof: prof,
-            tipo: tipo
+            tema: tema
         }
 
         this.capasJson.push(this.obj);
@@ -110,12 +112,13 @@ export default class Capas {
                         ]
                     },
                     {
-                        label: 'Febrero',
+                        label: 'Capas de México',
                         collapsed: true,
                         children: [
                             this.getLayer("México Ciudades"),
-                            this.simbologia.getMexCdSymb()
-
+                            this.simbologia.getMexCdSymb(),
+                            this.getLayer("México Estados"),
+                            this.simbologia.getEuaSymb()
                         ]
                     }
                 ]
@@ -146,10 +149,10 @@ export default class Capas {
         this.getCapasBase();
         this.getCapasJson();
 
+        /* capas que se cargan al inicio */
         this.getBaseLayer("Open Street Maps").layer.addTo(map);
         this.getLayer("Estados Unidos").layer.addTo(map);
+        this.getLayer("México Estados").layer.addTo(map);
     }
-
-
 
 }

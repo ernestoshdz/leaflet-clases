@@ -1,3 +1,5 @@
+/* Clases modulares modernas */
+
 import Capas from "./new_modulos/capas.js";
 import Controles from "./new_modulos/controles.js";
 
@@ -15,8 +17,6 @@ export default class App {
         this.capas.load_capas(map);
         this.controles.loadControles(map)
         this.capas.crearControl(map);
-
-        
 
     }
 }
