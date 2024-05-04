@@ -9,6 +9,8 @@ export default class Controles {
         this.peticiones = new Peticiones();
         this.estilos = new Estilos();
         this.capas = new Capas();
+
+        
     }
 
     crearCoordenadaas(map) {
@@ -48,6 +50,34 @@ export default class Controles {
         
     }
 
+    crearAcercaDe(map) {
+        L.easyButton({
+            position: 'bottomright',
+            states: [{
+                stateName: 'add-markers',
+                icon: '<img src="img/red_marker.svg" width="16" height="16">',
+                title: 'Mostrar Capas',
+                onClick: function(){
+                    let contenido = `<img src="img/red_marker.svg" width="16" height="16">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac sollicitudin eros, ut imperdiet felis. Pellentesque pretium mi ante, et faucibus ipsum rutrum sed. Proin accumsan luctus consectetur. In sit amet purus id dui scelerisque ultricies non porta dui. Cras sit amet arcu non est efficitur molestie.
+                    `;
+
+                    let win =  L.control.window(map,{
+                        title:'Hello world!',
+                        maxWidth:400,
+                        maxheight: 100,
+                        modal: true,
+                        content: contenido,
+                        position: "top",
+                        //visible: false
+                    });
+
+                    win.show()
+                }
+            }]
+        }).addTo(map);
+    }
+
     crearMinimap(map) {
 
         let lyr_mini = L.layerGroup();
@@ -68,10 +98,18 @@ export default class Controles {
 
     }
 
+    /* mostrarModal(){
+        var win =  L.control.window(map,{title:'Hello world!',maxWidth:400,modal: true})
+        .content('Esta es una prueba')
+        //.show()
+    } */
+
+
     loadControles(map){
         this.crearCoordenadaas(map);
         this.crearMostrarCapas(map);
         this.crearMinimap(map);
+        this.crearAcercaDe(map);
     }
 
 
