@@ -70,3 +70,6 @@ html, body{
     background-size: cover;
 }
 
+.leaflet-popup-content-wrapper{
+    width: 330px;
+}

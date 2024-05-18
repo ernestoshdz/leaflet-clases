@@ -59,8 +59,10 @@ export default class Controles {
                 title: 'Mostrar Capas',
                 onClick: function(){
                     let contenido = `<img src="img/red_marker.svg" width="16" height="16">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac sollicitudin eros, ut imperdiet felis. Pellentesque pretium mi ante, et faucibus ipsum rutrum sed. Proin accumsan luctus consectetur. In sit amet purus id dui scelerisque ultricies non porta dui. Cras sit amet arcu non est efficitur molestie.
-                    `;
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac sollicitudin eros, ut imperdiet felis. 
+                    Pellentesque pretium mi ante, et faucibus ipsum rutrum sed. Proin accumsan luctus consectetur. In sit amet purus id dui scelerisque ultricies non porta dui. Cras sit amet arcu non est efficitur molestie.
+                    <br>
+                    <img src="img/Ciudades/Mexicali.jpg" width="200" height="150">`;
 
                     let win =  L.control.window(map,{
                         title:'Hello world!',

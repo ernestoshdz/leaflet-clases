@@ -51,6 +51,7 @@ export default class Lista{
                 name: "México Ciudades",
                 ext: ".geojson",
                 file: "México_Ciudades",
+                pop: this.popups.mxEdosPop
             },
             {
                 layer: this.createLayer("mex_edos"),
@@ -59,6 +60,7 @@ export default class Lista{
                 ext: ".geojson",
                 file: "México_Estados",
                 style: this.estilos.estilo_mx,
+                pop: this.popups.popGenerico
             }
         ];
 

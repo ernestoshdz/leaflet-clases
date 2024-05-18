@@ -12,7 +12,7 @@ export default class App {
     load() {
         console.log('La aplicación ha sido inicializada');
 
-        const map = L.map('map').setView([38.548165, -98.833008], 4);
+        const map = L.map('map').setView([22.548165, -100.833008], 5);
 
         this.capas.load_capas(map);
         this.controles.loadControles(map)

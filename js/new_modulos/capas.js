@@ -153,6 +153,7 @@ export default class Capas {
         this.getBaseLayer("Open Street Maps").layer.addTo(map);
         this.getLayer("Estados Unidos").layer.addTo(map);
         this.getLayer("México Estados").layer.addTo(map);
+        this.getLayer("México Ciudades").layer.addTo(map);
     }
 
 }
