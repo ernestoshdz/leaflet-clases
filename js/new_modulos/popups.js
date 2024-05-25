@@ -20,23 +20,7 @@ export default class Popups {
         }
     }
 
-    crearModal(){
-        let win =  L.control.window(map,{
-            title:'Hello world!',
-            maxWidth:400,
-            maxheight: 100,
-            modal: true,
-            content: "contenido",
-            position: "top",
-            //visible: false
-        });
-
-        win.show()
-    }
-
     mxEdosPop(feature, layer){
-
-        
 
         if (feature.properties) {
 
