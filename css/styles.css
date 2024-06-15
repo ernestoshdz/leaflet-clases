@@ -14,14 +14,14 @@ html, body{
                         'menu menu2'
                         'contenido mapa'
                         'footer footer';
-    grid-template-columns: 20% auto;
-    grid-template-rows: 10% 10% 70% auto;
+    grid-template-columns: 0% auto;/* dejar 20% para caja 3 */
+    grid-template-rows: 5% 10% 80% auto;
     background-color: lightgreen;
     border: 1px solid black;
 }
 
 .caja{
-    border: 4px solid black;
+    border: 1px solid black;
     background-color: lightgray;
     text-align: left;
     padding: 10px;
@@ -40,8 +40,12 @@ html, body{
 
 .c2_5{
     grid-area: menu2;
+    background-color: lightgreen;
     background-image: url("../img/banner_mapa_titulo.jpg");
-    background-size: cover;
+    background-size: 900px;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: cover; */
 }
 
 .c3{
@@ -61,15 +65,19 @@ html, body{
 }
 
 .mapa{
-    height: 92%;
+    height: 100%;
     background-size: cover;
 }
 
 .derechos{
-    background-image: url("../img/banner_mapa.jpg");
+    /* background-image: url("../img/banner_mapa.jpg"); */
     background-size: cover;
 }
 
 .leaflet-popup-content-wrapper{
     width: 330px;
+}
+
+#sidebar{
+    height: 92%;
 }

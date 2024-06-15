@@ -58,6 +58,10 @@
 <!-- Charts.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
+<!-- Sidebar -->
+	<link rel="stylesheet" href="css/L.Control.Sidebar.css"/>
+	<script src="js/L.Control.Sidebar.js"></script>
+
 <!-- <script type="text/javascript" src="js/clases/clase_app.js" defer></script> -->
 <!-- <script type="text/javascript" src="js/clases/clase_clusters.js" defer></script> -->
 <!-- <script type="text/javascript" src="js/clases/clase_control_layers.js" defer></script> -->
@@ -70,8 +74,10 @@
 <!-- <script type="module" src="js/clases/clase_modular_completa.js" defer></script> -->
 <!-- <script type="text/javascript" src="js/clases/clase_simbologia.js" defer></script> -->
 <!-- <script type="text/javascript" src="js/clases/clase_modal.js" defer></script> -->
+<script type="text/javascript" src="js/clases/clase_sidebar.js" defer></script>
 
-<script type="module" src="js/main.js" defer></script>
+<!-- Ejercicio modular -->
+<!-- <script type="module" src="js/main.js" defer></script> -->
 
 <div class="grid-layout">
 
@@ -92,86 +98,85 @@
 	<div class="caja c2_5">
 	</div>
 
-	<!-- <div class="caja c3">
-		
-	</div> -->
-
 	<div class="caja c3">
-		<p><b>Condición Fitosanitaria: Presente en México</b></p>
-		<p>(no está ampliamente distribuida y no se encuentra bajo control oficial)</p>
-		<p>Categorización: No cuarentenaria</p>
-		<p>Tipo de acción operativa: Exploración para vigilancia</p>
-
-		<!-- <img src="img/grafica1.jpg">
-		<img src="img/grafica.jpg"> -->
-
-		<canvas id="myChartDonut" style="height:299px; width:100%;max-width:600px"></canvas>
-		<canvas id="myChart" style="height:299px; width:100%;max-width:600px"></canvas>
-
-		<script>
-			var xValues = ["Santa María Chilchotla", "Eloxochitlán", "Spain", "USA"];
-			var yValues = [55, 49, 44, 24];
-			var barColors = ["red", "green","blue","orange"];
-
-			new Chart("myChart", {
-			type: "horizontalBar",
-			data: {
-				labels: xValues,
-				datasets: [{
-				backgroundColor: barColors,
-				data: yValues
-				}]
-			},
-			options: {
-				legend: {display: false},
-				title: {
-				display: true,
-				text: "Detecciones por municipio, México, a enero del 2024"
-				}
-			}
-			});
-
-			var xValues = ["Oaxaca", "Puebla", "Veracruz"];
-			var yValues = [11, 8, 4];
-			var barColors = [
-			"#b91d47",
-			"#00aba9",
-			"#2b5797",
-			"#e8c3b9",
-			"#1e7145"
-			];
-
-			new Chart("myChartDonut", {
-			type: "doughnut",
-			data: {
-				labels: xValues,
-				datasets: [{
-				backgroundColor: barColors,
-				data: yValues
-				}]
-			},
-			options: {
-				title: {
-				display: true,
-				text: "Detecciones por municipio, México, a enero del 2018"
-				}
-			}
-			});
-		</script>
-
+		Caja 3
 	</div>
 
 	<div class="caja c4">
+
+		<div id="sidebar">
+			<h1>Título</h1>
+
+			<p><b>Condición Fitosanitaria: Presente en México</b></p>
+			<p>(no está ampliamente distribuida y no se encuentra bajo control oficial)</p>
+			<p>Categorización: No cuarentenaria</p>
+			<p>Tipo de acción operativa: Exploración para vigilancia</p>
+
+			<canvas id="myChart" style="height:220px; width:100%;max-width:600px"></canvas>
+
+			<script>
+				var xValues = ["Santa María Chilchotla", "Eloxochitlán", "Spain", "USA"];
+				var yValues = [55, 49, 44, 24];
+				var barColors = ["red", "green","blue","orange"];
+			
+				new Chart("myChart", {
+					type: "horizontalBar",
+					data: {
+					labels: xValues,
+					datasets: [{
+						backgroundColor: barColors,
+						data: yValues
+					}]
+					},
+					options: {
+						legend: {display: false},
+						title: {
+							display: true,
+							text: "Detecciones por municipio, México, a enero del 2024"
+						}
+					}
+				});
+			
+				var xValues = ["Oaxaca", "Puebla", "Veracruz"];
+				var yValues = [11, 8, 4];
+				var barColors = [
+				"#b91d47",
+				"#00aba9",
+				"#2b5797",
+				"#e8c3b9",
+				"#1e7145"
+				];
+			
+				new Chart("myChartDonut", {
+					type: "doughnut",
+					data: {
+					labels: xValues,
+					datasets: [{
+						backgroundColor: barColors,
+						data: yValues
+					}]
+					},
+					options: {
+						title: {
+							display: true,
+							text: "Detecciones por municipio, México, a enero del 2018"
+						}
+					}
+				});
+			</script>
+		</div>
+
 		<div id="map" class="caja mapa">
 			Mapa
 		</div>
 
-		<div class="caja derechos">
+		<!-- <div class="caja derechos">
 			Derechos Reservados
-		</div>
+		</div> -->
 	</div>
 
 	<div class="caja c5">
+		Derechos Reservados
 	</div>
 </div>
 
