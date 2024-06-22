@@ -96,6 +96,18 @@ export default class Capas {
 
     }
 
+    boton(){
+
+        
+        var sidebar = L.control.sidebar('sidebar', {
+            position: 'left'
+        });
+        
+        map.addControl(sidebar);
+        
+        sidebar.show();
+    }
+
     consultarCapasJson() {
 
         let overlaysTree = [
@@ -108,6 +120,7 @@ export default class Capas {
                         collapsed: false,
                         children: [
                             this.getLayer("Estados Unidos"),
+                            //this.boton(),
                             this.simbologia.getEuaSymb()
                         ]
                     },
@@ -141,6 +154,10 @@ export default class Capas {
         }).addTo(map);
 
         document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
+
+        map.on('click', function(e){
+            console.log(layer_control)
+        })
 
         return layer_control;
     }

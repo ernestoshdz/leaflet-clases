@@ -24,6 +24,10 @@ export default class Popups {
 
         if (feature.properties) {
 
+            layer.on('click', function(e){
+                alert('Clic en México Ciudades')
+            })
+
             let popupContent =
             `<table class="table table-striped table-hover">
                 <tr><td><b>Ciudad:</b></td><td>${feature.properties.CIUDAD}</td></tr>

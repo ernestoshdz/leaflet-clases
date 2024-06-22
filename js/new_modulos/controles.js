@@ -19,7 +19,7 @@ export default class Controles {
             gpsLong: false,
             utm: true,
             utmref: false,
-            position: 'bottomleft'
+            position: 'bottomright'
         }).addTo(map);
     }
 
@@ -50,7 +50,7 @@ export default class Controles {
         
     }
 
-    crearAcercaDe(map) {
+    crearAcercaDe(map,sidebar) {
         L.easyButton({
             position: 'bottomright',
             states: [{
@@ -64,7 +64,9 @@ export default class Controles {
                     <br>
                     <img src="img/Ciudades/Mexicali.jpg" width="200" height="150">`;
 
-                    let win =  L.control.window(map,{
+                    sidebar.show()
+
+                    /* let win =  L.control.window(map,{
                         title:'Hello world!',
                         maxWidth:400,
                         maxheight: 100,
@@ -74,7 +76,7 @@ export default class Controles {
                         //visible: false
                     });
 
-                    win.show()
+                    win.show(); */
                 }
             }]
         }).addTo(map);
@@ -93,26 +95,17 @@ export default class Controles {
 
         new L.Control.MiniMap(lyr_mini, {
             autoToggleDisplay: false,
-            position: 'bottomleft',
+            position: 'bottomright',
             zoomLevelFixed: 2,
             minimized: false,
         }).addTo(map);
 
     }
 
-    /* mostrarModal(){
-        var win =  L.control.window(map,{title:'Hello world!',maxWidth:400,modal: true})
-        .content('Esta es una prueba')
-        //.show()
-    } */
-
-
-    loadControles(map){
+    loadControles(map,sidebar){
         this.crearCoordenadaas(map);
         this.crearMostrarCapas(map);
         this.crearMinimap(map);
-        this.crearAcercaDe(map);
+        this.crearAcercaDe(map,sidebar);
     }
-
-
 }

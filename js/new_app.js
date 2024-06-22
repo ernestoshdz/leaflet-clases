@@ -12,11 +12,25 @@ export default class App {
     load() {
         console.log('La aplicación ha sido inicializada');
 
-        const map = L.map('map').setView([22.548165, -100.833008], 5);
+        const map = L.map('map',{
+            zoomControl: false
+        }).setView([22.548165, -100.833008], 5);
+
+        /* Control Sidebar */
+
+        var sidebar = L.control.sidebar('sidebar', {
+            position: 'left'
+        });
+        
+        map.addControl(sidebar);
+        
+        sidebar.show();
 
         this.capas.load_capas(map);
-        this.controles.loadControles(map)
+        this.controles.loadControles(map,sidebar)
         this.capas.crearControl(map);
+
+        
 
     }
 }
