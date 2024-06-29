@@ -1,11 +1,21 @@
 export default class Popups {
     constructor(){
-
+        this.map;
     }
 
     popGenerico(feature, layer){
 
         if (feature.properties) {
+
+            layer.on('click', function(e){
+
+                document.getElementById("sidebarTitle").innerHTML = `
+                <h1>
+                    EUA
+                </h1>
+                `;
+                
+            });
 
             let popupContent = '<table class="table table-striped table-hover">';
                 
@@ -25,8 +35,25 @@ export default class Popups {
         if (feature.properties) {
 
             layer.on('click', function(e){
-                alert('Clic en México Ciudades')
-            })
+                
+                //document.getElementById('sidebar').style.visibility = 'hidden';
+                document.getElementById("sidebarTitle").innerHTML = `
+                <h1>
+                    Ciudades de México
+                </h1>
+                `;
+
+                document.getElementById("sidebarContenido").innerHTML = `
+                <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consec
+                </p>
+                `;
+
+                document.getElementById('myChart').style.visibility = 'visible';
+
+                //document.getElementById('sidebar').style.visibility = 'hidden';
+                
+            });
 
             let popupContent =
             `<table class="table table-striped table-hover">

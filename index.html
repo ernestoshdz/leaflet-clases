@@ -105,14 +105,19 @@
 	<div class="caja c4">
 
 		<div id="sidebar">
-			<h1>Título</h1>
+			
+			<div id="sidebarTitle">
+				<h1>Título</h1>
+			</div>
 
-			<p><b>Condición Fitosanitaria: Presente en México</b></p>
-			<p>(no está ampliamente distribuida y no se encuentra bajo control oficial)</p>
-			<p>Categorización: No cuarentenaria</p>
-			<p>Tipo de acción operativa: Exploración para vigilancia</p>
+			<div id="sidebarContenido">
+				<p><b>Condición Fitosanitaria: Presente en México</b></p>
+				<p>(no está ampliamente distribuida y no se encuentra bajo control oficial)</p>
+				<p>Categorización: No cuarentenaria</p>
+				<p>Tipo de acción operativa: Exploración para vigilancia</p>
+			</div>
 
-			<canvas id="myChart" style="height:220px; width:100%;max-width:600px"></canvas>
+			<canvas id="myChart" style="height:220px; width:100%;max-width:600px;visibility:hidden"></canvas>
 
 			<script>
 				var xValues = ["Santa María Chilchotla", "Eloxochitlán", "Spain", "USA"];
@@ -167,7 +172,7 @@
 		</div>
 
 		<div id="map" class="caja mapa">
-			Mapa
+			<!-- Mapa -->
 		</div>
 
 		<!-- <div class="caja derechos">

@@ -8,9 +8,7 @@ export default class Controles {
         this.basemaps = new Basemaps();
         this.peticiones = new Peticiones();
         this.estilos = new Estilos();
-        this.capas = new Capas();
-
-        
+        this.capas = new Capas();        
     }
 
     crearCoordenadaas(map) {

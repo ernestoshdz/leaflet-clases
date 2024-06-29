@@ -19,12 +19,15 @@ export default class App {
         /* Control Sidebar */
 
         var sidebar = L.control.sidebar('sidebar', {
-            position: 'left'
+            position: 'left',
+            closeButton: false
+
         });
         
         map.addControl(sidebar);
         
         sidebar.show();
+        //sidebar.toggle();
 
         this.capas.load_capas(map);
         this.controles.loadControles(map,sidebar)
