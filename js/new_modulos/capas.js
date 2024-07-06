@@ -153,13 +153,8 @@ export default class Capas {
             collapsed: false
         }).addTo(map);
 
+        //Ocultar layers tree al cargar control
         document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
-
-        map.on('click', function(e){
-            console.log(layer_control)
-        })
-
-        return layer_control;
     }
 
     load_capas(map) {

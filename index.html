@@ -75,6 +75,7 @@
 <!-- <script type="text/javascript" src="js/clases/clase_simbologia.js" defer></script> -->
 <!-- <script type="text/javascript" src="js/clases/clase_modal.js" defer></script> -->
 <!-- <script type="text/javascript" src="js/clases/clase_sidebar.js" defer></script> -->
+<!-- <script type="text/javascript" src="js/clases/clase_test.js" defer></script> -->
 
 <!-- Ejercicio modular -->
 <script type="module" src="js/main.js" defer></script>
@@ -117,58 +118,8 @@
 				<p>Tipo de acción operativa: Exploración para vigilancia</p>
 			</div>
 
-			<canvas id="myChart" style="height:220px; width:100%;max-width:600px;visibility:hidden"></canvas>
+			<canvas id="sidebarGraficos"></canvas>
 
-			<script>
-				var xValues = ["Santa María Chilchotla", "Eloxochitlán", "Spain", "USA"];
-				var yValues = [55, 49, 44, 24];
-				var barColors = ["red", "green","blue","orange"];
-			
-				new Chart("myChart", {
-					type: "horizontalBar",
-					data: {
-					labels: xValues,
-					datasets: [{
-						backgroundColor: barColors,
-						data: yValues
-					}]
-					},
-					options: {
-						legend: {display: false},
-						title: {
-							display: true,
-							text: "Detecciones por municipio, México, a enero del 2024"
-						}
-					}
-				});
-			
-				var xValues = ["Oaxaca", "Puebla", "Veracruz"];
-				var yValues = [11, 8, 4];
-				var barColors = [
-				"#b91d47",
-				"#00aba9",
-				"#2b5797",
-				"#e8c3b9",
-				"#1e7145"
-				];
-			
-				new Chart("myChartDonut", {
-					type: "doughnut",
-					data: {
-					labels: xValues,
-					datasets: [{
-						backgroundColor: barColors,
-						data: yValues
-					}]
-					},
-					options: {
-						title: {
-							display: true,
-							text: "Detecciones por municipio, México, a enero del 2018"
-						}
-					}
-				});
-			</script>
 		</div>
 
 		<div id="map" class="caja mapa">
