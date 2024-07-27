@@ -32,16 +32,27 @@ export default class Popups {
                     { year: 2016, count: 28 },
                 ];
 
+                const data2 = [
+                    {id_oisa:1,Xiloboros:18,grafolita:25},
+                    {id_oisa:2,Xiloboros:0,grafolita:31},
+                ];
+
+                const filtro = data2.filter(d => d.id_oisa == 1);
+
+                console.log(filtro[0].Xiloboros,filtro[0].grafolita)
+
                 new Chart(
                     document.getElementById('sidebarGraficos'),
                     {
                         type: 'bar',
                         data: {
-                            labels: data.map(row => row.year),
+                            //labels: data2.map(row => row.year),
+                            labels: ["Xiloboros", "Grafolita", "Spain", "USA", "Argentina"],
                             datasets: [
                                 {
                                     label: 'Acquisitions by year',
-                                    data: data.map(row => row.count)
+                                    data: [filtro[0].Xiloboros, 20, 18, 0, 10],
+                                    //data: data2.map(row => row.Xiloboros)
                                 }
                             ]
                         },
@@ -130,6 +141,10 @@ export default class Popups {
 
             layer.bindPopup(popupContent);
         }
+    }
+
+    euaPop(feature,layer){
+        
     }
 
 }
