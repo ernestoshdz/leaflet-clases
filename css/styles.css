@@ -75,7 +75,10 @@ html, body{
 }
 
 .leaflet-popup-content-wrapper{
-    width: 330px;
+    width: 400px;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #sidebar{

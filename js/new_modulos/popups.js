@@ -22,37 +22,34 @@ export default class Popups {
 
                 document.getElementById("sidebarImagen").innerHTML = ``;
 
-                const data = [
-                    { year: 2010, count: 10 },
-                    { year: 2011, count: 20 },
-                    { year: 2012, count: 15 },
-                    { year: 2013, count: 25 },
-                    { year: 2014, count: 22 },
-                    { year: 2015, count: 30 },
-                    { year: 2016, count: 28 },
-                ];
+                const arr = ["a","b","c","ay","bl","cx"];
 
-                const data2 = [
-                    {id_oisa:1,Xiloboros:18,grafolita:25},
-                    {id_oisa:2,Xiloboros:0,grafolita:31},
-                ];
+                const newArray = [];
 
-                const filtro = data2.filter(d => d.id_oisa == 1);
+                const namesArray = [];
 
-                console.log(filtro[0].Xiloboros,filtro[0].grafolita)
+                arr.map(row => {
+                    
+                    if(feature.properties[row] > 0){
+                        //console.log(`${row}: ${feature.properties[row]}`)
+                        newArray.push(feature.properties[row])
+                        namesArray.push(row)
+                    }
+                })
+
+                /* console.log(namesArray)
+                console.log(newArray) */
 
                 new Chart(
                     document.getElementById('sidebarGraficos'),
                     {
                         type: 'bar',
                         data: {
-                            //labels: data2.map(row => row.year),
-                            labels: ["Xiloboros", "Grafolita", "Spain", "USA", "Argentina"],
+                            labels: namesArray,
                             datasets: [
                                 {
                                     label: 'Acquisitions by year',
-                                    data: [filtro[0].Xiloboros, 20, 18, 0, 10],
-                                    //data: data2.map(row => row.Xiloboros)
+                                    data: newArray,
                                 }
                             ]
                         },

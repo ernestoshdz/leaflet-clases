@@ -120,7 +120,6 @@ export default class Capas {
                         collapsed: false,
                         children: [
                             this.getLayer("Estados Unidos"),
-                            //this.boton(),
                             this.simbologia.getEuaSymb()
                         ]
                     },
@@ -131,7 +130,8 @@ export default class Capas {
                             this.getLayer("México Ciudades"),
                             this.simbologia.getMexCdSymb(),
                             this.getLayer("México Estados"),
-                            this.simbologia.getEuaSymb()
+                            this.simbologia.getEuaSymb(),
+                            this.getLayer("oisa"),
                         ]
                     }
                 ]
@@ -163,9 +163,10 @@ export default class Capas {
 
         /* capas que se cargan al inicio */
         this.getBaseLayer("Open Street Maps").layer.addTo(map);
-        this.getLayer("Estados Unidos").layer.addTo(map);
+        /* this.getLayer("Estados Unidos").layer.addTo(map);
         this.getLayer("México Estados").layer.addTo(map);
-        this.getLayer("México Ciudades").layer.addTo(map);
+        this.getLayer("México Ciudades").layer.addTo(map); */
+        this.getLayer("oisa").layer.addTo(map);
     }
 
 }

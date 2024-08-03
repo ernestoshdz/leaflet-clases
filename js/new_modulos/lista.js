@@ -61,6 +61,15 @@ export default class Lista{
                 file: "México_Estados",
                 style: this.estilos.estilo_mx,
                 pop: this.popups.popGenerico
+            },
+            {
+                layer: this.createMarkerCluster("oisa"),
+                folder: "OISA/",
+                name: "oisa",
+                ext: ".geojson",
+                file: "oisa",
+                //style: this.estilos.estilo_mx,
+                pop: this.popups.popGenerico
             }
         ];
 
