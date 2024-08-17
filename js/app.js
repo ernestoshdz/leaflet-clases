@@ -15,7 +15,9 @@ export default class App{
         console.log('La aplicación ha sido inicilizada');
 
         //Variable mapa
-        const map = L.map('map').setView([38.548165, -98.833008], 4);
+        const map = L.map('map',{
+            attributionControl: false
+        }).setView([38.548165, -98.833008], 4);
 
         this.layers.setLayers();
 
@@ -23,9 +25,9 @@ export default class App{
             this.peticiones.getCapas(item.layer,item.folder,item.nombre_archivo,item.estilo,item.pop);
         });
 
-        this.basemaps.osm.addTo(map);
+        /* this.basemaps.osm.addTo(map);
         this.layers.eua.addTo(map);
-        this.layers.mx_edos.addTo(map);
+        this.layers.mx_edos.addTo(map); */
 
         const capas_base = [
             {

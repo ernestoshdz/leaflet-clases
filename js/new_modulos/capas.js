@@ -127,10 +127,13 @@ export default class Capas {
                         label: 'Capas de México',
                         collapsed: true,
                         children: [
+                            {label: '<div class="leaflet-control-layers-separator"></div>'},
                             this.getLayer("México Ciudades"),
                             this.simbologia.getMexCdSymb(),
+                            {label: '<div class="leaflet-control-layers-separator"></div>'},
                             this.getLayer("México Estados"),
                             this.simbologia.getEuaSymb(),
+                            {label: '<div class="leaflet-control-layers-separator"></div>'},
                             this.getLayer("oisa"),
                         ]
                     }
@@ -164,9 +167,9 @@ export default class Capas {
         /* capas que se cargan al inicio */
         this.getBaseLayer("Open Street Maps").layer.addTo(map);
         /* this.getLayer("Estados Unidos").layer.addTo(map);
-        this.getLayer("México Estados").layer.addTo(map);
-        this.getLayer("México Ciudades").layer.addTo(map); */
-        this.getLayer("oisa").layer.addTo(map);
+        this.getLayer("México Estados").layer.addTo(map); */
+        this.getLayer("México Ciudades").layer.addTo(map);
+        //this.getLayer("oisa").layer.addTo(map);
     }
 
 }

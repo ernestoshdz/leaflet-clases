@@ -13,7 +13,7 @@ export default class Controles {
 
     crearCoordenadaas(map) {
         L.control.mouseCoordinate({
-            gps: false,
+            gps: true,
             gpsLong: false,
             utm: true,
             utmref: false,
@@ -105,5 +105,8 @@ export default class Controles {
         this.crearMostrarCapas(map);
         this.crearMinimap(map);
         this.crearAcercaDe(map,sidebar);
+
+        //esconder Logo Leaflet
+        document.getElementsByClassName( 'leaflet-control-attribution' )[0].style.display = 'none';
     }
 }
