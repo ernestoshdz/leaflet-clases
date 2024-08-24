@@ -10,8 +10,4 @@ export default class Sidebar {
     crearSideBar() {
         return this.sidebar;
     }
-
-    /* toggleSidebar(sidebar) {
-        sidebar.toggle()
-    } */
 }

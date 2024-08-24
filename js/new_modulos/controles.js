@@ -8,7 +8,13 @@ export default class Controles {
         this.basemaps = new Basemaps();
         this.peticiones = new Peticiones();
         this.estilos = new Estilos();
-        this.capas = new Capas();        
+        this.capas = new Capas();
+
+        /* this.sidebar = L.control.sidebar('sidebar', {
+            position: 'left',
+            closeButton: false
+
+        }); */
     }
 
     crearCoordenadaas(map) {
@@ -48,7 +54,21 @@ export default class Controles {
         
     }
 
-    crearAcercaDe(map,sidebar) {
+    /* crearModal(map){
+        let win =  L.control.window(map,{
+            title:'Hello world!',
+            maxWidth:400,
+            maxheight: 100,
+            modal: true,
+            content: contenido,
+            position: "top",
+            //visible: false
+        });
+
+        win.show();
+    } */
+
+    crearAcercaDe(map) {
         L.easyButton({
             position: 'bottomright',
             states: [{
@@ -62,9 +82,7 @@ export default class Controles {
                     <br>
                     <img src="img/Ciudades/Mexicali.jpg" width="200" height="150">`;
 
-                    sidebar.show()
-
-                    /* let win =  L.control.window(map,{
+                    let win =  L.control.window(map,{
                         title:'Hello world!',
                         maxWidth:400,
                         maxheight: 100,
@@ -74,7 +92,7 @@ export default class Controles {
                         //visible: false
                     });
 
-                    win.show(); */
+                    win.show();
                 }
             }]
         }).addTo(map);
@@ -100,10 +118,19 @@ export default class Controles {
 
     }
 
-    loadControles(map,sidebar){
+    /* crearSideBar(map){
+        map.addControl(this.sidebar);
+    }
+
+    mostrarSidebar(){
+        this.sidebar.show();
+    } */
+
+    loadControles(map){
         this.crearCoordenadaas(map);
         this.crearMostrarCapas(map);
         this.crearMinimap(map);
-        this.crearAcercaDe(map,sidebar);
+        this.crearAcercaDe(map);
+        //this.crearSideBar(map);
     }
 }

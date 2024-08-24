@@ -64,6 +64,22 @@ export default class Capas {
         return this.capasBase;
     }
 
+    //para comprimir capas base
+    /* consultarCapasBase() {
+        
+        
+        let baseTree = {
+            label: 'Base Layers',
+            collapsed: true,
+            children: [
+                this.capasBase[0],
+                this.capasBase[1]
+            ]
+        };
+
+        return baseTree;
+    } */
+
     getBaseLayer(label) {
         let capa = this.capasBase.filter((i) => i.label == label);
 
@@ -96,7 +112,7 @@ export default class Capas {
 
     }
 
-    boton(){
+    /* boton(){
 
         
         var sidebar = L.control.sidebar('sidebar', {
@@ -106,7 +122,7 @@ export default class Capas {
         map.addControl(sidebar);
         
         sidebar.show();
-    }
+    } */
 
     consultarCapasJson() {
 
@@ -168,8 +184,8 @@ export default class Capas {
         this.getBaseLayer("Open Street Maps").layer.addTo(map);
         /* this.getLayer("Estados Unidos").layer.addTo(map);
         this.getLayer("México Estados").layer.addTo(map); */
-        this.getLayer("México Ciudades").layer.addTo(map);
-        //this.getLayer("oisa").layer.addTo(map);
+        //this.getLayer("México Ciudades").layer.addTo(map);
+        this.getLayer("oisa").layer.addTo(map);
     }
 
 }

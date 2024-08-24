@@ -17,7 +17,7 @@ export default class App{
 
         //Variable mapa
         const map = L.map('map',{
-            attributionControl: false
+            attributionControl: true
         }).setView([38.548165, -98.833008], 4);
 
         this.layers.setLayers();

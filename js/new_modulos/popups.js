@@ -1,8 +1,10 @@
-//import Sidebar from "./sidebar.js";
+//import Controles from "./controles.js";
 
 export default class Popups {
     constructor() {
         //esto resuelve el problema del this, funcion anonima layer.on('click', function (e) { no deja usar this.myFunction
+        //this.controles = new Controles();
+        
         this.popGenerico = this.popGenerico.bind(this);
         this.mxEdosPop = this.mxEdosPop.bind(this);
 
@@ -59,6 +61,8 @@ export default class Popups {
         if (feature.properties) {
             
             layer.on('click', function (e) {
+
+                //this.controles.mostrarSidebar();
 
                 this.actualizarDivs("Detecciones por OISA","Descripción",`Oisa/${feature.properties.No_}`)
                 this.filtrarArray(feature,this.newArray,this.namesArray);
