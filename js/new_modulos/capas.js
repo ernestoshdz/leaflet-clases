@@ -60,25 +60,15 @@ export default class Capas {
     }
 
     consultarCapasBase() {
-
-        return this.capasBase;
-    }
-
-    //para comprimir capas base
-    /* consultarCapasBase() {
-        
         
         let baseTree = {
-            label: 'Base Layers',
+            label: 'Capas Base',
             collapsed: true,
-            children: [
-                this.capasBase[0],
-                this.capasBase[1]
-            ]
+            children: this.capasBase
         };
 
         return baseTree;
-    } */
+    }
 
     getBaseLayer(label) {
         let capa = this.capasBase.filter((i) => i.label == label);
