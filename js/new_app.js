@@ -1,4 +1,4 @@
-/* Clases modulares modernas */
+/* Clases modulares modernas, ./new_modulos */
 
 import Capas from "./new_modulos/capas.js";
 import Controles from "./new_modulos/controles.js";
@@ -15,7 +15,8 @@ export default class App {
         console.log('La aplicación ha sido inicializada');
 
         const map = L.map('map',{
-            zoomControl: false
+            zoomControl: false,
+            attributionControl: false
         }).setView([22.548165, -100.833008], 5);
 
         this.capas.load_capas(map);

@@ -105,8 +105,5 @@ export default class Controles {
         this.crearMostrarCapas(map);
         this.crearMinimap(map);
         this.crearAcercaDe(map,sidebar);
-
-        //esconder Logo Leaflet
-        document.getElementsByClassName( 'leaflet-control-attribution' )[0].style.display = 'none';
     }
 }
