@@ -1,9 +1,9 @@
-//import Controles from "./controles.js";
+//import Sidebar from "./sidebar.js";
 
 export default class Popups {
     constructor() {
         //esto resuelve el problema del this, funcion anonima layer.on('click', function (e) { no deja usar this.myFunction
-        //this.controles = new Controles();
+        
         
         this.popGenerico = this.popGenerico.bind(this);
         this.mxEdosPop = this.mxEdosPop.bind(this);
@@ -11,6 +11,8 @@ export default class Popups {
         this.newArray = [];
         this.namesArray = [];
         this.arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x_1", "y_1", "z", "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as_", "at", "au", "av", "aw", "ax", "ay", "az", "ba", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bw", "bx", "by_", "bz", "ca", "cb", "cc", "cd", "ce", "cf", "cg", "ch", "ci", "cj", "ck", "cl", "cm", "cn", "co", "cp", "cq", "cr", "cs", "ct", "cu", "cv", "cw", "cx", "cy", "cz", "da", "db", "dc", "dd", "de", "df", "dg", "dh", "di", "dj", "dk", "dl", "dm", "dn", "do", "dp", "dq", "dr", "ds", "dt", "du", "dw", "dx", "dy", "dz", "ea", "ec", "ed", "ee", "ef", "eg", "eh", "ei", "ej", "ek", "el", "em", "en", "eo", "ep", "eq", "Total_gene"];
+    
+        //this.sidebar = new Sidebar();
     }
 
     filtrarArray(feature,newArray,namesArray){
@@ -62,7 +64,7 @@ export default class Popups {
             
             layer.on('click', function (e) {
 
-                //this.controles.mostrarSidebar();
+                //this.sidebar.close()
 
                 this.actualizarDivs("Detecciones por OISA","Descripción",`Oisa/${feature.properties.No_}`)
                 this.filtrarArray(feature,this.newArray,this.namesArray);

@@ -2,13 +2,13 @@
 
 import Capas from "./new_modulos/capas.js";
 import Controles from "./new_modulos/controles.js";
-//import Sidebar from "./new_modulos/sidebar.js"; 
+import Sidebar from "./new_modulos/sidebar.js"; 
 
 export default class App {
     constructor() {
         this.capas = new Capas();
         this.controles = new Controles();
-        //this.sidebar = new Sidebar();
+        this.sidebar = new Sidebar();
     }
 
     load() {
@@ -23,13 +23,17 @@ export default class App {
         this.controles.loadControles(map)
         this.capas.crearControl(map);
 
+        this.sidebar.crearSideBar(map);
+
+        this.sidebar.close()
+
         // create the sidebar instance and add it to the map
-        var sidebar = L.control.sidebar({ container: 'sidebar' })
+        /* let sidebar = L.control.sidebar({ container: 'sidebar' })
             .addTo(map)
-            .open('home');
+            .open('home'); */
 
         // add panels dynamically to the sidebar
-        sidebar
+        /* sidebar
             .addPanel({
                 id:   'js-api',
                 tab:  '<i class="fa fa-gear"></i>',
@@ -42,7 +46,7 @@ export default class App {
                 tab:  '<i class="fa fa-envelope"></i>',
                 title: 'Messages',
                 button: function() { alert('opened via JS callback') },
-                disabled: true,
+                disabled: false,
             })
 
         // be notified when a panel is opened
@@ -54,12 +58,10 @@ export default class App {
                 default:
                 sidebar.options.autopan = false;
             }
-        });
+        }); */
 
 
-        
-
-        //this.controles.mostrarSidebar()
+        //sidebar.close();
 
     }
 }

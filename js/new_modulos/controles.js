@@ -10,11 +10,11 @@ export default class Controles {
         this.estilos = new Estilos();
         this.capas = new Capas();
 
-        /* this.sidebar = L.control.sidebar('sidebar', {
+        this.sidebar = L.control.sidebar('sidebar', {
             position: 'left',
             closeButton: false
 
-        }); */
+        });
     }
 
     crearCoordenadaas(map) {
@@ -120,11 +120,11 @@ export default class Controles {
 
     /* crearSideBar(map){
         map.addControl(this.sidebar);
-    }
+    } */
 
     mostrarSidebar(){
-        this.sidebar.show();
-    } */
+        return this.sidebar;
+    }
 
     loadControles(map){
         this.crearCoordenadaas(map);

@@ -102,18 +102,6 @@ export default class Capas {
 
     }
 
-    /* boton(){
-
-        
-        var sidebar = L.control.sidebar('sidebar', {
-            position: 'left'
-        });
-        
-        map.addControl(sidebar);
-        
-        sidebar.show();
-    } */
-
     consultarCapasJson() {
 
         let overlaysTree = [
