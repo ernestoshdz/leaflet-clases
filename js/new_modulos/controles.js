@@ -128,7 +128,7 @@ export default class Controles {
 
     loadControles(map){
         this.crearCoordenadaas(map);
-        this.crearMostrarCapas(map);
+        //this.crearMostrarCapas(map);
         this.crearMinimap(map);
         this.crearAcercaDe(map);
         //this.crearSideBar(map);

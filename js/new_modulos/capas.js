@@ -15,7 +15,7 @@ export default class Capas {
         let capas_base = this.lista.getLista().filter((i) => i.tema == "basemaps");
 
         /* console.log(capas_base) */
-        
+
         capas_base.forEach(i => {
 
             this.agregarCapasBase(i.name, i.layer);
@@ -32,7 +32,7 @@ export default class Capas {
 
             /* atributos de la lista */
             this.peticiones.getCapas(i.layer, i.folder, i.file, i.style, i.pop, i.ext, i.tema);
-            
+
             this.agregarCapasJson(i.name, i.layer, i.tema);
 
         });
@@ -60,7 +60,7 @@ export default class Capas {
     }
 
     consultarCapasBase() {
-        
+
         let baseTree = {
             label: 'Capas Base',
             collapsed: true,
@@ -119,15 +119,15 @@ export default class Capas {
                     },
                     {
                         label: 'Capas de México',
-                        collapsed: true,
+                        collapsed: false,
                         children: [
-                            {label: '<div class="leaflet-control-layers-separator"></div>'},
+                            { label: '<div class="leaflet-control-layers-separator"></div>' },
                             this.getLayer("México Ciudades"),
                             this.simbologia.getMexCdSymb(),
-                            {label: '<div class="leaflet-control-layers-separator"></div>'},
+                            { label: '<div class="leaflet-control-layers-separator"></div>' },
                             this.getLayer("México Estados"),
                             this.simbologia.getEuaSymb(),
-                            {label: '<div class="leaflet-control-layers-separator"></div>'},
+                            { label: '<div class="leaflet-control-layers-separator"></div>' },
                             this.getLayer("oisa"),
                         ]
                     }
@@ -144,14 +144,19 @@ export default class Capas {
             namedbtn_draw: true,
             closedSymbol: '<img src="img/plus.png" width="16" height="16"> <img src="img/folder-svgrepo-com.svg" width="16" height="16">',
             openedSymbol: '<img src="img/minus.png" width="16" height="16"> <img src="img/open-file-folder-svgrepo-com.svg" width="16" height="16">',
-            collapseAll: 'Colapsar todos',
-            expandAll: 'Expandir todos',
+            collapseAll: '',
+            expandAll: '',
             namedToggle: true,
             collapsed: false
         }).addTo(map);
 
+        let oldLayerControl = layer_control.getContainer();
+        let newLayerControl = document.getElementById("layercontrol");
+
+        newLayerControl.appendChild(oldLayerControl);        
+
         //Ocultar layers tree al cargar control
-        document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
+        //document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
     }
 
     load_capas(map) {

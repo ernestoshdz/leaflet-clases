@@ -144,8 +144,9 @@
 				<div class="leaflet-sidebar-tabs">
 					<!-- top aligned tabs -->
 					<ul role="tablist">
-						<li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+						<li><a href="#layerTree" role="tab"><i class="fa fa-bars active"></i></a></li>
 						<li><a href="#autopan" role="tab"><i class="fa fa-arrows"></i></a></li>
+						<li><a href="#home" role="tab"><i class="fa fa-home"></i></a></li>
 					</ul>
 
 					<!-- bottom aligned tabs -->
@@ -157,14 +158,35 @@
 
 				<!-- panel content -->
 				<div class="leaflet-sidebar-content">
+
+					<div class="leaflet-sidebar-pane" id="layerTree">
+						<h1 class="leaflet-sidebar-header">
+							Contenido
+							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+						</h1>
+						
+						<span id="layercontrol"></span>
+					</div>
+
+					<div class="leaflet-sidebar-pane" id="autopan">
+						<h1 class="leaflet-sidebar-header">
+							autopan
+							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+						</h1>
+						<p>
+							<code>Leaflet.control.sidebar({ autopan: true })</code>
+							makes shure that the map center always stays visible.
+						</p>
+						<p>
+							The autopan behviour is responsive as well.
+							Try opening and closing the sidebar from this pane!
+						</p>
+					</div>
+
 					<div class="leaflet-sidebar-pane" id="home">
 						<h1 class="leaflet-sidebar-header">
 							<div id="sidebarTitle">Título</div>
 							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-						</h1>
-
-						<h1>
-							
 						</h1>
 
 						<div id="sidebarContenido">
@@ -192,21 +214,6 @@
 							voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
 							gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-					</div>
-
-					<div class="leaflet-sidebar-pane" id="autopan">
-						<h1 class="leaflet-sidebar-header">
-							autopan
-							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-						</h1>
-						<p>
-							<code>Leaflet.control.sidebar({ autopan: true })</code>
-							makes shure that the map center always stays visible.
-						</p>
-						<p>
-							The autopan behviour is responsive as well.
-							Try opening and closing the sidebar from this pane!
-						</p>
 					</div>
 
 					<div class="leaflet-sidebar-pane" id="messages">

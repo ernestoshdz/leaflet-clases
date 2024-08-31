@@ -17,7 +17,7 @@ export default class App {
         const map = L.map('map',{
             zoomControl: false,
             attributionControl: false
-        }).setView([22.548165, -100.833008], 5);
+        }).setView([22.548165, -106.833008], 5);
 
         this.capas.load_capas(map);
         this.controles.loadControles(map)
@@ -25,7 +25,7 @@ export default class App {
 
         this.sidebar.crearSideBar(map);
 
-        this.sidebar.close()
+        //this.sidebar.close()
 
         // create the sidebar instance and add it to the map
         /* let sidebar = L.control.sidebar({ container: 'sidebar' })

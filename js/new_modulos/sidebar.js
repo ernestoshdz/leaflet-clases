@@ -5,7 +5,7 @@ export default class Sidebar {
 
     crearSideBar(map) {
         
-        this.sidebar.addTo(map).open('home');
+        this.sidebar.addTo(map).open('layerTree');
     }
 
     close(){
