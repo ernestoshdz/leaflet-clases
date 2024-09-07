@@ -10,11 +10,11 @@ export default class Controles {
         this.estilos = new Estilos();
         this.capas = new Capas();
 
-        this.sidebar = L.control.sidebar('sidebar', {
+        /* this.sidebar = L.control.sidebar('sidebar', {
             position: 'left',
             closeButton: false
 
-        });
+        }); */
     }
 
     crearCoordenadaas(map) {
@@ -27,7 +27,7 @@ export default class Controles {
         }).addTo(map);
     }
 
-    crearMostrarCapas(map) {
+    /* crearMostrarCapas(map) {
         L.easyButton({
             position: 'topright',
             states: [{
@@ -35,7 +35,7 @@ export default class Controles {
                 icon: '<img src="img/folder-svgrepo-com.svg" width="16" height="16">',
                 title: 'Mostrar Capas',
                 onClick: function (control) {
-                    /* muestra arbol de capas */
+                    //muestra arbol de capas
                     document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'block';
                     control.state('remove-markers');
                 }
@@ -44,29 +44,28 @@ export default class Controles {
                 icon: '<img src="img/open-file-folder-svgrepo-com.svg" width="16" height="16">',
                 title: 'Salir',
                 onClick: function (control) {
-                    /* esconde arbol */
+                    //esconde arbol
                     document.getElementsByClassName('leaflet-control-layers')[0].style.display = 'none';
                     control.state('add-markers');
                 }
             }]
         }).addTo(map);
 
-        
-    }
+    } */
 
-    /* crearModal(map){
+    crearModal(map){
         let win =  L.control.window(map,{
             title:'Hello world!',
             maxWidth:400,
             maxheight: 100,
             modal: true,
-            content: contenido,
+            content: 'contenido',
             position: "top",
             //visible: false
         });
 
         win.show();
-    } */
+    }
 
     crearAcercaDe(map) {
         L.easyButton({
@@ -102,10 +101,10 @@ export default class Controles {
 
         let lyr_mini = L.layerGroup();
 
-        this.peticiones.getCapas(lyr_mini, "USA/", "us-states_es6", this.estilos.st_pol, null, ".geojson")
+        //this.peticiones.getCapas(lyr_mini, "USA/", "us-states_es6", this.estilos.st_pol, null, ".geojson")
 
         /* para capas adicionales */
-        //this.peticiones.getCapas(lyr_mini, "MX/", "México_Estados", this.estilos.estilo_mx, null, ".geojson")
+        this.peticiones.getCapas(lyr_mini, "MX/", "México_Estados", this.estilos.st_pol, null, ".geojson")
 
         this.basemaps.osm.addTo(lyr_mini);
 

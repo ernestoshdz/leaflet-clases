@@ -69,7 +69,7 @@ export default class Lista{
                 ext: ".geojson",
                 file: "oisa",
                 //style: this.estilos.estilo_mx,
-                pop: this.popups.popGenerico
+                pop: this.popups.oisaPop
             }
         ];
 

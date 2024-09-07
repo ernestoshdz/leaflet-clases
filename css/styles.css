@@ -77,16 +77,11 @@ body {
 }
 
 .leaflet-popup-content-wrapper {
-    width: 400px;
-    height: 400px;
+    /* width: 400px; */
+    max-height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
 }
-
-/* #sidebar{
-    height: 92%;
-    width: 450px;
-} */
 
 .leaflet-control-layers {
     border-radius: none;
