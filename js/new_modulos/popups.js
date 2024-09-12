@@ -12,47 +12,79 @@ export default class Popups {
         this.namesArray = [];
         this.arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x_1", "y_1", "z", "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as_", "at", "au", "av", "aw", "ax", "ay", "az", "ba", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bw", "bx", "by_", "bz", "ca", "cb", "cc", "cd", "ce", "cf", "cg", "ch", "ci", "cj", "ck", "cl", "cm", "cn", "co", "cp", "cq", "cr", "cs", "ct", "cu", "cv", "cw", "cx", "cy", "cz", "da", "db", "dc", "dd", "de", "df", "dg", "dh", "di", "dj", "dk", "dl", "dm", "dn", "do", "dp", "dq", "dr", "ds", "dt", "du", "dw", "dx", "dy", "dz", "ea", "ec", "ed", "ee", "ef", "eg", "eh", "ei", "ej", "ek", "el", "em", "en", "eo", "ep", "eq", "Total_gene"];
 
-        //this.sidebar = new Sidebar();
+        this.barColors = ["red", "green", "blue", "orange", "brown"];
+
+        //funciona como diccionario de datos, muy útil para sustituir las claves por nombres
+        this.misValores = [
+            {
+                cve: "ay",
+                name: "Plátano"
+            },
+            {
+                cve: "bl",
+                name: "Jitomate"
+            },
+            {
+                cve: "cx",
+                name: "Tamarindo"
+            },
+            {
+                cve: "Total_gene",
+                name: "Total Generado"
+            }
+        ];
     }
 
     filtrarArray(feature, newArray, namesArray) {
 
         //limpiar arrays antes de llenarlos
-        newArray=[];
-        namesArray=[];
+        newArray = [];
+        namesArray = [];
 
-        this.arr.map(row => {
+        this.misValores.map(row => {
 
-            if (feature.properties[row] > 0 ) {
+            //para evitar graficar el total generado
+            if (feature.properties[row.cve] > 0 && row.cve != "Total_gene") {
+                newArray.push(feature.properties[row.cve])
+                namesArray.push(row.name)
+            }
+        });
+
+        /* this.arr.map(row => {
+
+            if (feature.properties[row] > 0) {
                 //console.log(`${row}: ${feature.properties[row]}`)
                 newArray.push(feature.properties[row])
                 namesArray.push(row)
             }
-        })
+        }) */
 
         this.crearGrafico('doughnut', newArray, namesArray);
     }
 
     crearGrafico(tipo, newArray, namesArray) {
-        
-        new Chart(
-            document.getElementById('sidebarGraficos'),
-            {
-                type: tipo,
-                data: {
-                    labels: namesArray,
-                    datasets: [
-                        {
-                            label: 'Acquisitions by year',
-                            data: newArray,
-                        }
-                    ]
-                },
-                options: {
-                    //animation: false
-                }
+
+        let chartData = {
+            type: tipo,
+            data: {
+                labels: namesArray,
+                datasets: [
+                    {
+                        backgroundColor: this.barColors,
+                        label: 'Acquisitions by year',
+                        data: newArray,
+                    }
+                ]
             }
-        );
+        }
+
+        if (typeof graph === "undefined") {
+            window.graph = new Chart(document.getElementById('sidebarGraficos'), chartData);
+        } else {
+            window.graph.config = chartData;
+            window.graph.update();
+        }
+
     }
 
     actualizarDivs(titulo, contenido, ruta_img) {
@@ -148,7 +180,7 @@ export default class Popups {
 
         if (feature.properties) {
 
-            let columnas = [];
+            //let columnas = [];
 
             layer.on('click', function (e) {
 
@@ -157,18 +189,34 @@ export default class Popups {
 
             }.bind(this));
 
-            this.arr.map(row => {
+            let arry = [];
+
+            this.misValores.map(row => {
+
+                if (feature.properties[row.cve] > 0) {
+
+                    arry.push(this.obj = {
+                        columna: row.name,
+                        valor: feature.properties[row.cve],
+
+                    });
+
+                }
+            });
+
+            //usar para comparar valores, borrar despues de que misValores este completo
+            /* this.arr.map(row => {
 
                 if (feature.properties[row] > 0) {
 
                     columnas.push(this.obj = {
-                        label: row,
-                        layer: feature.properties[row]
+                        columna: row,
+                        valor: feature.properties[row]
                     })
 
                 }
 
-            });
+            }); */
 
             let popupContent = `
             <table class="table table-striped table-hover">
@@ -176,10 +224,11 @@ export default class Popups {
                 <tr><td><b>Oisa:</b></td><td>${feature.properties.OISA}</td></tr>
                 <tr><td><b>Tipo:</b></td><td>${feature.properties.TIPO_DE_}</td></tr>`;
 
-            columnas.forEach(i => {
+            //Sustituir por columnas para comparar valores, borrar Columnas despues de que mis valores este completo
+            arry.forEach(i => {
 
-                popupContent += `<tr><td><b>${i.label}:</b></td><td>${i.layer}</td></tr>`;
-    
+                popupContent += `<tr><td><b>${i.columna}:</b></td><td>${i.valor}</td></tr>`;
+
             });
 
             popupContent += '</table>';
