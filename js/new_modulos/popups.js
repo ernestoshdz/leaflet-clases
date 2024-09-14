@@ -21,6 +21,10 @@ export default class Popups {
                 name: "Plátano"
             },
             {
+                cve: "az",
+                name: "Aguacate"
+            },
+            {
                 cve: "bl",
                 name: "Jitomate"
             },
@@ -84,7 +88,6 @@ export default class Popups {
             window.graph.config = chartData;
             window.graph.update();
         }
-
     }
 
     actualizarDivs(titulo, contenido, ruta_img) {
