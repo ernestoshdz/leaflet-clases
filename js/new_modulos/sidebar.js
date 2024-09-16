@@ -6,7 +6,8 @@ export default class Sidebar {
     crearSideBar(map) {
         
         //this.sidebar.addTo(map).open('layerTree');
-        this.sidebar.addTo(map).open('home');
+        //this.sidebar.addTo(map).open('home');
+        this.sidebar.addTo(map).open('autopan');
 
         this.sidebar.addPanel({
             id: 'js-api',

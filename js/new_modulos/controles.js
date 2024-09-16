@@ -53,10 +53,10 @@ export default class Controles {
 
     } */
 
-    crearModal(map){
-        let win =  L.control.window(map,{
-            title:'Hello world!',
-            maxWidth:400,
+    crearModal(map) {
+        let win = L.control.window(map, {
+            title: 'Hello world!',
+            maxWidth: 400,
             maxheight: 100,
             modal: true,
             content: 'contenido',
@@ -74,16 +74,16 @@ export default class Controles {
                 stateName: 'add-markers',
                 icon: '<img src="img/red_marker.svg" width="16" height="16">',
                 title: 'Mostrar Capas',
-                onClick: function(){
+                onClick: function () {
                     let contenido = `<img src="img/red_marker.svg" width="16" height="16">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac sollicitudin eros, ut imperdiet felis. 
                     Pellentesque pretium mi ante, et faucibus ipsum rutrum sed. Proin accumsan luctus consectetur. In sit amet purus id dui scelerisque ultricies non porta dui. Cras sit amet arcu non est efficitur molestie.
                     <br>
                     <img src="img/Ciudades/Mexicali.jpg" width="200" height="150">`;
 
-                    let win =  L.control.window(map,{
-                        title:'Hello world!',
-                        maxWidth:400,
+                    let win = L.control.window(map, {
+                        title: 'Hello world!',
+                        maxWidth: 400,
                         maxheight: 100,
                         modal: true,
                         content: contenido,
@@ -121,15 +121,33 @@ export default class Controles {
         map.addControl(this.sidebar);
     } */
 
-    mostrarSidebar(){
+    mostrarSidebar() {
         return this.sidebar;
     }
 
-    loadControles(map){
+    loadControles(map) {
         this.crearCoordenadaas(map);
         //this.crearMostrarCapas(map);
         this.crearMinimap(map);
         this.crearAcercaDe(map);
+        this.cargarFiltro(map);
         //this.crearSideBar(map);
     }
+
+    cargarFiltro(map) {
+        document.getElementById("layers").onchange = (e) => {
+
+            //console.log(e.target.value)
+
+            let lyr_filtro = L.layerGroup();
+
+            this.peticiones.getCapaFiltrada(lyr_filtro, "MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",e.target.value)
+
+            lyr_filtro.addTo(map);
+        };
+    }
+
+    
+
+    
 }
