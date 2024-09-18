@@ -1,7 +1,7 @@
 export default class Peticiones {
 
     constructor() {
-
+        this.lyr_filtro = L.layerGroup();
     }
 
     getCapas = async (lyr, folder, nombre_archivo, estilo, pop, ext, req, res) => {
@@ -16,27 +16,37 @@ export default class Peticiones {
         lyr.addLayer(geojsonLayer);
     }
 
-    getCapaFiltrada = async (lyr, folder, nombre_archivo, estilo, pop, ext, filtro, req, res) => {
+    getCapaFiltrada = async (folder, nombre_archivo, estilo, pop, ext, filtro, map, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
-        //limpiar antes de filtrar
+        //otra forma de filtrar capa
+        /* let arry = [];
+
+        data.features.map(row => {
+
+            if (row.properties.ESTADO == filtro) {
+                arry.push(row);
+            }
+        }); */
+
+        //esta línea limpiar el layergroup antes de llenarlo
+        this.lyr_filtro.clearLayers()
 
         let geojsonLayer = L.geoJson(data, {
             style: estilo,
             onEachFeature: pop,
             filter: function (feature) {
 
-                if (feature.properties.ESTADO === filtro) {
-                    return true
+                if (feature.properties.CODIGO === filtro) {
+                    return true;
                 }
             }
         });
 
-        lyr.addLayer(geojsonLayer);
+        this.lyr_filtro.addLayer(geojsonLayer);
 
-        //geojsonLayer.clearLayers()
-
+        this.lyr_filtro.addTo(map);
     }
 
 }

@@ -9,12 +9,6 @@ export default class Controles {
         this.peticiones = new Peticiones();
         this.estilos = new Estilos();
         this.capas = new Capas();
-
-        /* this.sidebar = L.control.sidebar('sidebar', {
-            position: 'left',
-            closeButton: false
-
-        }); */
     }
 
     crearCoordenadaas(map) {
@@ -117,37 +111,27 @@ export default class Controles {
 
     }
 
-    /* crearSideBar(map){
-        map.addControl(this.sidebar);
-    } */
-
     mostrarSidebar() {
         return this.sidebar;
     }
 
     loadControles(map) {
         this.crearCoordenadaas(map);
-        //this.crearMostrarCapas(map);
         this.crearMinimap(map);
         this.crearAcercaDe(map);
         this.cargarFiltro(map);
+        //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
     }
 
     cargarFiltro(map) {
         document.getElementById("layers").onchange = (e) => {
 
-            //console.log(e.target.value)
+            let valor_select = e.target.value;
 
-            let lyr_filtro = L.layerGroup();
+            this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
 
-            this.peticiones.getCapaFiltrada(lyr_filtro, "MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",e.target.value)
-
-            lyr_filtro.addTo(map);
         };
     }
 
-    
-
-    
 }
