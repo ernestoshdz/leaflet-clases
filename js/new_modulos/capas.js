@@ -163,12 +163,12 @@ export default class Capas {
         this.getCapasBase();
         this.getCapasJson();
 
-        /* capas que se cargan al inicio */
+        //capas que se cargan al inicio
         this.getBaseLayer("Open Street Maps").layer.addTo(map);
         /* this.getLayer("Estados Unidos").layer.addTo(map);
-        this.getLayer("México Estados").layer.addTo(map); */
-        //this.getLayer("México Ciudades").layer.addTo(map);
-        this.getLayer("oisa").layer.addTo(map);
+        this.getLayer("México Estados").layer.addTo(map);
+        this.getLayer("México Ciudades").layer.addTo(map);
+        this.getLayer("oisa").layer.addTo(map); */
     }
 
 }

@@ -2,6 +2,7 @@ import Basemaps from "./basemaps.js";
 import Peticiones from "./peticiones.js";
 import Estilos from "./estilos.js";
 import Capas from "./capas.js";
+import Popups from "./popups.js";
 
 export default class Controles {
     constructor() {
@@ -9,6 +10,7 @@ export default class Controles {
         this.peticiones = new Peticiones();
         this.estilos = new Estilos();
         this.capas = new Capas();
+        this.popups = new Popups();
     }
 
     crearCoordenadaas(map) {
@@ -125,13 +127,38 @@ export default class Controles {
     }
 
     cargarFiltro(map) {
-        document.getElementById("layers").onchange = (e) => {
+
+        let test = document.querySelectorAll('#layers, #mx_edos');
+
+        test.forEach((i)=>{
+            document.getElementById(i.id).onchange = (e) => {
+
+                let v_edo = document.getElementById("mx_edos").value;
+                let v_cultivo = document.getElementById("layers").value;
+
+                let obj = {
+                    edo: v_edo,
+                    cultivo: v_cultivo
+                };
+
+                console.log(`Estado: ${v_edo} y Cultivo: ${v_cultivo}`)
+    
+                //ejemplo
+                //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
+                
+                this.peticiones.getCapaFiltrada("MX/", "cultivos", null, this.popups.popGenerico, ".geojson",obj, map);
+            };
+        });
+
+        /* document.getElementById("layers").onchange = (e) => {
 
             let valor_select = e.target.value;
 
-            this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
-
-        };
+            //ejemplo
+            //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
+            
+            this.peticiones.getCapaFiltrada("MX/", "cultivos", null, this.popups.popGenerico, ".geojson",valor_select, map);
+        }; */
     }
 
 }

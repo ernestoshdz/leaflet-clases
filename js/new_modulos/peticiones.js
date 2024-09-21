@@ -1,7 +1,8 @@
 export default class Peticiones {
 
     constructor() {
-        this.lyr_filtro = L.layerGroup();
+        this.lyr_filtro = L.markerClusterGroup();
+        //this.lyr_filtro = L.layerGroup();
     }
 
     getCapas = async (lyr, folder, nombre_archivo, estilo, pop, ext, req, res) => {
@@ -33,12 +34,15 @@ export default class Peticiones {
         //esta línea limpiar el layergroup antes de llenarlo
         this.lyr_filtro.clearLayers()
 
+        //console.log(filtro)
+
         let geojsonLayer = L.geoJson(data, {
             style: estilo,
             onEachFeature: pop,
             filter: function (feature) {
 
-                if (feature.properties.CODIGO === filtro) {
+                if ((feature.properties.Estado == filtro.edo)) {
+                    console.log(1)
                     return true;
                 }
             }
