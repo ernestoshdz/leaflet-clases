@@ -141,7 +141,7 @@ export default class Controles {
                     cultivo: v_cultivo
                 };
 
-                console.log(`Estado: ${v_edo} y Cultivo: ${v_cultivo}`)
+                //console.log(`Estado: ${v_edo} y Cultivo: ${v_cultivo}`)
     
                 //ejemplo
                 //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)

@@ -41,9 +41,24 @@ export default class Peticiones {
             onEachFeature: pop,
             filter: function (feature) {
 
-                if ((feature.properties.Estado == filtro.edo)) {
-                    console.log(1)
+                // Estado con valor y cultivo vacio
+                if ((feature.properties.Estado == filtro.edo) && (filtro.cultivo == "" && filtro.edo != "")) {
                     return true;
+                }
+
+                //Estado sin valor y cultivo con valor
+                if ((feature.properties.Cultivo == filtro.cultivo) && (filtro.edo == "" && filtro.cultivo != "")) {
+                    return true;
+                }
+
+                //Estado y cultivo con valor
+                if (((feature.properties.Estado == filtro.edo) && (feature.properties.Cultivo == filtro.cultivo))) {
+                    return true;
+                }
+
+                //Estado y cultivo vacios
+                if (((filtro.edo === "") && (filtro.cultivo === ""))) {
+                    return false;
                 }
             }
         });
