@@ -25,19 +25,23 @@ export default class App {
 
         this.sidebar.crearSideBar(map);
 
-        this.getEstados('MX/',"México_Estados",".geojson")
+        //Este archivo no tiene geometría
+        this.getEstados('MX/',"test",".geojson")
 
         //this.controles.crearModal(map);
 
     }
 
+    //mover función a peticiones
     getEstados = async (folder, nombre_archivo, ext, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
+        console.log(data.features)
+
         data.features.forEach((i)=>{
             //llenar selects de estados, no estan ordenados alfábeticamente
-            document.getElementById('mx_edos').add(new Option(i.properties.ESTADO,i.properties.CODIGO))
+            document.getElementById('mx_edos').add(new Option(i.properties.NOMGEO,i.properties.cve_edo))
         });
 
     }
