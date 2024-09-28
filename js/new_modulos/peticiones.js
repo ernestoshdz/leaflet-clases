@@ -34,31 +34,29 @@ export default class Peticiones {
         //esta línea limpiar el layergroup antes de llenarlo
         this.lyr_filtro.clearLayers()
 
-        //console.log(filtro)
-
         let geojsonLayer = L.geoJson(data, {
             style: estilo,
             onEachFeature: pop,
             filter: function (feature) {
 
                 // Estado con valor y cultivo vacio
-                if ((feature.properties.Estado == filtro.edo) && (filtro.cultivo == "" && filtro.edo != "")) {
+                if ((feature.properties.c_edo == filtro.edo) && (filtro.cultivo == "" && filtro.edo != "")) {
                     return true;
                 }
 
                 //Estado sin valor y cultivo con valor
-                if ((feature.properties.Cultivo == filtro.cultivo) && (filtro.edo == "" && filtro.cultivo != "")) {
+                if ((feature.properties.c_cultivo == filtro.cultivo) && (filtro.edo == "" && filtro.cultivo != "")) {
                     return true;
                 }
 
                 //Estado y cultivo con valor
-                if (((feature.properties.Estado == filtro.edo) && (feature.properties.Cultivo == filtro.cultivo))) {
+                if (((feature.properties.c_edo == filtro.edo) && (feature.properties.c_cultivo == filtro.cultivo))) {
                     return true;
                 }
 
                 //Estado y cultivo vacios
                 if (((filtro.edo === "") && (filtro.cultivo === ""))) {
-                    return false;
+                    return false;//Return true si necesitas todos los valores por default
                 }
             }
         });

@@ -13,7 +13,7 @@ export default class App {
 
     load() {
         console.log('La aplicación ha sido inicializada');
-
+        
         const map = L.map('map',{
             zoomControl: false,
             attributionControl: false
@@ -25,7 +25,20 @@ export default class App {
 
         this.sidebar.crearSideBar(map);
 
+        this.getEstados('MX/',"México_Estados",".geojson")
+
         //this.controles.crearModal(map);
+
+    }
+
+    getEstados = async (folder, nombre_archivo, ext, req, res) => {
+        const response = await fetch('geojson/' + folder + nombre_archivo + ext);
+        const data = await response.json();
+
+        data.features.forEach((i)=>{
+            //llenar selects de estados, no estan ordenados alfábeticamente
+            document.getElementById('mx_edos').add(new Option(i.properties.ESTADO,i.properties.CODIGO))
+        });
 
     }
 }

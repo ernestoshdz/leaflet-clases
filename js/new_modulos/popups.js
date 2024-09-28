@@ -10,31 +10,586 @@ export default class Popups {
 
         this.newArray = [];
         this.namesArray = [];
-        //this.arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x_1", "y_1", "z", "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as_", "at", "au", "av", "aw", "ax", "ay", "az", "ba", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bw", "bx", "by_", "bz", "ca", "cb", "cc", "cd", "ce", "cf", "cg", "ch", "ci", "cj", "ck", "cl", "cm", "cn", "co", "cp", "cq", "cr", "cs", "ct", "cu", "cv", "cw", "cx", "cy", "cz", "da", "db", "dc", "dd", "de", "df", "dg", "dh", "di", "dj", "dk", "dl", "dm", "dn", "do", "dp", "dq", "dr", "ds", "dt", "du", "dw", "dx", "dy", "dz", "ea", "ec", "ed", "ee", "ef", "eg", "eh", "ei", "ej", "ek", "el", "em", "en", "eo", "ep", "eq", "Total_gene"];
 
         this.barColors = ["red", "green", "blue", "orange", "brown"];
 
         //funciona como diccionario de datos, muy útil para sustituir las claves por nombres
         this.misValores = [
             {
+                cve: "a",
+                name: "Acanthoscelides obtectus"
+            },
+            {
+                cve: "b",
+                name: "Acanthoscelides obtectus, Anastrepha obliqua, Drosophila melanogaster, Sitophilus granarius, Cadra cautella"
+            },
+            {
+                cve: "c",
+                name: "Acanthoscelides obtectus, Apion godmani"
+            },
+            {
+                cve: "d",
+                name: "Acanthoscelides obtectus, Callosobruchus maculatus, Lasioderma serricorne"
+            },
+            {
+                cve: "e",
+                name: "Acanthoscelides obtectus, Pagiocerus frontalis, Rhyzopertha dominica, Sitophilus zeamais"
+            },
+            {
+                cve: "f",
+                name: "Acanthoscelides obtectus, Rhyzopertha dominica"
+            },
+            {
+                cve: "g",
+                name: "Acanthoscelides obtectus, Sitophilus granarius"
+            },
+            {
+                cve: "h",
+                name: "Acanthoscelides obtectus, Sitophilus zeamais"
+            },
+            {
+                cve: "i",
+                name: "Acarus siro"
+            },
+            {
+                cve: "j",
+                name: "Acrobasis nuxvorella"
+            },
+            {
+                cve: "k",
+                name: "Agrotis sp."
+            },
+            {
+                cve: "l",
+                name: "Ahasverus advena, Sitophilus granarius"
+            },
+            {
+                cve: "m",
+                name: "Ahasverus rectus, Oryzaephilus surinamensis"
+            },
+            {
+                cve: "n",
+                name: "Amaranthus hybridus, Digitaria horizontalis, Digitaria sanguinalis, Ipomoea tiliacea"
+            },
+            {
+                cve: "o",
+                name: "Ambrosiodmus sp., Carpophilus dimidiatus, Necrobia rufipes"
+            },
+            {
+                cve: "p",
+                name: "Amyelois transitelia"
+            },
+            {
+                cve: "q",
+                name: "Amyelois transitelia, Lepidoptera (pupa)"
+            },
+            {
+                cve: "r",
+                name: "Anastrepha ludens"
+            },
+            {
+                cve: "s",
+                name: "Anastrepha obliqua"
+            },
+            {
+                cve: "t",
+                name: "Anastrepha obliqua, Sitophilus zeamais"
+            },
+            {
+                cve: "u",
+                name: "Anisopteromalus calandrae, Crapophilus hermipterus, Sitophilus granarius"
+            },
+            {
+                cve: "v",
+                name: "Anisopteromalus calandrae, Lasioderma serricorne"
+            },
+            {
+                cve: "w",
+                name: "Aphidoletes sp., Cadra sp., Curculio sp."
+            },
+            {
+                cve: "x_1",
+                name: "Aphis sp."
+            },
+            {
+                cve: "y_1",
+                name: "Apion godmani"
+            },
+            {
+                cve: "z",
+                name: "Apomyelois ceratoniae"
+            },
+            {
+                cve: "aa",
+                name: "Araptus dentifrons"
+            },
+            {
+                cve: "ab",
+                name: "Araptus schwarzi, Hypothenemus birmanus, Hypothenemus brunneus, Hypothenemus eruditus, Sepedophilus castaneus"
+            },
+            {
+                cve: "ac",
+                name: "Bactrocera dorsalis"
+            },
+            {
+                cve: "ad",
+                name: "Bactrocera oleae"
+            },
+            {
+                cve: "ae",
+                name: "Blattidae"
+            },
+            {
+                cve: "af",
+                name: "Cadra cautella"
+            },
+            {
+                cve: "ag",
+                name: "Cadra cautella, Carpophilus dimidiatus"
+            },
+            {
+                cve: "ah",
+                name: "Cadra cautella, Oryzaephilus surinamensis"
+            },
+            {
+                cve: "ai",
+                name: "Cadra sp., Cydia pomonella"
+            },
+            {
+                cve: "aj",
+                name: "Callosobruchus chinensis"
+            },
+            {
+                cve: "ak",
+                name: "Callosobruchus maculatus"
+            },
+            {
+                cve: "al",
+                name: "Carpophilus dimidiatus"
+            },
+            {
+                cve: "am",
+                name: "Carpophilus dimidiatus, Lasioderma serricorne, Oryzaephilus surinamensis, Plodia interpunctella"
+            },
+            {
+                cve: "an",
+                name: "Carpophilus humeralis, Diptera"
+            },
+            {
+                cve: "ao",
+                name: "Carpophilus ligneus, Euxesta stigmatias, Staphylinidae"
+            },
+            {
+                cve: "ap",
+                name: "Carpophilus lugubris, Cryptolestes ferrugineus, Tribolium castaneum"
+            },
+            {
+                cve: "aq",
+                name: "Ceratitis capitata"
+            },
+            {
+                cve: "ar",
+                name: "Chenopodium quinoa"
+            },
+            {
+                cve: "as_",
+                name: "Commelina sp., Cyanotis axillaris, Eleusine indica, Euphorbia heterophylla, Ipomoea lacunosa, Setaria glauca, Melochia corchorifolia, Sesbania exaltata, Pennisetum glaucum, Triticum aestivum, Echinochloa crus-galli"
+            },
+            {
+                cve: "at",
+                name: "Cryptolestes ferrugineus"
+            },
+            {
+                cve: "au",
+                name: "Cryptolestes pusillus"
+            },
+            {
+                cve: "av",
+                name: "Cryptolestes pusillus, Orius sp., Sitophilus zeamais, Tribolium castaneum"
+            },
+            {
+                cve: "aw",
+                name: "Curculio caryae"
+            },
+            {
+                cve: "ax",
+                name: "Curculio elephas"
+            },
+            {
                 cve: "ay",
-                name: "Plátano"
+                name: "Curculio elephas, Cydia caryana"
             },
             {
                 cve: "az",
-                name: "Aguacate"
+                name: "Curculio elephas, Dermester frischii, Tribolium castaneum"
+            },
+            {
+                cve: "ba",
+                name: "Cuscuta spp., Asphodelus fistulosus, Anagallis arvensis, Chenopodium album, Eruca sativa, Melilotus indicus, Lepidium sativum"
+            },
+            {
+                cve: "bc",
+                name: "Cydia caryana"
+            },
+            {
+                cve: "bd",
+                name: "Cydia pomonella"
+            },
+            {
+                cve: "be",
+                name: "Cydia pomonella, Psocoptera, Tribolium castaneum"
+            },
+            {
+                cve: "bf",
+                name: "Diachasminorpha longicaudata"
+            },
+            {
+                cve: "bg",
+                name: "Diaphania nitidalis"
+            },
+            {
+                cve: "bh",
+                name: "Diptera"
+            },
+            {
+                cve: "bi",
+                name: "Drosophila melanogaster"
+            },
+            {
+                cve: "bj",
+                name: "Drosophila melanogaster, Anastrepha striata"
+            },
+            {
+                cve: "bk",
+                name: "Drosophila melanogaster, Carpophilus dimidiatus"
             },
             {
                 cve: "bl",
-                name: "Jitomate"
+                name: "Drosophila melanogaster, Carpophilus hemipterus"
+            },
+            {
+                cve: "bm",
+                name: "Drosophila melanogaster, Tribolium castaneum"
+            },
+            {
+                cve: "bn",
+                name: "Elachiptera sp."
+            },
+            {
+                cve: "bo",
+                name: "Ephestia elutella"
+            },
+            {
+                cve: "bp",
+                name: "Eurybia elvina, Rhizophagus sp."
+            },
+            {
+                cve: "bq",
+                name: "Eurysacca quinoae"
+            },
+            {
+                cve: "br",
+                name: "Euxesta stigmatias"
+            },
+            {
+                cve: "bs",
+                name: "Galeopsis tetrahit, Galium spurium, Polygonum convolvulus, Avena fatua, Avena sativa, Brassica napus, Echinochloa crus-galli, Linum usitatissimum, Malva parviflora, Polygonum lapathifolium"
+            },
+            {
+                cve: "bt",
+                name: "Galium spurium, Brassica napus, Polygonum lapathifolium, Vicia sp."
+            },
+            {
+                cve: "bu",
+                name: "Grapholita molesta"
+            },
+            {
+                cve: "bw",
+                name: "Habrobracon hebetor"
+            },
+            {
+                cve: "bx",
+                name: "Helicoverpa zea"
+            },
+            {
+                cve: "by_",
+                name: "Heliothis subflexa"
+            },
+            {
+                cve: "bz",
+                name: "Heliothis virescens"
+            },
+            {
+                cve: "ca",
+                name: "Hister sp."
+            },
+            {
+                cve: "cb",
+                name: "Hydrotaea sp."
+            },
+            {
+                cve: "cc",
+                name: "Larvas necrosadas"
+            },
+            {
+                cve: "cd",
+                name: "Lasioderma serricorne"
+            },
+            {
+                cve: "ce",
+                name: "Lasioderma serricorne, Orius sp., Oryzaephilus surinamensis"
+            },
+            {
+                cve: "cf",
+                name: "Lasioderma serricorne, Oryzaephilus surinamensis"
+            },
+            {
+                cve: "cg",
+                name: "Lasioderma serricorne, Oryzaephilus surinamensis, Psocoptera"
+            },
+            {
+                cve: "ch",
+                name: "Lasioderma serricorne, Rhyzopertha dominica"
+            },
+            {
+                cve: "ci",
+                name: "Lasioderma serricorne, Thanasimus sp."
+            },
+            {
+                cve: "cj",
+                name: "Lepidoptera"
+            },
+            {
+                cve: "ck",
+                name: "Lepidoptera (pupa)"
+            },
+            {
+                cve: "cl",
+                name: "Leptostylopsis viridicomus"
+            },
+            {
+                cve: "cm",
+                name: "Lithospermum arvense, Anagallis arvensis, Avena fatua, Brassica napus, Chenopodium album, Centaurea melitensis, Digitaria sanguinalis, Echinochloa crus-galli, Galium sp., Medicago lupulina, Polygonum aviculare, S. arvensis, S. spinosa, S. gallica, S. viridis, Nicandra physalodes"
+            },
+            {
+                cve: "cn",
+                name: "Lonchaea sp."
+            },
+            {
+                cve: "co",
+                name: "Lyctus planicollis"
+            },
+            {
+                cve: "cp",
+                name: "Megaselia scalaris"
+            },
+            {
+                cve: "cq",
+                name: "Monotoma picipes"
+            },
+            {
+                cve: "cr",
+                name: "Musca domestica"
+            },
+            {
+                cve: "cs",
+                name: "Necrobia rufipes"
+            },
+            {
+                cve: "ct",
+                name: "Neoleucinodes elegantalis"
+            },
+            {
+                cve: "cu",
+                name: "Orius sp."
+            },
+            {
+                cve: "cv",
+                name: "Orius sp., Psoccoptera"
+            },
+            {
+                cve: "cw",
+                name: "Oryzaephilus mercator"
             },
             {
                 cve: "cx",
-                name: "Tamarindo"
+                name: "Oryzaephilus surinamensis"
+            },
+            {
+                cve: "cy",
+                name: "Oryzaephilus surinamensis, Necrobia rufipes"
+            },
+            {
+                cve: "cz",
+                name: "Oryzaephilus surinamensis, Psocoptera"
+            },
+            {
+                cve: "da",
+                name: "Oryzaephilus surinamensis, Sitophilus granarius"
+            },
+            {
+                cve: "db",
+                name: "Oryzaephilus surinamensis, Sitophilus granarius, Lasioderma serricorne"
+            },
+            {
+                cve: "dc",
+                name: "Oryzaephilus surinamensis, Sitophilus granarius, Tribolium castaneum"
+            },
+            {
+                cve: "dd",
+                name: "Oryzaephilus surinamensis, Sitophilus oryzae"
+            },
+            {
+                cve: "de",
+                name: "Oryzaephilus surinamensis, Sitophilus zeamais"
+            },
+            {
+                cve: "df",
+                name: "Oryzaephilus surinamensis, Tribolium castaneum"
+            },
+            {
+                cve: "dg",
+                name: "Pagiocerus frontalis"
+            },
+            {
+                cve: "dh",
+                name: "Pagiocerus frontalis, Sitophilus zeamais"
+            },
+            {
+                cve: "di",
+                name: "Pharaxonotha kirschii"
+            },
+            {
+                cve: "dj",
+                name: "Phormia regina"
+            },
+            {
+                cve: "dk",
+                name: "Platynota sp."
+            },
+            {
+                cve: "dl",
+                name: "Platynota stultana"
+            },
+            {
+                cve: "dm",
+                name: "Plodia interpunctella"
+            },
+            {
+                cve: "dn",
+                name: "Plutella xylostella"
+            },
+            {
+                cve: "do",
+                name: "Polygonum convolvulus, Amaranthus sp., Chenopodium album, Chenopodium murale, Echinochloa crus-galli, Anagallis arvensis, Melilotus indicus, Phalaris minor, Rumex crispus, Setaria pumilla, Setaria viridis"
+            },
+            {
+                cve: "dp",
+                name: "Polygonum convolvulus, Avena fatua, Avena sativa, Amaranthus blitoides, Brassica juncea, Centaurea solstitialis, Cichorium intybus, Chenopodium album, Lolium temulentum, Lolium perenne, Malva parviflora, Panicum miliaceum, Phalaris minor, Polygonum aviculare, Rumex crispus, Pimpinella anisum, Setaria viridis, Sorghum halepense"
+            },
+            {
+                cve: "dq",
+                name: "Pseudococcus sp."
+            },
+            {
+                cve: "dr",
+                name: "Psocoptera"
+            },
+            {
+                cve: "ds",
+                name: "Pyroderces rileyi"
+            },
+            {
+                cve: "dt",
+                name: "Rhagoletis pomonella"
+            },
+            {
+                cve: "du",
+                name: "Rhopalapion longirostre"
+            },
+            {
+                cve: "dw",
+                name: "Rhyzopertha dominica"
+            },
+            {
+                cve: "dx",
+                name: "Rhyzopertha dominica, Sitophilus zeamais"
+            },
+            {
+                cve: "dy",
+                name: "Scymnus sp."
+            },
+            {
+                cve: "dz",
+                name: "Silvanus sp., Sitophilus zeamais, Tribolium castaneum"
+            },
+            {
+                cve: "ea",
+                name: "Sitophilus granarius"
+            },
+            {
+                cve: "ec",
+                name: "Sitophilus zeamais"
+            },
+            {
+                cve: "ed",
+                name: "Spodoptera frugiperda"
+            },
+            {
+                cve: "ee",
+                name: "Stenoma catenifer"
+            },
+            {
+                cve: "ef",
+                name: "Stethorus sp."
+            },
+            {
+                cve: "eg",
+                name: "Strepsicrates smithiana"
+            },
+            {
+                cve: "eh",
+                name: "Talponia batesi"
+            },
+            {
+                cve: "ei",
+                name: "Tecia solanivora"
+            },
+            {
+                cve: "ej",
+                name: "Tetranychus sp."
+            },
+            {
+                cve: "ek",
+                name: "Tribolium castaneum"
+            },
+            {
+                cve: "el",
+                name: "Tribolium, Oryzaephilus surinamensis, Trogoderma inclusum"
+            },
+            {
+                cve: "em",
+                name: "Trogoderma glabrum"
+            },
+            {
+                cve: "en",
+                name: "Trogoderma iclusum"
+            },
+            {
+                cve: "eo",
+                name: "Vitula edmandsii"
+            },
+            {
+                cve: "ep",
+                name: "Zabrachia polita"
+            },
+            {
+                cve: "eq",
+                name: "Zabrotes subfasciatus"
             },
             {
                 cve: "Total_gene",
-                name: "Total Generado"
+                name: "Total de positivos"
             }
         ];
     }

@@ -141,12 +141,11 @@ export default class Controles {
                     cultivo: v_cultivo
                 };
 
-                //console.log(`Estado: ${v_edo} y Cultivo: ${v_cultivo}`)
     
                 //ejemplo
                 //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
                 
-                this.peticiones.getCapaFiltrada("MX/", "cultivos", null, this.popups.popGenerico, ".geojson",obj, map);
+                this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.popGenerico, ".geojson",obj, map);
             };
         });
 
