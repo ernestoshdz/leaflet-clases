@@ -122,6 +122,8 @@ export default class Controles {
         this.crearMinimap(map);
         this.crearAcercaDe(map);
         this.cargarFiltro(map);
+        this.getSelectInputs("mx_edos",'sin_geometria/',"test",".geojson","NOMGEO","cve_edo");
+
         //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
     }
@@ -158,6 +160,18 @@ export default class Controles {
             
             this.peticiones.getCapaFiltrada("MX/", "cultivos", null, this.popups.popGenerico, ".geojson",valor_select, map);
         }; */
+    }
+
+    getSelectInputs = async (id, folder, nombre_archivo, ext, name, value, req, res) => {
+        const response = await fetch('geojson/' + folder + nombre_archivo + ext);
+        const data = await response.json();
+
+        //console.log(data.features)
+
+        data.features.forEach((i)=>{
+            //llenar selects de estados (archivo sin geometría)
+            document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
+        });
     }
 
 }
