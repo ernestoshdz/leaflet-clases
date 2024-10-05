@@ -122,7 +122,8 @@ export default class Controles {
         this.crearMinimap(map);
         this.crearAcercaDe(map);
         this.cargarFiltro(map);
-        this.getSelectInputs("mx_edos",'sin_geometria/',"test",".geojson","NOMGEO","cve_edo");
+        this.getSelectInputs("mx_edos",'sin_geometria/',"edos_mx",".geojson","NOMGEO","CVE_ENT",null);
+        this.getSelectInputs("mx_mun",'sin_geometria/',"mun_mx",".geojson","NOMGEO","cve_edo",null);
 
         //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
@@ -143,35 +144,41 @@ export default class Controles {
                     cultivo: v_cultivo
                 };
 
-    
                 //ejemplo
                 //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
                 
+                //Filtrado de Geometría
                 this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.popGenerico, ".geojson",obj, map);
+
+                this.getSelectInputs("mx_mun",'sin_geometria/',"mun_mx",".geojson","NOMGEO","cve_edo",obj.edo);
             };
         });
-
-        /* document.getElementById("layers").onchange = (e) => {
-
-            let valor_select = e.target.value;
-
-            //ejemplo
-            //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
-            
-            this.peticiones.getCapaFiltrada("MX/", "cultivos", null, this.popups.popGenerico, ".geojson",valor_select, map);
-        }; */
     }
 
-    getSelectInputs = async (id, folder, nombre_archivo, ext, name, value, req, res) => {
+    getSelectInputs = async (id, folder, nombre_archivo, ext, name, value, filtro, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
-        //console.log(data.features)
+        if(filtro != null){
+            document.getElementById("mx_mun").innerHTML = null;
 
-        data.features.forEach((i)=>{
-            //llenar selects de estados (archivo sin geometría)
-            document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
-        });
+            data.features.forEach((i)=>{
+
+                if(i.properties.CVE_ENT == filtro){
+                    //llenar selects de estados (archivo sin geometría)
+                    document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
+                }
+            });
+
+        } else {
+            data.features.forEach((i)=>{
+
+                //llenar selects de estados (archivo sin geometría)
+                document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
+            });
+        }
+
+        
     }
 
 }
