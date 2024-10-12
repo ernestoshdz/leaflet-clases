@@ -34,29 +34,39 @@ export default class Peticiones {
         //esta línea limpiar el layergroup antes de llenarlo
         this.lyr_filtro.clearLayers()
 
+        console.log(filtro)
+
         let geojsonLayer = L.geoJson(data, {
             style: estilo,
             onEachFeature: pop,
             filter: function (feature) {
+
+                //Estado con valor, mun y cultivo vacios
+
+                //Mun con valor, edo y cultivo vacios
+
+                //Cultivo con valor, edo y mun vacios
+
+                //Estado y municipio vacios, cultivo con valor
 
                 // Estado con valor y cultivo vacio
                 if ((feature.properties.c_edo == filtro.edo) && (filtro.cultivo == "" && filtro.edo != "")) {
                     return true;
                 }
 
-                //Estado sin valor y cultivo con valor
-                if ((feature.properties.c_cultivo == filtro.cultivo) && (filtro.edo == "" && filtro.cultivo != "")) {
+                //Estado sin valor, municipio con valor y cultivo con valor
+                if ((filtro.edo == "" && filtro.mun != "" && filtro.cultivo != "") && (feature.properties.c_mpio == filtro.mun) && (feature.properties.c_cultivo == filtro.cultivo)) {
                     return true;
                 }
 
-                //Estado y cultivo con valor
-                if (((feature.properties.c_edo == filtro.edo) && (feature.properties.c_cultivo == filtro.cultivo))) {
+                //Estado, cultivo y municipio con valor
+                if ((filtro.edo != "" && filtro.mun != "" && filtro.cultivo != "") && (feature.properties.c_edo == filtro.edo) && (feature.properties.c_mpio == filtro.mun) && (feature.properties.c_cultivo == filtro.cultivo)) {
                     return true;
                 }
 
                 //Estado y cultivo vacios
-                if (((filtro.edo === "") && (filtro.cultivo === ""))) {
-                    return false;//Return true si necesitas todos los valores por default
+                if (((filtro.edo === "") && (filtro.mun === "") && (filtro.cultivo === ""))) {
+                    return true;//Return false si necesitas quitar todos los valores por default
                 }
             }
         });

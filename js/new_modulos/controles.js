@@ -122,18 +122,33 @@ export default class Controles {
         this.crearMinimap(map);
         this.crearAcercaDe(map);
         this.cargarFiltro(map);
-        this.getSelectInputs("mx_edos",'sin_geometria/',"edos_mx",".geojson","NOMGEO","CVE_ENT",null);
-        this.getSelectInputs("mx_mun",'sin_geometria/',"mun_mx",".geojson","NOMGEO","cve_edo",null);
+        this.getSelectInputs("mx_edos", 'sin_geometria/', "edos_mx", ".geojson", "NOMGEO", "CVE_ENT", null);
+        this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
 
         //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
     }
 
+    test(map) {
+        let v_edo = document.getElementById("mx_edos").value;
+        let v_mun = document.getElementById("mx_mun").value;
+        let v_cultivo = document.getElementById("layers").value;
+
+        let obj = {
+            edo: v_edo,
+            mun: v_mun,
+            cultivo: v_cultivo
+        };
+
+        //Filtrado de Geometría
+        this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.popGenerico, ".geojson", obj, map);
+    }
+
     cargarFiltro(map) {
 
-        let test = document.querySelectorAll('#layers, #mx_edos');
+        let test = document.querySelectorAll('#mx_edos');
 
-        test.forEach((i)=>{
+        test.forEach((i) => {
             document.getElementById(i.id).onchange = (e) => {
 
                 let v_edo = document.getElementById("mx_edos").value;
@@ -146,64 +161,43 @@ export default class Controles {
                     cultivo: v_cultivo
                 };
 
-                //ejemplo
-                //this.peticiones.getCapaFiltrada("MX/", "México_Estados", this.estilos.st_pol, null, ".geojson",valor_select, map)
-                
-                //Filtrado de Geometría
-                this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.popGenerico, ".geojson",obj, map);
-
                 //Antes de hacer esto empezar a filtrar correctamente la geometría con edo, mun y cultivo
-                ///this.getSelectInputs("mx_mun",'sin_geometria/',"mun_mx",".geojson","NOMGEO","cve_edo",obj);
+                this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", obj);
             };
         });
+
+        let button_buscar = document.getElementById('btn_buscar');
+
+        button_buscar.onclick = function () { this.test(map) }.bind(this);
     }
 
     getSelectInputs = async (id, folder, nombre_archivo, ext, name, value, filtro, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
-        if(filtro != null){
+        if (filtro != null) {
 
-            if(filtro.edo != '' && (filtro.mun == '' || filtro.mun != '') && (filtro.cultivo != '' || filtro.cultivo == '')){
-                document.getElementById("mx_mun").innerHTML = null;
-                data.features.forEach((i)=>{
-                    //llenar select de municipios en función del estado seleccionado
-                    if(i.properties.CVE_ENT == filtro.edo){
-                        document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
-                    }
-                    
-                });
-            }
+            document.getElementById("mx_mun").innerHTML = null;
+            data.features.forEach((i) => {
+                //llenar select de municipios en función del estado seleccionado
+                if (i.properties.CVE_ENT == filtro.edo) {
+                    document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                } else {
+                    //document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                }
 
-            if(filtro.cultivo == "" && filtro.edo != ""){
-                document.getElementById("mx_mun").innerHTML = null;
-                data.features.forEach((i)=>{
-                    if(i.properties.CVE_ENT == filtro.edo){
-                        //llenar selects de estados (archivo sin geometría)
-                        document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
-                    }
-                });
-            }
+            });
 
-            //Desactivar Municipio
-            if(filtro.edo == '' && filtro.mun != '' && filtro.cultivo == ''){
-                document.getElementById("mx_mun").innerHTML = null;
-                data.features.forEach((i)=>{
-                    //llenar selects de estados (archivo sin geometría)
-                    document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
-                    
-                });
-            }
 
         } else {
-            data.features.forEach((i)=>{
 
+            data.features.forEach((i) => {
                 //llenar selects de estados (archivo sin geometría)
-                document.getElementById(id).add(new Option(i.properties[name],i.properties[value]))
+                document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
             });
         }
 
-        
+
     }
 
 }
