@@ -34,39 +34,52 @@ export default class Peticiones {
         //esta línea limpiar el layergroup antes de llenarlo
         this.lyr_filtro.clearLayers()
 
-        console.log(filtro)
-
         let geojsonLayer = L.geoJson(data, {
             style: estilo,
             onEachFeature: pop,
             filter: function (feature) {
 
-                //Estado con valor, mun y cultivo vacios
+                if (filtro.edo != "") {
 
-                //Mun con valor, edo y cultivo vacios
+                    if (filtro.mun != "") {
+                        if (filtro.cultivo != "") {
+                            if (feature.properties.c_edo == filtro.edo && feature.properties.c_mpio == filtro.mun && feature.properties.c_cultivo == filtro.cultivo) {
+                                return true;
+                            }
+                        } else {
+                            
+                            if (feature.properties.c_edo == filtro.edo && feature.properties.c_mpio == filtro.mun) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        if (filtro.cultivo == "") {
+                            if (feature.properties.c_edo == filtro.edo) {
+                                return true;
+                            }
+                        } else {
+                            if (feature.properties.c_edo == filtro.edo && feature.properties.c_cultivo == filtro.cultivo){
+                                return true;
+                            }
+                        }
+                    }
 
-                //Cultivo con valor, edo y mun vacios
-
-                //Estado y municipio vacios, cultivo con valor
-
-                // Estado con valor y cultivo vacio
-                if ((feature.properties.c_edo == filtro.edo) && (filtro.cultivo == "" && filtro.edo != "")) {
-                    return true;
-                }
-
-                //Estado sin valor, municipio con valor y cultivo con valor
-                if ((filtro.edo == "" && filtro.mun != "" && filtro.cultivo != "") && (feature.properties.c_mpio == filtro.mun) && (feature.properties.c_cultivo == filtro.cultivo)) {
-                    return true;
-                }
-
-                //Estado, cultivo y municipio con valor
-                if ((filtro.edo != "" && filtro.mun != "" && filtro.cultivo != "") && (feature.properties.c_edo == filtro.edo) && (feature.properties.c_mpio == filtro.mun) && (feature.properties.c_cultivo == filtro.cultivo)) {
-                    return true;
-                }
-
-                //Estado y cultivo vacios
-                if (((filtro.edo === "") && (filtro.mun === "") && (filtro.cultivo === ""))) {
-                    return true;//Return false si necesitas quitar todos los valores por default
+                } else {
+                    if (filtro.mun == "") {
+                        if (filtro.cultivo == "") {
+                            return true;
+                        } else {
+                            if (feature.properties.c_cultivo == filtro.cultivo) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        if (filtro.cultivo == "") {
+                            if (feature.properties.c_mpio == filtro.mun) {
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
         });

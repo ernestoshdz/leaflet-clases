@@ -178,12 +178,19 @@ export default class Controles {
         if (filtro != null) {
 
             document.getElementById("mx_mun").innerHTML = null;
+            
+            //agregar opcion de todos por default
+            document.getElementById(id).add(new Option("Todo", ""))
+            
             data.features.forEach((i) => {
                 //llenar select de municipios en función del estado seleccionado
                 if (i.properties.CVE_ENT == filtro.edo) {
                     document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
                 } else {
-                    //document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                    //llena los municipios cuando no hay estado seleccionado
+                    if(filtro.edo == ""){
+                        document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                    }
                 }
 
             });
