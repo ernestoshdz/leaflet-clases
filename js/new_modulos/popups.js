@@ -726,6 +726,24 @@ export default class Popups {
         }
     }
 
+    cultivosPop(feature, layer){
+        layer.on('click', function(e) {
+            //console.log(feature)
+        });
+
+        let popupContent =
+            `<table class="table table-striped table-hover">
+                <tr><td><b>Cultivo:</b></td><td>${feature.properties.Cultivo}</td></tr>
+                <tr><td><b>Nombre Científico:</b></td><td><i>${feature.properties.Cientifico} ${feature.properties.Cientifi_1} ${feature.properties.Cientifi_2}</i></td></tr>
+                <tr><td><b>Estado:</b></td><td>${feature.properties.Estado}, ${feature.properties.Municipio}</td></tr>
+                <tr><td><b>Cita:</b></td><td>${feature.properties.Cita} ${feature.properties.Cita1} ${feature.properties.Cita2}</td></tr>
+                <tr><td><b>Latitud:</b></td><td>${feature.properties.Latitud}</td></tr>
+                <tr><td><b>Longitud:</b></td><td>${feature.properties.Longitud}</td></tr>
+            </table>`;
+
+        layer.bindPopup(popupContent);
+    }
+
     oisaPop(feature, layer) {
 
         if (feature.properties) {

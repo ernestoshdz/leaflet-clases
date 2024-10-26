@@ -49,13 +49,13 @@ export default class Controles {
 
     } */
 
-    crearModal(map) {
+    crearModal(map, contenido) {
         let win = L.control.window(map, {
             title: 'Hello world!',
             maxWidth: 400,
             maxheight: 100,
             modal: true,
-            content: 'contenido',
+            content: contenido,
             position: "top",
             //visible: false
         });
@@ -77,18 +77,8 @@ export default class Controles {
                     <br>
                     <img src="img/Ciudades/Mexicali.jpg" width="200" height="150">`;
 
-                    let win = L.control.window(map, {
-                        title: 'Hello world!',
-                        maxWidth: 400,
-                        maxheight: 100,
-                        modal: true,
-                        content: contenido,
-                        position: "top",
-                        //visible: false
-                    });
-
-                    win.show();
-                }
+                    this.crearModal(map, contenido)
+                }.bind(this)
             }]
         }).addTo(map);
     }
@@ -129,7 +119,7 @@ export default class Controles {
         //this.crearSideBar(map);
     }
 
-    test(map) {
+    getFiltros(map) {
         let v_edo = document.getElementById("mx_edos").value;
         let v_mun = document.getElementById("mx_mun").value;
         let v_cultivo = document.getElementById("layers").value;
@@ -141,7 +131,7 @@ export default class Controles {
         };
 
         //Filtrado de Geometría
-        this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.popGenerico, ".geojson", obj, map);
+        this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
     }
 
     cargarFiltro(map) {
@@ -168,7 +158,7 @@ export default class Controles {
 
         let button_buscar = document.getElementById('btn_buscar');
 
-        button_buscar.onclick = function () { this.test(map) }.bind(this);
+        button_buscar.onclick = function () { this.getFiltros(map) }.bind(this);
     }
 
     getSelectInputs = async (id, folder, nombre_archivo, ext, name, value, filtro, req, res) => {
@@ -178,17 +168,17 @@ export default class Controles {
         if (filtro != null) {
 
             document.getElementById("mx_mun").innerHTML = null;
-            
+
             //agregar opcion de todos por default
             document.getElementById(id).add(new Option("Todo", ""))
-            
+
             data.features.forEach((i) => {
                 //llenar select de municipios en función del estado seleccionado
                 if (i.properties.CVE_ENT == filtro.edo) {
                     document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
                 } else {
                     //llena los municipios cuando no hay estado seleccionado
-                    if(filtro.edo == ""){
+                    if (filtro.edo == "") {
                         document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
                     }
                 }
