@@ -1,4 +1,4 @@
-//import Sidebar from "./sidebar.js";
+import Controles from "./controles.js";
 
 export default class Popups {
     constructor() {
@@ -7,6 +7,7 @@ export default class Popups {
         this.popGenerico = this.popGenerico.bind(this);
         this.mxEdosPop = this.mxEdosPop.bind(this);
         this.oisaPop = this.oisaPop.bind(this);
+        this.cultivosPop = this.cultivosPop.bind(this);
 
         this.newArray = [];
         this.namesArray = [];
@@ -726,15 +727,74 @@ export default class Popups {
         }
     }
 
-    cultivosPop(feature, layer){
-        layer.on('click', function(e) {
-            //console.log(feature)
+    crearModal(map, titulo, img) {
+        let win = L.control.window(map, {
+            title: titulo,
+            maxWidth: 400,
+            maxheight: 100,
+            modal: true,
+            content: this.crearGaleria(),
+            //content: `<img src="img/Plagas/${img}.jpg" width="200" height="150">`,
+            position: "top",
+            //visible: false
         });
+
+        win.show();
+    }
+
+    crearGaleria() {
+
+        let array_img = [
+            {
+                name:"Maconellicoccus hirsutus",
+                folder: "Maconellicoccus",
+                ext: ".jpg"
+            },
+            {
+                name:"Maconellicoccus test",
+                folder: "Maconellicoccus",
+                ext: ".jpg"
+            },
+        ];
+        
+        let gallery = `
+        <div id="galeria" class="container-fluid">`;
+
+            array_img.forEach((i) => {
+                gallery += `
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <a href="img/Plagas/${i.name}.jpg">
+                            <img class="img-fluid"src="img/Plagas/${i.name}.jpg">
+                        </a>
+                    </div>`
+            });
+
+            gallery += `<div class="jumbotron">
+                <p>Monks spent most of their time praying, meditating, teaching, reading, etc.The first clocks created in medieval England were the work of monks.</p>
+            </div>
+        </div>
+        `;
+
+        return gallery;
+    }
+
+    cultivosPop(feature, layer) {
 
         let popupContent =
             `<table class="table table-striped table-hover">
                 <tr><td><b>Cultivo:</b></td><td>${feature.properties.Cultivo}</td></tr>
-                <tr><td><b>Nombre Científico:</b></td><td><i>${feature.properties.Cientifico} ${feature.properties.Cientifi_1} ${feature.properties.Cientifi_2}</i></td></tr>
+                <tr><td><b>Nombre Científico:</b></td><td><i>
+                    ${feature.properties.Cientifico}
+                    ${feature.properties.Cientifi_1}
+                    ${feature.properties.Cientifi_2}
+                </i></td></tr>
+                <tr><td><b>Plaga:</b></td><td><i>
+                    ${feature.properties.Plaga} 
+                    ${feature.properties.Plaga1} 
+                    ${feature.properties.Plaga2}
+                    ${feature.properties.Plaga3}
+                </i></td></tr>
+                <tr><td></td><td><button type="button" id="btn_verImg">Ver Plaga</button></td></tr>
                 <tr><td><b>Estado:</b></td><td>${feature.properties.Estado}, ${feature.properties.Municipio}</td></tr>
                 <tr><td><b>Cita:</b></td><td>${feature.properties.Cita} ${feature.properties.Cita1} ${feature.properties.Cita2}</td></tr>
                 <tr><td><b>Latitud:</b></td><td>${feature.properties.Latitud}</td></tr>
@@ -742,6 +802,14 @@ export default class Popups {
             </table>`;
 
         layer.bindPopup(popupContent);
+
+        layer.on('click', function (e) {
+            let btn_verImg = document.getElementById('btn_verImg');
+
+            //console.log(feature.properties.Plaga)
+
+            btn_verImg.onclick = function () { this.crearModal(map, feature.properties.Plaga, feature.properties.Plaga) }.bind(this);
+        }.bind(this));
     }
 
     oisaPop(feature, layer) {
