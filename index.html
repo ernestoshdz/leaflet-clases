@@ -27,6 +27,11 @@
 	<!-- Font Awesome -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+	<!-- Baguettebox -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+	<!-- <link rel="stylesheet" href="css/baguetteBox.css"> -->
+
 </head>
 
 <body>
@@ -75,6 +80,10 @@
 	<!-- Sidebar V2 -->
 	<link rel="stylesheet" href="css/leaflet-sidebar.css" />
 	<script src="js/leaflet-sidebar-v2.js"></script>
+
+	<!-- BaguetteBox -->
+	<!-- <script src="js/baguetteBox.js" async></script>
+	<script src="js/highlight.min.js" async></script> -->
 
 	<!-- <script type="text/javascript" src="js/clases/clase_app.js" defer></script> -->
 	<!-- <script type="text/javascript" src="js/clases/clase_clusters.js" defer></script> -->
@@ -322,7 +331,12 @@
 			Derechos Reservados
 		</div>
 	</div>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+	<script>
+		window.onload = function() {
+			baguetteBox.run('.gallery');
+		};
+	</script>
 </body>
 
 </html>

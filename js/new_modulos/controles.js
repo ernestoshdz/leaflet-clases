@@ -98,7 +98,7 @@ export default class Controles {
             autoToggleDisplay: false,
             position: 'bottomright',
             zoomLevelFixed: 2,
-            minimized: false,
+            minimized: true,//false
         }).addTo(map);
 
     }

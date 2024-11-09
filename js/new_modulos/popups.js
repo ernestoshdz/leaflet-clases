@@ -593,6 +593,42 @@ export default class Popups {
                 name: "Total de positivos"
             }
         ];
+
+        this.array_img = [
+            {
+                plaga:"Maconellicoccus hirsutus",
+                cve: 76,
+                images: [
+                    {
+                        name:"Maconellicoccus hirsutus",
+                        folder:"Maconellicoccus hirsutus",
+                        ext: "jpg"
+                    },
+                    {
+                        name:"test",
+                        folder:"Maconellicoccus hirsutus",
+                        ext: "jpg"
+                    }
+                ],
+            },
+            {
+                plaga:"Thielaviopsis paradoxa",
+                cve: 57,
+                images: [
+                    {
+                        name:"OIP",
+                        folder:"Thielaviopsis",
+                        ext: "jpg"
+                    },
+                    {
+                        name:"Figura",
+                        folder:"Thielaviopsis",
+                        ext: "png"
+                    }
+                ],
+            },
+
+        ];
     }
 
     filtrarArray(feature, newArray, namesArray) {
@@ -727,14 +763,13 @@ export default class Popups {
         }
     }
 
-    crearModal(map, titulo, img) {
+    crearModal(map, titulo, cve_plaga) {
         let win = L.control.window(map, {
             title: titulo,
             maxWidth: 400,
             maxheight: 100,
             modal: true,
-            content: this.crearGaleria(),
-            //content: `<img src="img/Plagas/${img}.jpg" width="200" height="150">`,
+            content: this.crearGaleria(cve_plaga),
             position: "top",
             //visible: false
         });
@@ -742,38 +777,42 @@ export default class Popups {
         win.show();
     }
 
-    crearGaleria() {
-
-        let array_img = [
-            {
-                name:"Maconellicoccus hirsutus",
-                folder: "Maconellicoccus",
-                ext: ".jpg"
-            },
-            {
-                name:"Maconellicoccus test",
-                folder: "Maconellicoccus",
-                ext: ".jpg"
-            },
-        ];
+    crearGaleria(cve_plaga) { 
         
         let gallery = `
-        <div id="galeria" class="container-fluid">`;
+        
+        <div id="galeria" class="container-fluid">
+            <div class="jumbotron">
+                <p>Monks spent most of their time praying, meditating, teaching, reading, etc.The first clocks created in medieval England were the work of monks.</p>
+            </div>`;
 
-            array_img.forEach((i) => {
-                gallery += `
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <a href="img/Plagas/${i.name}.jpg">
-                            <img class="img-fluid"src="img/Plagas/${i.name}.jpg">
-                        </a>
-                    </div>`
+            let filtro_array_img = this.array_img.filter((i) => i.cve == cve_plaga);
+
+            filtro_array_img.forEach((i) => {
+
+                gallery += `<div class="row gallery">`
+
+                    i.images.forEach((i) => {
+
+                        gallery += `
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <a href="img/Plagas/${i.folder}/${i.name}.${i.ext}">
+                                <img class="img-fluid"src="img/Plagas/${i.folder}/${i.name}.${i.ext}">
+                            </a>
+                        </div>`;
+                    });
+                        
+                gallery +=`</div>`;
+
             });
 
-            gallery += `<div class="jumbotron">
-                <p>Monks spent most of their time praying, meditating, teaching, reading, etc.The first clocks created in medieval England were the work of monks.</p>
-            </div>
-        </div>
-        `;
+        gallery += `</div>`;
+
+        window.onload = function() {
+            baguetteBox.run(".gallery", {
+                animation: "slideIn"
+            });
+        }
 
         return gallery;
     }
@@ -788,6 +827,7 @@ export default class Popups {
                     ${feature.properties.Cientifi_1}
                     ${feature.properties.Cientifi_2}
                 </i></td></tr>
+                <tr><td><b>Clave Plaga:</b></td><td>${feature.properties.c_plaga}</td></tr>
                 <tr><td><b>Plaga:</b></td><td><i>
                     ${feature.properties.Plaga} 
                     ${feature.properties.Plaga1} 
@@ -808,7 +848,7 @@ export default class Popups {
 
             //console.log(feature.properties.Plaga)
 
-            btn_verImg.onclick = function () { this.crearModal(map, feature.properties.Plaga, feature.properties.Plaga) }.bind(this);
+            btn_verImg.onclick = function () { this.crearModal(map, feature.properties.Plaga, feature.properties.c_plaga) }.bind(this);
         }.bind(this));
     }
 
