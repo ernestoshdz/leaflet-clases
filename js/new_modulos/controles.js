@@ -114,6 +114,7 @@ export default class Controles {
         this.cargarFiltro(map);
         this.getSelectInputs("mx_edos", 'sin_geometria/', "edos_mx", ".geojson", "NOMGEO", "CVE_ENT", null);
         this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
+        this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "c_Cultivo", null);
 
         //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
@@ -122,7 +123,7 @@ export default class Controles {
     getFiltros(map) {
         let v_edo = document.getElementById("mx_edos").value;
         let v_mun = document.getElementById("mx_mun").value;
-        let v_cultivo = document.getElementById("layers").value;
+        let v_cultivo = document.getElementById("select_cultivos").value;
 
         let obj = {
             edo: v_edo,
@@ -143,7 +144,7 @@ export default class Controles {
 
                 let v_edo = document.getElementById("mx_edos").value;
                 let v_mun = document.getElementById("mx_mun").value;
-                let v_cultivo = document.getElementById("layers").value;
+                let v_cultivo = document.getElementById("select_cultivos").value;
 
                 let obj = {
                     edo: v_edo,

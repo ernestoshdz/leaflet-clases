@@ -41,22 +41,22 @@ export default class Peticiones {
 
                 if (filtro.mun != "") {
                     if (filtro.cultivo != "") {
-                        if (row.properties.c_edo == filtro.edo && row.properties.c_mpio == filtro.mun && row.properties.c_cultivo == filtro.cultivo) {
+                        if (row.properties.cve_edo == filtro.edo && row.properties.cve_mpio == filtro.mun && row.properties.cve_cultiv == filtro.cultivo) {
                             filter_data.push(row);
                         }
                     } else {
                         
-                        if (row.properties.c_edo == filtro.edo && row.properties.c_mpio == filtro.mun) {
+                        if (row.properties.cve_edo == filtro.edo && row.properties.cve_mpio == filtro.mun) {
                             filter_data.push(row);
                         }
                     }
                 } else {
                     if (filtro.cultivo == "") {
-                        if (row.properties.c_edo == filtro.edo) {
+                        if (row.properties.cve_edo == filtro.edo) {
                             filter_data.push(row);
                         }
                     } else {
-                        if (row.properties.c_edo == filtro.edo && row.properties.c_cultivo == filtro.cultivo){
+                        if (row.properties.cve_edo == filtro.edo && row.properties.cve_cultiv == filtro.cultivo){
                             filter_data.push(row);
                         }
                     }
@@ -67,13 +67,13 @@ export default class Peticiones {
                     if (filtro.cultivo == "") {
                         filter_data.push(row);
                     } else {
-                        if (row.properties.c_cultivo == filtro.cultivo) {
+                        if (row.properties.cve_cultiv == filtro.cultivo) {
                             filter_data.push(row);
                         }
                     }
                 } else {
                     if (filtro.cultivo == "") {
-                        if (row.properties.c_mpio == filtro.mun) {
+                        if (row.properties.cve_mpio == filtro.mun) {
                             filter_data.push(row);
                         }
                     }

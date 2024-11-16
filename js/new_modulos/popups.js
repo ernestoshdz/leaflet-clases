@@ -766,7 +766,7 @@ export default class Popups {
     crearModal(map, titulo, cve_plaga) {
         let win = L.control.window(map, {
             title: titulo,
-            maxWidth: 400,
+            maxWidth: 700,
             maxheight: 100,
             modal: true,
             content: this.crearGaleria(cve_plaga),
@@ -779,42 +779,33 @@ export default class Popups {
 
     crearGaleria(cve_plaga) { 
         
-        let gallery = `
+        let galeria = `
         
-        <div id="galeria" class="container-fluid">
-            <div class="jumbotron">
-                <p>Monks spent most of their time praying, meditating, teaching, reading, etc.The first clocks created in medieval England were the work of monks.</p>
-            </div>`;
+        <div id="galeria" class="container-fluid">`;
 
             let filtro_array_img = this.array_img.filter((i) => i.cve == cve_plaga);
 
             filtro_array_img.forEach((i) => {
 
-                gallery += `<div class="row gallery">`
+                galeria += `<div class="row gallery">`
 
                     i.images.forEach((i) => {
 
-                        gallery += `
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <a href="img/Plagas/${i.folder}/${i.name}.${i.ext}">
-                                <img class="img-fluid"src="img/Plagas/${i.folder}/${i.name}.${i.ext}">
+                        galeria += `
+                        <div class="col-sm-6 col-md-5 col-lg-6">
+                            <a href="img/Plagas/${i.folder}/${i.name}.${i.ext}" target="_blank">
+                                <img class="img-fluid" src="img/Plagas/${i.folder}/${i.name}.${i.ext}">
                             </a>
                         </div>`;
                     });
                         
-                gallery +=`</div>`;
+                galeria +=`</div>`;
 
             });
 
-        gallery += `</div>`;
+        galeria += `</div>`;
 
-        window.onload = function() {
-            baguetteBox.run(".gallery", {
-                animation: "slideIn"
-            });
-        }
-
-        return gallery;
+        return galeria;
     }
 
     cultivosPop(feature, layer) {
@@ -824,15 +815,14 @@ export default class Popups {
                 <tr><td><b>Cultivo:</b></td><td>${feature.properties.Cultivo}</td></tr>
                 <tr><td><b>Nombre Científico:</b></td><td><i>
                     ${feature.properties.Cientifico}
-                    ${feature.properties.Cientifi_1}
-                    ${feature.properties.Cientifi_2}
+                    ${feature.properties.Cient1}
+                    ${feature.properties.Cient2}
                 </i></td></tr>
                 <tr><td><b>Clave Plaga:</b></td><td>${feature.properties.c_plaga}</td></tr>
                 <tr><td><b>Plaga:</b></td><td><i>
                     ${feature.properties.Plaga} 
                     ${feature.properties.Plaga1} 
                     ${feature.properties.Plaga2}
-                    ${feature.properties.Plaga3}
                 </i></td></tr>
                 <tr><td></td><td><button type="button" id="btn_verImg">Ver Plaga</button></td></tr>
                 <tr><td><b>Estado:</b></td><td>${feature.properties.Estado}, ${feature.properties.Municipio}</td></tr>
