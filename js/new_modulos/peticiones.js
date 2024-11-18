@@ -32,6 +32,8 @@ export default class Peticiones {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
+        //console.log(data)
+
         //otra forma de filtrar capa
         let filter_data = [];
 
@@ -45,7 +47,7 @@ export default class Peticiones {
                             filter_data.push(row);
                         }
                     } else {
-                        
+
                         if (row.properties.cve_edo == filtro.edo && row.properties.cve_mpio == filtro.mun) {
                             filter_data.push(row);
                         }
@@ -56,7 +58,7 @@ export default class Peticiones {
                             filter_data.push(row);
                         }
                     } else {
-                        if (row.properties.cve_edo == filtro.edo && row.properties.cve_cultiv == filtro.cultivo){
+                        if (row.properties.cve_edo == filtro.edo && (row.properties.cve_cultiv.includes(filtro.cultivo))) {
                             filter_data.push(row);
                         }
                     }
@@ -67,8 +69,17 @@ export default class Peticiones {
                     if (filtro.cultivo == "") {
                         filter_data.push(row);
                     } else {
-                        if (row.properties.cve_cultiv == filtro.cultivo) {
-                            filter_data.push(row);
+                        if (filtro.geom == "1") {
+                            if (row.properties.cve_cultiv == filtro.cultivo) {
+                                filter_data.push(row);
+                            }
+                        } else {
+ 
+                            let names = row.properties.cve_cultiv.split(",")
+
+                            if (names.includes(filtro.cultivo)) {
+                                filter_data.push(row);
+                            }
                         }
                     }
                 } else {
@@ -76,12 +87,18 @@ export default class Peticiones {
                         if (row.properties.cve_mpio == filtro.mun) {
                             filter_data.push(row);
                         }
+                    } else {
+                        if(row.properties.cve_mpio == filtro.mun && row.properties.cve_cultiv == filtro.cultivo){
+                            filter_data.push(row);
+                        }
                     }
                 }
             }
         });
 
-        if(filter_data.length == 0){
+        //console.log(filter_data)
+
+        if (filter_data.length == 0) {
 
             this.modal_window.show();
 

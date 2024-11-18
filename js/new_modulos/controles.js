@@ -121,18 +121,24 @@ export default class Controles {
     }
 
     getFiltros(map) {
+        let v_geom = document.getElementById("geom").value;
         let v_edo = document.getElementById("mx_edos").value;
         let v_mun = document.getElementById("mx_mun").value;
         let v_cultivo = document.getElementById("select_cultivos").value;
 
         let obj = {
+            geom: v_geom,
             edo: v_edo,
             mun: v_mun,
             cultivo: v_cultivo
         };
 
-        //Filtrado de Geometría
-        this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
+        if (obj.geom == "1") {
+            //Filtrado de Geometría
+            this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
+        } else {
+            this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.popGenerico, ".geojson", obj, map);
+        }
     }
 
     cargarFiltro(map) {
@@ -191,7 +197,7 @@ export default class Controles {
 
             data.features.forEach((i) => {
                 //llenar selects de estados (archivo sin geometría)
-                document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
             });
         }
 
