@@ -39,26 +39,29 @@ export default class Peticiones {
 
         data.features.map(row => {
 
+            //Municipios solo para 2 casos muy especificos (cuando y mun estan llenos y cultivo esta o no vacio )
             if (filtro.edo != "") {
 
                 if (filtro.mun != "") {
                     if (filtro.cultivo != "") {
-                        if (row.properties.cve_edo == filtro.edo && row.properties.cve_mpio == filtro.mun && row.properties.cve_cultiv == filtro.cultivo) {
+                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo) {
                             filter_data.push(row);
                         }
                     } else {
 
-                        if (row.properties.cve_edo == filtro.edo && row.properties.cve_mpio == filtro.mun) {
+                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun) {
                             filter_data.push(row);
                         }
                     }
                 } else {
                     if (filtro.cultivo == "") {
-                        if (row.properties.cve_edo == filtro.edo) {
+                        if (row.properties.CVE_ENT == filtro.edo) {
                             filter_data.push(row);
                         }
                     } else {
-                        if (row.properties.cve_edo == filtro.edo && (row.properties.cve_cultiv.includes(filtro.cultivo))) {
+                        let names = row.properties.cve_cultiv.split(",")
+
+                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
                             filter_data.push(row);
                         }
                     }
@@ -84,11 +87,11 @@ export default class Peticiones {
                     }
                 } else {
                     if (filtro.cultivo == "") {
-                        if (row.properties.cve_mpio == filtro.mun) {
+                        if (row.properties.CVEGEO == filtro.mun) {
                             filter_data.push(row);
                         }
                     } else {
-                        if(row.properties.cve_mpio == filtro.mun && row.properties.cve_cultiv == filtro.cultivo){
+                        if(row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo){
                             filter_data.push(row);
                         }
                     }

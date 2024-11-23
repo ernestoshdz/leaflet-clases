@@ -8,14 +8,35 @@ export default class Popups {
         this.mxEdosPop = this.mxEdosPop.bind(this);
         this.oisaPop = this.oisaPop.bind(this);
         this.cultivosPop = this.cultivosPop.bind(this);
+        this.edosCultivosPop = this.edosCultivosPop.bind(this);
 
         this.newArray = [];
         this.namesArray = [];
 
         this.barColors = ["red", "green", "blue", "orange", "brown"];
 
+        //Diccionario de datos para Estados Cultivos
+        this.misValoresCultivos = [
+            {
+                cve_cultiv: 1,
+                name: 'Agave'
+            },
+            {
+                cve_cultiv: 43,
+                name: 'Curcubitaceas'
+            },
+            {
+                cve_cultiv: 48,
+                name: 'Frutales'
+            },
+            {
+                cve_cultiv: 51,
+                name: 'Girasol'
+            }
+        ];
+
         //funciona como diccionario de datos, muy útil para sustituir las claves por nombres
-        this.misValores = [
+        this.misValoresOISA = [
             {
                 cve: "a",
                 name: "Acanthoscelides obtectus"
@@ -637,7 +658,7 @@ export default class Popups {
         newArray = [];
         namesArray = [];
 
-        this.misValores.map(row => {
+        this.misValoresOISA.map(row => {
 
             //para evitar graficar el total generado
             if (feature.properties[row.cve] > 0 && row.cve != "Total_gene") {
@@ -817,15 +838,20 @@ export default class Popups {
                     ${feature.properties.Cientifico}
                     ${feature.properties.Cient1}
                     ${feature.properties.Cient2}
+                    ${feature.properties.Otros}
+                    ${feature.properties.Otros1}
+                    ${feature.properties.Otros2}
+                    ${feature.properties.Otros3}
                 </i></td></tr>
-                <tr><td><b>Clave Plaga:</b></td><td>${feature.properties.c_plaga}</td></tr>
+                <tr><td><b>Clave Plaga:</b></td><td>${feature.properties.cve_plaga}</td></tr>
                 <tr><td><b>Plaga:</b></td><td><i>
                     ${feature.properties.Plaga} 
                     ${feature.properties.Plaga1} 
                     ${feature.properties.Plaga2}
+                    ${feature.properties.Plaga3}
                 </i></td></tr>
                 <tr><td></td><td><button type="button" id="btn_verImg">Ver Plaga</button></td></tr>
-                <tr><td><b>Estado:</b></td><td>${feature.properties.Estado}, ${feature.properties.Municipio}</td></tr>
+                <tr><td><b>Estado:</b></td><td>${feature.properties.Estado}, ${feature.properties.NOMGEO}</td></tr>
                 <tr><td><b>Cita:</b></td><td>${feature.properties.Cita} ${feature.properties.Cita1} ${feature.properties.Cita2}</td></tr>
                 <tr><td><b>Latitud:</b></td><td>${feature.properties.Latitud}</td></tr>
                 <tr><td><b>Longitud:</b></td><td>${feature.properties.Longitud}</td></tr>
@@ -855,7 +881,7 @@ export default class Popups {
 
             let arry = [];
 
-            this.misValores.map(row => {
+            this.misValoresOISA.map(row => {
 
                 if (feature.properties[row.cve] > 0) {
 
@@ -881,6 +907,37 @@ export default class Popups {
             });
 
             popupContent += '</table>';
+
+            layer.bindPopup(popupContent);
+        }
+    }
+
+    edosCultivosPop(feature, layer){
+        if(feature.properties){
+
+            let names = feature.properties.cve_cultiv.split(",")
+
+            let myArray = [];
+
+            names.forEach((i) => {
+
+                this.misValoresCultivos.forEach((j)  => {
+                    
+                    if(i == j.cve_cultiv){
+                        myArray.push(j.name)
+                    }
+                });
+            });
+
+            //console.log(myArray)
+
+            let popupContent =
+                `<table class="table table-striped table-hover">
+                <tr><td><b>Claves Cultivos:</b></td><td>${feature.properties.cve_cultiv}</td></tr>
+                <tr><td><b>Cultivos:</b></td><td>${myArray}</td></tr>
+            </table>`;
+
+            {/* <tr><td><b>Imagen:</b></td><td><img src="img/Ciudades/${feature.properties.CIUDAD}.jpg" width="200" height="150"></td></tr> */ }
 
             layer.bindPopup(popupContent);
         }

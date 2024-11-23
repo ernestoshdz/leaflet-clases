@@ -114,7 +114,7 @@ export default class Controles {
         this.cargarFiltro(map);
         this.getSelectInputs("mx_edos", 'sin_geometria/', "edos_mx", ".geojson", "NOMGEO", "CVE_ENT", null);
         this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
-        this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "c_Cultivo", null);
+        this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "cve_cultiv", null);
 
         //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
@@ -137,7 +137,7 @@ export default class Controles {
             //Filtrado de Geometría
             this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
         } else {
-            this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.popGenerico, ".geojson", obj, map);
+            this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.edosCultivosPop, ".geojson", obj, map);
         }
     }
 
