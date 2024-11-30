@@ -31,7 +31,7 @@ export default class Capas {
         capas_json.forEach(i => {
 
             /* atributos de la lista */
-            this.peticiones.getCapas(i.layer, i.folder, i.file, i.style, i.pop, i.ext, i.tema);
+            this.peticiones.getCapas(i.layer, i.folder, i.file, i.style, i.pop, i.ext, i.estilo_pts, i.tema);
 
             this.agregarCapasJson(i.name, i.layer, i.tema);
 
