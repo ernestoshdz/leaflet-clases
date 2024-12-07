@@ -133,11 +133,19 @@ export default class Controles {
             cultivo: v_cultivo
         };
 
+        //hacer esto mas limpio
+
         if (obj.geom == "1") {
             //Filtrado de Geometría
             this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
         } else {
-            this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.edosCultivosPop, ".geojson", obj, map);
+
+            if(obj.mun != ""){
+                this.peticiones.getCapaFiltrada("MX/", "municipios_cul_plagas", this.estilos.estilo_eua, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
+            } else {
+                this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
+            }
+
         }
     }
 
@@ -182,11 +190,11 @@ export default class Controles {
             data.features.forEach((i) => {
                 //llenar select de municipios en función del estado seleccionado
                 if (i.properties.CVE_ENT == filtro.edo) {
-                    document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                    document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
                 } else {
                     //llena los municipios cuando no hay estado seleccionado
                     if (filtro.edo == "") {
-                        document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
+                        document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
                     }
                 }
 

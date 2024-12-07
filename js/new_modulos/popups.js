@@ -8,7 +8,7 @@ export default class Popups {
         this.mxEdosPop = this.mxEdosPop.bind(this);
         this.oisaPop = this.oisaPop.bind(this);
         this.cultivosPop = this.cultivosPop.bind(this);
-        this.edosCultivosPop = this.edosCultivosPop.bind(this);
+        this.poligonosCultivosPlagasPop = this.poligonosCultivosPlagasPop.bind(this);
 
         this.newArray = [];
         this.namesArray = [];
@@ -20,405 +20,408 @@ export default class Popups {
             {
                 cve_cultiv: 1,
                 name: 'Agave',
-				cintifico:'(Agave tequilana)'
+				cientifico:'(Agave tequilana)'
             },
             {
                 cve_cultiv: 2,
                 name: 'Aguacate',
-				cintifico:'(Persea americana)'
+				cientifico:'(Persea americana)'
             },
             {
                 cve_cultiv: 3,
                 name: 'Ajo',
-				cintifico:'(Allium sativum)'
+				cientifico:'(Allium sativum)'
             },
             {
                 cve_cultiv: 4,
                 name: 'Ajonjolí',
-				cintifico:'(Sesamum indicum)'
+				cientifico:'(Sesamum indicum)'
             },
 			{
                 cve_cultiv: 5,
                 name: 'Alfalfa',
-				cintifico:'(Medicago sativa)'
+				cientifico:'(Medicago sativa)'
             },
             {
                 cve_cultiv: 6,
                 name: 'Algarrobo',
-				cintifico:'(Ceratonia siliqua)'
+				cientifico:'(Ceratonia siliqua)'
             },
             {
                 cve_cultiv: 7,
                 name: 'Algodón',
-				cintifico:'(Gossypium hirsutum)'
+				cientifico:'(Gossypium hirsutum)'
             },
             {
                 cve_cultiv: 8,
                 name: 'Amaranto',
-				cintifico:'(Amaranthus hypochondriacus)'
+				cientifico:'(Amaranthus hypochondriacus)'
             },
 			{
                 cve_cultiv: 9,
                 name: 'Anturio',
-				cintifico:'(Anthurium andraeanum)'
+				cientifico:'(Anthurium andraeanum)'
             },
             {
                 cve_cultiv: 10,
                 name: 'Arroz',
-				cintifico:'(Oryza sativa)'
+				cientifico:'(Oryza sativa)'
             },
             {
                 cve_cultiv: 11,
                 name: 'Ave del paraíso',
-				cintifico:'(Strelitzia reginae)'
+				cientifico:'(Strelitzia reginae)'
             },
             {
                 cve_cultiv: 12,
                 name: 'Azucena',
-				cintifico:'(Hippeastrum x hybridum)'
+				cientifico:'(Hippeastrum x hybridum)'
             },
 			{
                 cve_cultiv: 13,
                 name: 'Berenjena',
-				cintifico:'(Solanum melongena)'
+				cientifico:'(Solanum melongena)'
             },
             {
                 cve_cultiv: 14,
                 name: 'Brócoli',
-				cintifico:'(Brassica oleracea var. italica)'
+				cientifico:'(Brassica oleracea var. italica)'
             },
             {
                 cve_cultiv: 15,
                 name: 'Cacao',
-				cintifico:'(Theobroma cacao)'
+				cientifico:'(Theobroma cacao)'
             },
             {
                 cve_cultiv: 16,
                 name: 'Café',
-				cintifico:'(Coffea arabica)'
+				cientifico:'(Coffea arabica)'
             },
 			{
                 cve_cultiv: 17,
                 name: 'Calabacita',
-				cintifico:'(Cucurbita pepo)'
+				cientifico:'(Cucurbita pepo)'
 				
             },
             {
                 cve_cultiv: 18,
                 name: 'Calabaza',
-				cintifico:'(Cucurbita pepo)'
+				cientifico:'(Cucurbita pepo)'
             },
             {
                 cve_cultiv: 19,
                 name: 'Calabaza kabocha',
-				cintifico:'(Cucurbita maxima)'
+				cientifico:'(Cucurbita maxima)'
             },
             {
                 cve_cultiv: 20,
                 name: 'Caña de azúcar',
-				cintifico:'(Saccharum officinarum)'
+				cientifico:'(Saccharum officinarum)'
             },
 			{
                 cve_cultiv: 21,
                 name: 'Cártamo',
-				cintifico:'(Carthamus tinctorius)'
+				cientifico:'(Carthamus tinctorius)'
             },
             {
                 cve_cultiv: 22,
                 name: 'Cebada',
-				cintifico:'(Hordeum vulgare)'
+				cientifico:'(Hordeum vulgare)'
             },
             {
                 cve_cultiv: 23,
                 name: 'Cebolla',
-				cintifico:'(Allium cepa)'
+				cientifico:'(Allium cepa)'
             },
             {
                 cve_cultiv: 24,
                 name: 'Centeno',
-				cintifico:'(Secale cereale)'
+				cientifico:'(Secale cereale)'
             },
 			{
                 cve_cultiv: 25,
                 name: 'Chayote',
-				cintifico:'(Sechium edule)'
+				cientifico:'(Sechium edule)'
             },
             {
                 cve_cultiv: 26,
                 name: 'Chícharo',
-				cintifico:'(Pisum sativum)'
+				cientifico:'(Pisum sativum)'
             },
             {
                 cve_cultiv: 27,
                 name: 'Chile',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
             {
                 cve_cultiv: 28,
                 name: 'Chile costeño',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
 			{
                 cve_cultiv: 29,
                 name: 'Chile de agua',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
             {
                 cve_cultiv: 30,
                 name: 'Chile dulce',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
             {
                 cve_cultiv: 31,
                 name: 'Chile habanero',
-				cintifico:'(Capsicum chinense)'
+				cientifico:'(Capsicum chinense)'
             },
             {
                 cve_cultiv: 32,
                 name: 'Chile jalapeño',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
 			{
                 cve_cultiv: 33,
                 name: 'Chile maax´ik',
-				cintifico:'(Capsicum annuum var. glabriusculum)'
+				cientifico:'(Capsicum annuum var. glabriusculum)'
 				
             },
             {
                 cve_cultiv: 34,
                 name: 'Chile poblano',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
             {
                 cve_cultiv: 35,
                 name: 'Chile serrano',
-				cintifico:'(Capsicum annuum var. accuminatum)'
+				cientifico:'(Capsicum annuum var. accuminatum)'
             },
             {
                 cve_cultiv: 36,
                 name: 'Chile soledad',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
 			{
                 cve_cultiv: 37,
                 name: 'Chile xcatik',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
             {
                 cve_cultiv: 38,
                 name: 'Cítricos',
-				cintifico:'(Citrus spp.)'
+				cientifico:'(Citrus spp.)'
             },
             {
                 cve_cultiv: 39,
                 name: 'Coco',
-				cintifico:'(Cocos nucifera)'
+				cientifico:'(Cocos nucifera)'
             },
             {
                 cve_cultiv: 40,
                 name: 'Col',
-				cintifico:'(Brassica oleracea var. capitata)'
+				cientifico:'(Brassica oleracea var. capitata)'
             },
 			{
                 cve_cultiv: 41,
                 name: 'Coliflor',
-				cintifico:'(Brassica oleracea)'
+				cientifico:'(Brassica oleracea)'
 				
             },
             {
                 cve_cultiv: 42,
                 name: 'Crisantemo',
-				cintifico:'(Chrysanthemum indicum)'
+				cientifico:'(Chrysanthemum indicum)'
             },
             {
                 cve_cultiv: 43,
-                name: 'Cucurbitáceas'
+                name: 'Cucurbitáceas',
+                cientifico:''
             },
             {
                 cve_cultiv: 44,
                 name: 'Durazno',
-				cintifico:'(Prunus persica)'
+				cientifico:'(Prunus persica)'
             },
 			{
                 cve_cultiv: 45,
                 name: 'Fresa',
-				cintifico:'(Fragaria x ananassa)'
+				cientifico:'(Fragaria x ananassa)'
 				
             },
             {
                 cve_cultiv: 46,
                 name: 'Fresa silvestre',
-				cintifico:'(Fragaria mexicana)'
+				cientifico:'(Fragaria mexicana)'
             },
             {
                 cve_cultiv: 47,
                 name: 'Frijol',
-				cintifico:'(Phaseolus vulgaris)'
+				cientifico:'(Phaseolus vulgaris)'
             },
             {
                 cve_cultiv: 48,
-                name: 'Frutales'
+                name: 'Frutales',
+                cientifico:''
             },
 			{
                 cve_cultiv: 49,
                 name: 'Garbanzo',
-				cintifico:'(Cicer arietinum)'
+				cientifico:'(Cicer arietinum)'
 				
             },
             {
                 cve_cultiv: 50,
                 name: 'Geranio',
-				cintifico:'(Pelargonium hortorum )'
+				cientifico:'(Pelargonium hortorum )'
             },
             {
                 cve_cultiv: 51,
                 name: 'Girasol',
-				cintifico:'(Helianthus annuus)'
+				cientifico:'(Helianthus annuus)'
             },
             {
                 cve_cultiv: 52,
                 name: 'Guanábana',
-				cintifico:'(Annona muricata)'
+				cientifico:'(Annona muricata)'
             },
 			{
                 cve_cultiv: 53,
                 name: 'Guayaba',
-				cintifico:'(Psidium guajava)'
+				cientifico:'(Psidium guajava)'
 				
             },
             {
                 cve_cultiv: 54,
                 name: 'Huauzontle',
-				cintifico:'(Chenopodium nuttalliae)'
+				cientifico:'(Chenopodium nuttalliae)'
             },
             {
                 cve_cultiv: 55,
                 name: 'Jamaica',
-				cintifico:'(Hibiscus sabdariffa)'
+				cientifico:'(Hibiscus sabdariffa)'
             },
             {
                 cve_cultiv: 56,
                 name: 'Jícama',
-				cintifico:'(Pachyrhizus erosus)'
+				cientifico:'(Pachyrhizus erosus)'
             },
 			{
                 cve_cultiv: 57,
                 name: 'Jitomate',
-				cintifico:'(Solanum lycopersicum)'
+				cientifico:'(Solanum lycopersicum)'
             },
             {
                 cve_cultiv: 58,
                 name: 'Lima mexicana',
-				cintifico:'(Citrus x limetta)'
+				cientifico:'(Citrus x limetta)'
             },
             {
                 cve_cultiv: 59,
                 name: 'Limón mandarino',
-				cintifico:'(Citrus x limonia)'
+				cientifico:'(Citrus x limonia)'
             },
             {
                 cve_cultiv: 60,
                 name: 'Limón mexicano',
-				cintifico:'(Citrus x aurantifolia)'
+				cientifico:'(Citrus x aurantifolia)'
             },
 			{
                 cve_cultiv: 61,
                 name: 'Limón persa',
-				cintifico:'(Citrus x latifolia)'
+				cientifico:'(Citrus x latifolia)'
 				
             },
             {
                 cve_cultiv: 62,
                 name: 'Limón real',
-				cintifico:'(Citrus x limon)'
+				cientifico:'(Citrus x limon)'
             },
             {
                 cve_cultiv: 63,
                 name: 'Linaza',
-				cintifico:'(Linum usitatissimum)'
+				cientifico:'(Linum usitatissimum)'
             },
             {
                 cve_cultiv: 64,
                 name: 'Maíz',
-				cintifico:'(Zea mays)'
+				cientifico:'(Zea mays)'
             },
 			{
                 cve_cultiv: 65,
                 name: 'Mandarina',
-				cintifico:'(Citrus reticulata)'
+				cientifico:'(Citrus reticulata)'
 				
             },
             {
                 cve_cultiv: 66,
                 name: 'Mandarino',
-				cintifico:'(Citrus nobilis var. deliciosa)'
+				cientifico:'(Citrus nobilis var. deliciosa)'
             },
             {
                 cve_cultiv: 67,
                 name: 'Mango',
-				cintifico:'(Mangifera indica)'
+				cientifico:'(Mangifera indica)'
             },
             {
                 cve_cultiv: 68,
                 name: 'Manzana',
-				cintifico:'(Malus domestica)'
+				cientifico:'(Malus domestica)'
             },
 			{
                 cve_cultiv: 69,
                 name: 'Melón',
-				cintifico:'(Cucumis melo)'
+				cientifico:'(Cucumis melo)'
 				
             },
             {
                 cve_cultiv: 70,
                 name: 'Mora',
-				cintifico:'(Rubus spp.)'
+				cientifico:'(Rubus spp.)'
             },
             {
                 cve_cultiv: 71,
                 name: 'Nabo',
-				cintifico:'(Brassica rapa  subsp. rapa)'
+				cientifico:'(Brassica rapa  subsp. rapa)'
             },
             {
                 cve_cultiv: 72,
                 name: 'Nanche',
-				cintifico:'(Byrsonima crassifolia)'
+				cientifico:'(Byrsonima crassifolia)'
             },
 			{
                 cve_cultiv: 73,
                 name: 'Naranja',
-				cintifico:'(Citrus sinensis)'
+				cientifico:'(Citrus sinensis)'
 				
             },
             {
                 cve_cultiv: 74,
                 name: 'Naranja agria',
-				cintifico:'(Citrus x aurantium)'
+				cientifico:'(Citrus x aurantium)'
             },
             {
                 cve_cultiv: 75,
                 name: 'No especificado',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: 76,
                 name: 'Nopal',
-				cintifico:'(Opuntia spp.)'
+				cientifico:'(Opuntia spp.)'
             },
 			{
                 cve_cultiv: 77,
                 name: 'Nopal calvo',
-				cintifico:'(Opuntia atrispina)'
+				cientifico:'(Opuntia atrispina)'
 				
             },
             {
                 cve_cultiv: 78,
                 name: 'Nogal pecanero',
-				cintifico:'(Carya Illinoinensis)'
+				cientifico:'(Carya Illinoinensis)'
             },
             {
                 cve_cultiv: 79,
-                name: 'Ornamentales'
+                name: 'Ornamentales',
+                cientifico:''
             },
             {
                 cve_cultiv: 80,
@@ -427,871 +430,871 @@ export default class Popups {
 			{
                 cve_cultiv: 81,
                 name: 'Palma de aceite africana',
-				cintifico:'(Elaeis guineensis)'
+				cientifico:'(Elaeis guineensis)'
 				
             },
             {
                 cve_cultiv: 82,
                 name: 'Papa',
-				cintifico:'(Solanum tuberosum)'
+				cientifico:'(Solanum tuberosum)'
             },
             {
                 cve_cultiv: 83,
                 name: 'Pápalo',
-				cintifico:'(Porophyllum ruderale)'
+				cientifico:'(Porophyllum ruderale)'
             },
             {
                 cve_cultiv: 84,
                 name: 'Papaya',
-				cintifico:'(Carica papaya)'
+				cientifico:'(Carica papaya)'
             },
 			{
                 cve_cultiv: 85,
                 name: 'Pepino',
-				cintifico:'(Cucumis sativus)'
+				cientifico:'(Cucumis sativus)'
             },
             {
                 cve_cultiv: 86,
                 name: 'Pera',
-				cintifico:'(Pyrus communis)'
+				cientifico:'(Pyrus communis)'
             },
             {
                 cve_cultiv: 87,
                 name: 'Pimiento',
-				cintifico:'(Capsicum annuum)'
+				cientifico:'(Capsicum annuum)'
             },
             {
                 cve_cultiv: 88,
                 name: 'Piña',
-				cintifico:'(Ananas comosus)'
+				cientifico:'(Ananas comosus)'
             },
 			{
                 cve_cultiv: 89,
                 name: 'Plátano',
-				cintifico:'(Musa paradisiaca)'		
+				cientifico:'(Musa paradisiaca)'		
             },
             {
                 cve_cultiv: 90,
                 name: 'Rábano',
-				cintifico:'(Raphanus sativus)'
+				cientifico:'(Raphanus sativus)'
             },
             {
                 cve_cultiv: 91,
                 name: 'Rambután',
-				cintifico:'(Nephelium lappaceum)'
+				cientifico:'(Nephelium lappaceum)'
             },
             {
                 cve_cultiv: 92,
                 name: 'Rosa',
-				cintifico:'(Rosa spp.)'
+				cientifico:'(Rosa spp.)'
             },
 			{
                 cve_cultiv: 93,
                 name: 'Sandía',
-				cintifico:'(Citrullus lanatus)'
+				cientifico:'(Citrullus lanatus)'
             },
             {
                 cve_cultiv: 94,
                 name: 'Solanáceas',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: 95,
                 name: 'Sorgo',
-				cintifico:'(Sorghum vulgare)'
+				cientifico:'(Sorghum vulgare)'
             },
             {
                 cve_cultiv: 96,
                 name: 'Soya',
-				cintifico:'(Glycine max)'
+				cientifico:'(Glycine max)'
             },
 			{
                 cve_cultiv: 97,
                 name: 'Tabaco',
-				cintifico:'(Nicotiana tabacum)'
+				cientifico:'(Nicotiana tabacum)'
 				
             },
             {
                 cve_cultiv: 98,
                 name: 'Tejocote',
-				cintifico:'(Crataegus mexicana)'
+				cientifico:'(Crataegus mexicana)'
             },
             {
                 cve_cultiv: 99,
                 name: 'Tomate',
-				cintifico:'(Physalis ixocarpa)'
+				cientifico:'(Physalis ixocarpa)'
             },
             {
                 cve_cultiv: 100,
                 name: 'Tomatillo',
-				cintifico:'(Physalis philadelphica)'
+				cientifico:'(Physalis philadelphica)'
             },
 			{
                 cve_cultiv: 101,
                 name: 'Toronja',
-				cintifico:'(Citrus x paradisi)'
+				cientifico:'(Citrus x paradisi)'
 				
             },
             {
                 cve_cultiv: 102,
                 name: 'Trébol',
-				cintifico:'(Trifolium pratense)'
+				cientifico:'(Trifolium pratense)'
             },
             {
                 cve_cultiv: 103,
                 name: 'Trigo',
-				cintifico:'(Triticum aestivum)'
+				cientifico:'(Triticum aestivum)'
             },
             {
                 cve_cultiv: 104,
                 name: 'Tulipán',
-				cintifico:'(Tulipa spp.)'
+				cientifico:'(Tulipa spp.)'
             },
 			{
                 cve_cultiv: 105,
                 name: 'Vainilla',
-				cintifico:'(Vanilla planifolia)'
+				cientifico:'(Vanilla planifolia)'
 				
             },
             {
                 cve_cultiv: 106,
                 name: 'Vid',
-				cintifico:'(Vitis vinifera)'
+				cientifico:'(Vitis vinifera)'
             },
             {
                 cve_cultiv: 107,
                 name: 'Yaca',
-				cintifico:'(Artocarpus heterophyllus)'
+				cientifico:'(Artocarpus heterophyllus)'
             },
             {
                 cve_cultiv: 108,
                 name: 'Azucena',
-				cintifico:'(Hippeastrum sp.)'
+				cientifico:'(Hippeastrum sp.)'
             },
 			{
                 cve_cultiv: 109,
                 name: 'Café',
-				cintifico:'(Coffea canephora)'
+				cientifico:'(Coffea canephora)'
 				
             },
             {
                 cve_cultiv: 110,
                 name: 'Calabaza',
-				cintifico:'(Cucurbita argyrosperma)'
+				cientifico:'(Cucurbita argyrosperma)'
             },
             {
                 cve_cultiv: 111,
                 name: 'Chile',
-				cintifico:'(Capsicum spp.)'
+				cientifico:'(Capsicum spp.)'
             },
             {
                 cve_cultiv: 112,
                 name: 'Crisantemo',
-				cintifico:'(Chrysanthemum x morifolium)'
+				cientifico:'(Chrysanthemum x morifolium)'
             },
 			{
                 cve_cultiv: 113,
                 name: 'Crisantemo',
-				cintifico:'(Dendranthema grandiflora)'
+				cientifico:'(Dendranthema grandiflora)'
 				
             },
             {
                 cve_cultiv: 114,
                 name: 'Girasol',
-				cintifico:'(Helianthus sp.)'
+				cientifico:'(Helianthus sp.)'
             },
             {
                 cve_cultiv: 115,
                 name: 'Manzana',
-				cintifico:'(Malus pumila)'
+				cientifico:'(Malus pumila)'
             },
             {
                 cve_cultiv: 116,
                 name: 'Plátano',
-				cintifico:'(Musa acuminata)'
+				cientifico:'(Musa acuminata)'
             },
 			{
                 cve_cultiv: 117,
                 name: 'Rosa',
-				cintifico:'(Rosa centifolia)'
+				cientifico:'(Rosa centifolia)'
 				
             },
             {
                 cve_cultiv: 118,
                 name: 'Rosa',
-				cintifico:'(Rosa sp.)'
+				cientifico:'(Rosa sp.)'
             },
             {
                 cve_cultiv: 119,
                 name: 'Trigo',
-				cintifico:'(Triticum vulgare)'
+				cientifico:'(Triticum vulgare)'
             },
             {
                 cve_cultiv: 120,
                 name: 'Trigo',
-				cintifico:'(Triticum spp.)'
+				cientifico:'(Triticum spp.)'
             },
 			{
                 cve_cultiv: 121,
                 name: 'Vainilla',
-				cintifico:'(Vanilla sp.)'
+				cientifico:'(Vanilla sp.)'
 				
             },
             {
                 cve_cultiv: '80a',
                 name: 'Acacia',
-				cintifico:'(Acacia sp.)'
+				cientifico:'(Acacia sp.)'
             },
             {
                 cve_cultiv: '80b',
                 name: 'Ahuejote',
-				cintifico:'(Salix bonplandiana)'
+				cientifico:'(Salix bonplandiana)'
             },
             {
                 cve_cultiv: '80c',
                 name: 'Álamo',
-				cintifico:'(Populus alba)'
+				cientifico:'(Populus alba)'
             },
 			{
                 cve_cultiv: '80d',
                 name: 'Aralia',
-				cintifico:'(Polyscias fruticosa)'
+				cientifico:'(Polyscias fruticosa)'
             },
             {
                 cve_cultiv: '80e',
                 name: 'Área de agostadero',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80f',
                 name: 'Avenida',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80g',
                 name: 'Bambú',
-				cintifico:'(Bambusa vulgaris)'
+				cientifico:'(Bambusa vulgaris)'
             },
             {
                 cve_cultiv: '80h',
                 name: 'Banderilla Diana',
-				cintifico:'(Bouteloua curtipendula)'
+				cientifico:'(Bouteloua curtipendula)'
             },
             {
                 cve_cultiv: '80i',
                 name: 'Banqueta',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80j',
                 name: 'Borde de camino',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80k',
                 name: 'Bosque de coníferas',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80l',
                 name: 'Bosque de encino',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80m',
                 name: 'Bosque de oyamel, pino y encino',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80n',
                 name: 'Bosque de pino',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80o',
                 name: 'Bosque de pino perturbado',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80p',
                 name: 'Bosque de pino-encino',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80q',
                 name: 'Bosque de pinos',
-				cintifico:'(Pinus patula)'
+				cientifico:'(Pinus patula)'
             },
             {
                 cve_cultiv: '80r',
                 name: 'Bosque mesófilo de montaña',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80s',
                 name: 'Bosque tropical caducifolio',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80t',
                 name: 'Bugambilia',
-				cintifico:'(Bougainvillea glabra)'
+				cientifico:'(Bougainvillea glabra)'
             },
             {
                 cve_cultiv: '80u',
                 name: 'Camino a Campo Experimental Zoquiapan',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80v',
                 name: 'Campo de futbol',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80w',
                 name: 'Campos experimentales',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80x',
                 name: 'Capote',
-				cintifico:'(Xanthosoma robustum)'
+				cientifico:'(Xanthosoma robustum)'
             },
 			{
                 cve_cultiv: '80y',
                 name: 'Carretera',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80z',
                 name: 'Casuarina',
-				cintifico:'(Casuarina equisetifolia)'
+				cientifico:'(Casuarina equisetifolia)'
             },
             {
                 cve_cultiv: '80aa',
                 name: 'Cerca de laguna',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80ab',
                 name: 'Césped',
-				cintifico:'(Paspalum vaginatum )'
+				cientifico:'(Paspalum vaginatum )'
             },
             {
                 cve_cultiv: '80ac',
                 name: 'Cheflera',
-				cintifico:'(Schefflera actinophylla )'
+				cientifico:'(Schefflera actinophylla )'
             },
             {
                 cve_cultiv: '80ad',
                 name: 'Colorín',
-				cintifico:'(Erythrina coralloides)'
+				cientifico:'(Erythrina coralloides)'
             },
 			{
                 cve_cultiv: '80ae',
                 name: 'Copalillo',
-				cintifico:'(Parthenium incanum)'
+				cientifico:'(Parthenium incanum)'
             },
             {
                 cve_cultiv: '80af',
                 name: 'Costilla de Adán',
-				cintifico:'(Monstera deliciosa)'
+				cientifico:'(Monstera deliciosa)'
             },
             {
                 cve_cultiv: '80ag',
                 name: 'Cresta rocosa con pinos y encinos',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80ah',
                 name: 'Ecotono entre matorral xerófilo y bosque de encino',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80ai',
                 name: 'Encino',
-				cintifico:'(Quercus rugosa)'
+				cientifico:'(Quercus rugosa)'
             },
             {
                 cve_cultiv: '80aj',
                 name: 'Encino',
-				cintifico:'(Quercus castanea)'
+				cientifico:'(Quercus castanea)'
             },
 			{
                 cve_cultiv: '80ak',
                 name: 'Encino',
-				cintifico:'(Quercus deserticola)'
+				cientifico:'(Quercus deserticola)'
             },
             {
                 cve_cultiv: '80al',
                 name: 'Encino',
-				cintifico:'(Quercus potosina)'
+				cientifico:'(Quercus potosina)'
             },
             {
                 cve_cultiv: '80am',
                 name: 'Encino',
-				cintifico:'(Quercus sp.)'
+				cientifico:'(Quercus sp.)'
             },
 			{
                 cve_cultiv: '80an',
                 name: 'Estafiate',
-				cintifico:'(Ambrosia confertiflora)'
+				cientifico:'(Ambrosia confertiflora)'
             },
             {
                 cve_cultiv: '80ao',
                 name: 'Estropajo',
-				cintifico:'(Luffa cylindrica)'
+				cientifico:'(Luffa cylindrica)'
             },
             {
                 cve_cultiv: '80ap',
                 name: 'Falso alcanfor',
-				cintifico:'(Heterotheca latifolia)'
+				cientifico:'(Heterotheca latifolia)'
             },
 			{
                 cve_cultiv: '80aq',
                 name: 'Ficus',
-				cintifico:'(Ficus spp.)'
+				cientifico:'(Ficus spp.)'
             },
             {
                 cve_cultiv: '80ar',
                 name: 'Ficus',
-				cintifico:'(Ficus sp.)'
+				cientifico:'(Ficus sp.)'
             },
             {
                 cve_cultiv: '80as',
                 name: 'Filodendro',
-				cintifico:'(Philodendron hastatum)'
+				cientifico:'(Philodendron hastatum)'
             },
 			{
                 cve_cultiv: '80at',
                 name: 'Flor de bígaro',
-				cintifico:'(Catharanthus roseus)'
+				cientifico:'(Catharanthus roseus)'
             },
             {
                 cve_cultiv: '80au',
                 name: 'Fresno',
-				cintifico:'(Fraxinus sp.)'
+				cientifico:'(Fraxinus sp.)'
             },
             {
                 cve_cultiv: '80av',
                 name: 'Gramíneas',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80aw',
                 name: 'Helecho',
-				cintifico:'(Pteridium aquilinum)'
+				cientifico:'(Pteridium aquilinum)'
             },
             {
                 cve_cultiv: '80ax',
                 name: 'Hibisco',
-				cintifico:'(Hibiscus sp.)'
+				cientifico:'(Hibiscus sp.)'
             },
             {
                 cve_cultiv: '80ay',
                 name: 'Hierba amarilla',
-				cintifico:'(Baileya multiradiata)'
+				cientifico:'(Baileya multiradiata)'
             },
 			{
                 cve_cultiv: '80az',
                 name: 'Huizache',
-				cintifico:'(Acacia pennatula)'
+				cientifico:'(Acacia pennatula)'
             },
             {
                 cve_cultiv: '80ba',
                 name: 'Jardín',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bb',
                 name: 'Jonote',
-				cintifico:'(Heliocarpus appendiculatus)'
+				cientifico:'(Heliocarpus appendiculatus)'
             },,
 			{
                 cve_cultiv: '80bc',
                 name: 'Laurel',
-				cintifico:'(Laurus nobilis)'
+				cientifico:'(Laurus nobilis)'
             },
             {
                 cve_cultiv: '80bd',
                 name: 'Laurel',
-				cintifico:'(Laurus sp.)'
+				cientifico:'(Laurus sp.)'
             },
             {
                 cve_cultiv: '80be',
                 name: 'Limón mexicano ornato',
-				cintifico:'(Citrus x aurantifolia)'
+				cientifico:'(Citrus x aurantifolia)'
             },
 			{
                 cve_cultiv: '80bf',
                 name: 'Liquidámbar',
-				cintifico:'(Liquidambar macrophylla)'
+				cientifico:'(Liquidambar macrophylla)'
             },
             {
                 cve_cultiv: '80bg',
                 name: 'Liquidámbar',
-				cintifico:'(Liquidambar sp.)'
+				cientifico:'(Liquidambar sp.)'
             },
             {
                 cve_cultiv: '80bh',
                 name: 'Lote baldio',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80bi',
                 name: 'Maleza',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bj',
                 name: 'Maleza botón de cadete',
-				cintifico:'(Leonotis nepetaefolia)'
+				cientifico:'(Leonotis nepetaefolia)'
             },
             {
                 cve_cultiv: '80bk',
                 name: 'Matorral alto espinoso',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80bl',
                 name: 'Matorral crasicaule',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bm',
                 name: 'Matorral xerófilo',
-				cintifico:'(Salix bonplandiana)'
+				cientifico:'(Salix bonplandiana)'
             },
             {
                 cve_cultiv: '80bn',
                 name: 'Mezquite',
-				cintifico:'(Prosopis laevigata)'
+				cientifico:'(Prosopis laevigata)'
             },
 			{
                 cve_cultiv: '80bo',
                 name: 'Mezquite',
-				cintifico:'(Prosopis glandulosa)'
+				cientifico:'(Prosopis glandulosa)'
             },
             {
                 cve_cultiv: '80bp',
                 name: 'Mostacilla',
-				cintifico:'(Sisymbrium irio)'
+				cientifico:'(Sisymbrium irio)'
             },
             {
                 cve_cultiv: '80bq',
                 name: 'Mostaza silvestre',
-				cintifico:'(Brassica campestris)'
+				cientifico:'(Brassica campestris)'
             },
 			{
                 cve_cultiv: '80br',
                 name: 'Naranja agria ornato',
-				cintifico:'(Citrus x aurantium)'
+				cientifico:'(Citrus x aurantium)'
             },
             {
                 cve_cultiv: '80bs',
                 name: 'Obelisco',
-				cintifico:'(Hibiscus spp.)'
+				cientifico:'(Hibiscus spp.)'
             },
             {
                 cve_cultiv: '80bt',
                 name: 'Oceloxóchitl',
-				cintifico:'(Tigridia pavonia)'
+				cientifico:'(Tigridia pavonia)'
             },
 			{
                 cve_cultiv: '80bu',
                 name: 'Olmo',
-				cintifico:'(Ulmus sp.)'
+				cientifico:'(Ulmus sp.)'
             },
             {
                 cve_cultiv: '80bv',
                 name: 'Orilla de camino, junto a campo deportivo',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bw',
                 name: 'Orilla de laguna',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80bx',
                 name: 'Orillas de arroyo',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80by',
                 name: 'Orillas del Río Tlamincas',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bz',
                 name: 'Palma canaria',
-				cintifico:'(Phoenix canariensis)'
+				cientifico:'(Phoenix canariensis)'
             },
 			{
                 cve_cultiv: '80ca',
                 name: 'Parcelas experimentales',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cb',
                 name: 'Parque recreativo',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cc',
                 name: 'Pastizal',
-				cintifico:''
+				cientifico:''
             },
 			,
             {
                 cve_cultiv: '80bp',
                 name: 'Mostacilla',
-				cintifico:'(Sisymbrium irio)'
+				cientifico:'(Sisymbrium irio)'
             },
             {
                 cve_cultiv: '80bq',
                 name: 'Mostaza silvestre',
-				cintifico:'(Brassica campestris)'
+				cientifico:'(Brassica campestris)'
             },
 			{
                 cve_cultiv: '80br',
                 name: 'Naranja agria ornato',
-				cintifico:'(Citrus x aurantium)'
+				cientifico:'(Citrus x aurantium)'
             },
             {
                 cve_cultiv: '80bs',
                 name: 'Obelisco',
-				cintifico:'(Hibiscus spp.)'
+				cientifico:'(Hibiscus spp.)'
             },
             {
                 cve_cultiv: '80bt',
                 name: 'Oceloxóchitl',
-				cintifico:'(Tigridia pavonia)'
+				cientifico:'(Tigridia pavonia)'
             },
 			{
                 cve_cultiv: '80bu',
                 name: 'Olmo',
-				cintifico:'(Ulmus sp.)'
+				cientifico:'(Ulmus sp.)'
             },
             {
                 cve_cultiv: '80bv',
                 name: 'Orilla de camino, junto a campo deportivo',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bw',
                 name: 'Orilla de laguna',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80bx',
                 name: 'Orillas de arroyo',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80by',
                 name: 'Orillas del Río Tlamincas',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80bz',
                 name: 'Palma canaria',
-				cintifico:'(Phoenix canariensis)'
+				cientifico:'(Phoenix canariensis)'
             },
 			{
                 cve_cultiv: '80ca',
                 name: 'Parcelas experimentales',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cb',
                 name: 'Parque recreativo',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cc',
                 name: 'Pastizal',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cd',
                 name: 'Pastizal inducido',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80ce',
                 name: 'Pastizal mediano arborescente',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80cf',
                 name: 'Pasto guineo',
-				cintifico:'(Panicum maximun)'
+				cientifico:'(Panicum maximun)'
             },
             {
                 cve_cultiv: '80cg',
                 name: 'Pasto rayado',
-				cintifico:'(Echinochloa crus galli)'
+				cientifico:'(Echinochloa crus galli)'
             },
             {
                 cve_cultiv: '80ch',
                 name: 'Pata de gallina',
-				cintifico:'(Digitaria horizontalis)'
+				cientifico:'(Digitaria horizontalis)'
             },
 			{
                 cve_cultiv: '80ci',
                 name: 'Petunia',
-				cintifico:'(Petunia sp.)'
+				cientifico:'(Petunia sp.)'
             },
             {
                 cve_cultiv: '80cj',
                 name: 'Pimentero',
-				cintifico:'(Schinus terebinthifolius)'
+				cientifico:'(Schinus terebinthifolius)'
             },
             {
                 cve_cultiv: '80ck',
                 name: 'Pino',
-				cintifico:'(Araucaria araucana)'
+				cientifico:'(Araucaria araucana)'
             },
 			{
                 cve_cultiv: '80cl',
                 name: 'Pino',
-				cintifico:'(Pinus sp.)'
+				cientifico:'(Pinus sp.)'
             },
             {
                 cve_cultiv: '80cm',
                 name: 'Pirúl',
-				cintifico:'(Schinus molle)'
+				cientifico:'(Schinus molle)'
             },
             {
                 cve_cultiv: '80cn',
                 name: 'Población',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80co',
                 name: 'Rabanillo',
-				cintifico:'(Raphanus raphanistrum)'
+				cientifico:'(Raphanus raphanistrum)'
             },
             {
                 cve_cultiv: '80cp',
                 name: 'Roble de duelas',
-				cintifico:'(Quercus xalapensis)'
+				cientifico:'(Quercus xalapensis)'
             },
             {
                 cve_cultiv: '80cq',
                 name: 'Roble real',
-				cintifico:'(Quercus germana)'
+				cientifico:'(Quercus germana)'
             },
             {
                 cve_cultiv: '80cr',
                 name: 'Sauce',
-				cintifico:'(Salix sp.)'
+				cientifico:'(Salix sp.)'
             },
             {
                 cve_cultiv: '80cs',
                 name: 'Sauce blanco',
-				cintifico:'(Salix alba)'
+				cientifico:'(Salix alba)'
             },
 			{
                 cve_cultiv: '80ct',
                 name: 'Secuoya roja',
-				cintifico:'(Sequoia sempervirens)'
+				cientifico:'(Sequoia sempervirens)'
             },
             {
                 cve_cultiv: '80cu',
                 name: 'Selva baja caducifolia',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cv',
                 name: 'Selva mediana caducifolia',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80cw',
                 name: 'Singonio',
-				cintifico:'(Syngonium podophyllum)'
+				cientifico:'(Syngonium podophyllum)'
             },
             {
                 cve_cultiv: '80cx',
                 name: 'Suelo (arena)',
-				cintifico:''
+				cientifico:''
             },
             {
                 cve_cultiv: '80cy',
                 name: 'Suelo de finca cafetalera',
-				cintifico:''
+				cientifico:''
             },
 			{
                 cve_cultiv: '80cz',
                 name: 'Teca',
-				cintifico:'(Tectona grandis)'
+				cientifico:'(Tectona grandis)'
             },
             {
                 cve_cultiv: '80da',
                 name: 'Trompetilla',
-				cintifico:'(Bouvardia ternifolia)'
+				cientifico:'(Bouvardia ternifolia)'
             },
             {
                 cve_cultiv: '80db',
                 name: 'Trueno',
-				cintifico:'(Ligustrum lucidum)'
+				cientifico:'(Ligustrum lucidum)'
             },
 			{
                 cve_cultiv: '80dc',
                 name: 'Tulillo',
-				cintifico:'(Aster spinosus)'
+				cientifico:'(Aster spinosus)'
             },
             {
                 cve_cultiv: '80de',
                 name: 'Violeta africana',
-				cintifico:'(Saintpaulia ionantha)'
+				cientifico:'(Saintpaulia ionantha)'
             },
             {
                 cve_cultiv: '80dg',
                 name: 'Zacate bahía',
-				cintifico:'(Paspalum notatum)'
+				cientifico:'(Paspalum notatum)'
             },
 			 {
                 cve_cultiv: '80dh',
                 name: 'Zacate banderilla',
-				cintifico:'(Cenchrus echinatus)'
+				cientifico:'(Cenchrus echinatus)'
             },
             {
                 cve_cultiv: '80di',
                 name: 'Zacate blanco',
-				cintifico:'(Ixophorus unisetus)'
+				cientifico:'(Ixophorus unisetus)'
             },
 			{
                 cve_cultiv: '80dj',
                 name: 'Zacate Johnson',
-				cintifico:'(Sorgum halepense)'
+				cientifico:'(Sorgum halepense)'
             },
             {
                 cve_cultiv: '80dk',
                 name: 'Zapote de monte',
-				cintifico:'(Pouteria neglecta)'
+				cientifico:'(Pouteria neglecta)'
             },
             {
                 cve_cultiv: '80dl',
                 name: 'Otros',
-				cintifico:'(Erythrina spp.)'
+				cientifico:'(Erythrina spp.)'
             },
 			{
                 cve_cultiv: '80dm',
                 name: 'Otros',
-				cintifico:'(Trichilia spp.)'
+				cientifico:'(Trichilia spp.)'
             },
             {
                 cve_cultiv: '80dn',
                 name: 'Otros',
-				cintifico:'(Cynodon dactylon)'
+				cientifico:'(Cynodon dactylon)'
             },
             {
                 cve_cultiv: '80do',
                 name: 'Otros',
-				cintifico:'(Gutierrezia sarothrae)'
+				cientifico:'(Gutierrezia sarothrae)'
             }
         ];
 
@@ -2944,7 +2947,7 @@ export default class Popups {
         }
     }
 
-    edosCultivosPop(feature, layer) {
+    poligonosCultivosPlagasPop(feature, layer) {
         if (feature.properties) {
 
             let array_cultivos = feature.properties.cve_cultiv.split(",");
@@ -2959,7 +2962,14 @@ export default class Popups {
                 this.misValoresCultivos.forEach((j) => {
 
                     if (i == j.cve_cultiv) {
-                        names_cultivos.push(j.name)
+
+                        let obj = {
+                            cve_cultivo: j.cve_cultiv,
+                            name: j.name,
+                            cientifico: j.cientifico
+                        }
+
+                        names_cultivos.push(obj);
                     }
                 });
             });
@@ -2969,8 +2979,6 @@ export default class Popups {
                 this.misValoresPlagas.forEach((j) => {
 
                     if (i == j.cve_plaga) {
-                        //names_plagas.push(j.name)
-                        //console.log(j)
 
                         let obj = {
                             cve_plaga: j.cve_plaga,
@@ -2978,29 +2986,50 @@ export default class Popups {
                             autor: j.autor
                         }
 
-                        //console.log(obj)
-                
                         names_plagas.push(obj);
                     }
                 });
             });
 
             let test = '';
+            let test2 = '';
 
             names_plagas.forEach((i) => {
                 test += `<li><i>${i.name}</i> ${i.autor}</li>`;
             });
 
-            console.log(names_cultivos);
-            console.log(names_plagas);
+            names_cultivos.forEach((i) => {
+                test2 += `<li><i>${i.name}</i> ${i.cientifico}</li>`;
+            });
 
-            let popupContent =
-                `<table id="myTable" class="table table-striped table-hover">
-                <tr><td><b>Plaga:</b></td><td>${test}</td></tr>
-                <tr><td><b>Cultivos:</b></td><td>${names_cultivos}</td></tr>
+            //console.log(names_cultivos);
+            //console.log(names_plagas);
+
+            let popupContent = `<table id="myTableXL" class="table table-striped table-hover">
+                <tr>
+                    <td>
+                        <b>Estado:</b>
+                    </td>
+                    <td>
+                        ${feature.properties.NOMGEO}
+                    </td>
+                </tr>
+                <tr>     
+                    <td>
+                        <b>Plagas:</b>
+                    </td>
+                    <td>
+                        <ul>${test}</ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Cultivos:</b>
+                    </td>
+                    <td><ul>${test2}</ul>
+                    </td>
+                </tr>
             </table>`;
-
-            {/* <tr><td><b>Imagen:</b></td><td><img src="img/Ciudades/${feature.properties.CIUDAD}.jpg" width="200" height="150"></td></tr> */ }
 
             layer.bindPopup(popupContent);
         }

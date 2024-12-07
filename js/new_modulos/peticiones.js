@@ -40,7 +40,7 @@ export default class Peticiones {
 
         data.features.map(row => {
 
-            //Municipios solo para 2 casos muy especificos (cuando y mun estan llenos y cultivo esta o no vacio )
+            //Municipios solo para 2 casos muy especificos (cuando edo y mun estan llenos y cultivo esta o no vacio )
             if (filtro.edo != "") {
 
                 if (filtro.mun != "") {
