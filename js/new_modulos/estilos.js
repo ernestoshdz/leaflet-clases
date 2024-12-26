@@ -15,6 +15,18 @@ export default class Estilos {
         };
     }
 
+    estilo_mun = (feature) => {
+        return {
+            weight: 2,
+            opacity: 1,
+            color: 'black',
+            dashArray: '1',
+            fillOpacity: 0.3,
+            clickable: true,
+            fillColor: '#f5c842'
+        };
+    }
+
     estilo_eua = (feature) => {
         return {
             weight: 2,

@@ -141,7 +141,7 @@ export default class Controles {
         } else {
 
             if(obj.mun != ""){
-                this.peticiones.getCapaFiltrada("MX/", "municipios_cul_plagas", this.estilos.estilo_eua, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
+                this.peticiones.getCapaFiltrada("MX/", "municipios_cul_plagas", this.estilos.estilo_mun, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
             } else {
                 this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
             }
