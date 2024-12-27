@@ -1,4 +1,7 @@
 import Diccionario from "./diccionario.js";
+import Popups from "./popups.js";
+import Estilos from "./estilos.js";
+import Modal from "./modal.js";
 
 export default class Peticiones {
 
@@ -6,21 +9,13 @@ export default class Peticiones {
         this.lyr_filtro = L.markerClusterGroup();
         this.lyr_filtro_pol = L.layerGroup();
 
-        this.modal_window = L.control.window(map, {
-            title: 'Advertencia <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>',
-            maxWidth: 400,
-            maxheight: 80,
-            modal: true,
-            content: 'La búsqueda no generó resultados',
-            position: "top",
-            closeButton: true,
-            //visible: false
-        });
-
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
+        this.popups = new Popups();
+        this.estilos = new Estilos();
+        this.modal = new Modal();
 
-        this.test = this.test.bind(this);
+        this.filtrarGeomMun = this.filtrarGeomMun.bind(this);
     }
 
     getCapas = async (lyr, folder, nombre_archivo, estilo, pop, ext, estilo_pts, req, res) => {
@@ -36,19 +31,136 @@ export default class Peticiones {
         lyr.addLayer(geojsonLayer);
     }
 
-    getMunicipiosFiltrados = async (folder, nombre_archivo, ext, filtro, req, res) => {
+    //Filtro por estado (geometrico)
+    getCapaFiltrada = async (folder, nombre_archivo, estilo, pop, ext, filtro, map, req, res) => {
+        const response = await fetch('geojson/' + folder + nombre_archivo + ext);
+        const data = await response.json();
+
+        //console.log(data)
+
+        //otra forma de filtrar capa
+        let filter_data = [];
+
+        if(filtro.edo != ""){
+            this.getMunicipiosFiltrados("MX/", "municipios_cul_plagas", ".geojson", filtro, map);
+        }
+        
+        data.features.map(row => {
+
+            //Municipios solo para 2 casos muy especificos (cuando edo y mun estan llenos y cultivo esta o no vacio )
+            if (filtro.edo != "") {
+
+                if (filtro.mun != "") {
+                    /* if (filtro.cultivo != "") {
+                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo) {
+                            filter_data.push(row);
+                        }
+                    } else {
+
+                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun) {
+                            filter_data.push(row);
+                        }
+                    } */
+                } else {
+
+                    if (filtro.cultivo == "") {
+                        if (row.properties.CVE_ENT == filtro.edo) {
+                            filter_data.push(row);
+                        }
+                    } else {
+                        let names = row.properties.cve_cultiv.split(",");
+
+                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
+                            filter_data.push(row);
+                        }
+                    }
+                }
+
+            } else {
+                if (filtro.mun == "") {
+                    if (filtro.cultivo == "") {
+                        filter_data.push(row);
+                    } else {
+                        if (filtro.geom == "1") {
+                            if (row.properties.cve_cultiv == filtro.cultivo) {
+                                filter_data.push(row);
+                            }
+                        } else {
+ 
+                            let names = row.properties.cve_cultiv.split(",")
+
+                            if (names.includes(filtro.cultivo)) {
+                                filter_data.push(row);
+                            }
+                        }
+                    }
+                } else {
+                    /* if (filtro.cultivo == "") {
+                        if (row.properties.CVEGEO == filtro.mun) {
+                            filter_data.push(row);
+                        }
+                    } else {
+                        if(row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo){
+                            filter_data.push(row);
+                        }
+                    } */
+                }
+            }
+        });
+
+        //console.log(filter_data)
+
+        if (filter_data.length == 0) {
+
+            this.modal.crearModal(map,{
+                titulo: "Advertencia",
+                icon: "fa fa-exclamation-triangle",
+                width: 400,
+                height: 80,
+                modal: true,
+                contenido: "La búsqueda no generó resultados",
+                position: "top",
+                closeButton: true
+            });
+
+            //solo funciona una vez
+            /* this.modal_window.prompt({
+                callback:function(){},
+                buttonOK: "Aceptar",
+            }).show(); */
+        } else {
+            //esta línea limpiar el layergroup antes de llenarlo
+            this.lyr_filtro.clearLayers();
+
+            let geojsonLayer = L.geoJson(filter_data, {
+                style: estilo,
+                onEachFeature: pop
+            });
+
+            //zoom a los limites (bounds) del geojsonLayer
+            map.fitBounds(geojsonLayer.getBounds());
+
+            this.lyr_filtro.addLayer(geojsonLayer);
+
+            this.lyr_filtro.addTo(map);
+        }
+
+    }
+
+    //Filtra los municipios alfanúmericamente por estado
+    getMunicipiosFiltrados = async (folder, nombre_archivo, ext, filtro, map, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
         let mun_filtrados = [];
 
         document.getElementById("misResultados").innerHTML = `
+        <tr>Resultados</tr>
         <tr>
+            <th>Mapa</th>
             <th>Estado</th>
             <th>Municipio</th>
-            <th>Clave Cultivo</th>
             <th>Cultivo</th>
-            <th>Mapa</th>
         </tr>
         `;
 
@@ -85,11 +197,10 @@ export default class Peticiones {
 
                 document.getElementById("misResultados").innerHTML += `
                 <tr>
+                    <td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.CVE_MUN}">Ver</button></td>
                     <td>${row.properties.Estado}</td>
                     <td>${row.properties.NOMGEO}</td>
-                    <td>${row.properties.cve_cultiv}</td>
                     <td>${test2}</td>
-                    <td><button type="button" id="btn_ver${row.properties.CVEGEO}">Ver</button></td>
                 </tr>`;
 
                 //Evento onclick para cada boton existente
@@ -97,13 +208,13 @@ export default class Peticiones {
                     button.onclick = function(){
                         //console.log(button.id)
 
-                        //corregir valores hardcodeados
                         let obj = {
-                            edo:'01',
-                            mun:'007'
+                            edo:row.properties.CVE_ENT,
+                            mun:button.value,
+                            name: row.properties.NOMGEO
                         }
 
-                        this.test("MX/", "municipios_cul_plagas", null, null, ".geojson", obj, map)
+                        this.filtrarGeomMun("MX/", "municipios_cul_plagas", this.estilos.estilo_mun, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map)
 
                     }.bind(this);
                 })
@@ -112,7 +223,8 @@ export default class Peticiones {
 
     }
 
-    test = async (folder, nombre_archivo, estilo, pop, ext, filtro, map, req, res) => {
+    //Filtra la geometria del municipio con base a la selección de los resultados alfanúmericos
+    filtrarGeomMun = async (folder, nombre_archivo, estilo, pop, ext, filtro, map, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
@@ -134,114 +246,13 @@ export default class Peticiones {
         });
 
         //checar por que no funciona
-        //map.fitBounds(geojsonLayer.getBounds());
+        map.fitBounds(geojsonLayer.getBounds());
 
         this.lyr_filtro.addLayer(geojsonLayer);
 
         //this.lyr_filtro.addTo(map);
     }
 
-    getCapaFiltrada = async (folder, nombre_archivo, estilo, pop, ext, filtro, map, req, res) => {
-        const response = await fetch('geojson/' + folder + nombre_archivo + ext);
-        const data = await response.json();
-
-        //console.log(data)
-
-        //otra forma de filtrar capa
-        let filter_data = [];
-
-        this.getMunicipiosFiltrados("MX/", "municipios_cul_plagas", ".geojson", filtro);
-
-        data.features.map(row => {
-
-            //Municipios solo para 2 casos muy especificos (cuando edo y mun estan llenos y cultivo esta o no vacio )
-            if (filtro.edo != "") {
-
-                if (filtro.mun != "") {
-                    if (filtro.cultivo != "") {
-                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo) {
-                            filter_data.push(row);
-                        }
-                    } else {
-
-                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun) {
-                            filter_data.push(row);
-                        }
-                    }
-                } else {
-
-                    if (filtro.cultivo == "") {
-                        if (row.properties.CVE_ENT == filtro.edo) {
-                            filter_data.push(row);
-                        }
-                    } else {
-                        let names = row.properties.cve_cultiv.split(",");
-
-                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
-                            filter_data.push(row);
-                        }
-                    }
-                }
-
-            } else {
-                if (filtro.mun == "") {
-                    if (filtro.cultivo == "") {
-                        filter_data.push(row);
-                    } else {
-                        if (filtro.geom == "1") {
-                            if (row.properties.cve_cultiv == filtro.cultivo) {
-                                filter_data.push(row);
-                            }
-                        } else {
- 
-                            let names = row.properties.cve_cultiv.split(",")
-
-                            if (names.includes(filtro.cultivo)) {
-                                filter_data.push(row);
-                            }
-                        }
-                    }
-                } else {
-                    if (filtro.cultivo == "") {
-                        if (row.properties.CVEGEO == filtro.mun) {
-                            filter_data.push(row);
-                        }
-                    } else {
-                        if(row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo){
-                            filter_data.push(row);
-                        }
-                    }
-                }
-            }
-        });
-
-        //console.log(filter_data)
-
-        if (filter_data.length == 0) {
-
-            this.modal_window.show();
-
-            //solo funciona una vez
-            /* this.modal_window.prompt({
-                callback:function(){},
-                buttonOK: "Aceptar",
-            }).show(); */
-        }
-
-        //esta línea limpiar el layergroup antes de llenarlo
-        this.lyr_filtro.clearLayers();
-
-        let geojsonLayer = L.geoJson(filter_data, {
-            style: estilo,
-            onEachFeature: pop
-        });
-
-        //zoom a los limites (bounds) del geojsonLayer
-        map.fitBounds(geojsonLayer.getBounds());
-
-        this.lyr_filtro.addLayer(geojsonLayer);
-
-        this.lyr_filtro.addTo(map);
-    }
+    
 
 }

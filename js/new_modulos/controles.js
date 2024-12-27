@@ -49,6 +49,7 @@ export default class Controles {
 
     } */
 
+    //usar la clase modal.js
     crearModal(map, contenido) {
         let win = L.control.window(map, {
             title: 'Hello world!',
@@ -113,7 +114,7 @@ export default class Controles {
         this.crearAcercaDe(map);
         this.cargarFiltro(map);
         this.getSelectInputs("mx_edos", 'sin_geometria/', "edos_mx", ".geojson", "NOMGEO", "CVE_ENT", null);
-        this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
+        //this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
         this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "cve_cultiv", null);
 
         //this.crearMostrarCapas(map);
@@ -123,13 +124,12 @@ export default class Controles {
     getFiltros(map) {
         let v_geom = document.getElementById("geom").value;
         let v_edo = document.getElementById("mx_edos").value;
-        let v_mun = document.getElementById("mx_mun").value;
         let v_cultivo = document.getElementById("select_cultivos").value;
 
         let obj = {
             geom: v_geom,
             edo: v_edo,
-            mun: v_mun,
+            mun: "",
             cultivo: v_cultivo
         };
 
@@ -140,36 +140,12 @@ export default class Controles {
             this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
         } else {
 
-            if(obj.mun != ""){
-                this.peticiones.getCapaFiltrada("MX/", "municipios_cul_plagas", this.estilos.estilo_mun, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
-            } else {
-                this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
-            }
+            this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
 
         }
     }
 
     cargarFiltro(map) {
-
-        let test = document.querySelectorAll('#mx_edos');
-
-        test.forEach((i) => {
-            document.getElementById(i.id).onchange = (e) => {
-
-                let v_edo = document.getElementById("mx_edos").value;
-                let v_mun = document.getElementById("mx_mun").value;
-                let v_cultivo = document.getElementById("select_cultivos").value;
-
-                let obj = {
-                    edo: v_edo,
-                    mun: v_mun,
-                    cultivo: v_cultivo
-                };
-
-                //Antes de hacer esto empezar a filtrar correctamente la geometría con edo, mun y cultivo
-                this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", obj);
-            };
-        });
 
         let button_buscar = document.getElementById('btn_buscar');
 
@@ -180,35 +156,10 @@ export default class Controles {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
-        if (filtro != null) {
-
-            document.getElementById("mx_mun").innerHTML = null;
-
-            //agregar opcion de todos por default
-            document.getElementById(id).add(new Option("Todo", ""))
-
-            data.features.forEach((i) => {
-                //llenar select de municipios en función del estado seleccionado
-                if (i.properties.CVE_ENT == filtro.edo) {
-                    document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
-                } else {
-                    //llena los municipios cuando no hay estado seleccionado
-                    if (filtro.edo == "") {
-                        document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
-                    }
-                }
-
-            });
-
-
-        } else {
-
-            data.features.forEach((i) => {
-                //llenar selects de estados (archivo sin geometría)
-                document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
-            });
-        }
-
+        data.features.forEach((i) => {
+            //llenar selects de estados (archivo sin geometría)
+            document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
+        });
 
     }
 

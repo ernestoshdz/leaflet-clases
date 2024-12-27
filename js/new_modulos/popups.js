@@ -390,7 +390,7 @@ export default class Popups {
                         <b>Estado:</b>
                     </td>
                     <td>
-                        ${feature.properties.NOMGEO}
+                        ${feature.properties.Estado}, ${feature.properties.NOMGEO} 
                     </td>
                 </tr>
                 <tr>     

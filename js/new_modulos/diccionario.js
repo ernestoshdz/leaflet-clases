@@ -411,7 +411,8 @@ export default class Diccionario {
             },
             {
                 cve_cultiv: 80,
-                name: 'Otros'
+                name: 'Otros',
+                cientifico:''
             },
 			{
                 cve_cultiv: 81,

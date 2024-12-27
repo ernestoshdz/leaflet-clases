@@ -23,6 +23,7 @@ export default class App {
         this.controles.loadControles(map)
         this.capas.crearControl(map);
         this.sidebar.crearSideBar(map);
+        //usar clase modal.js
         //this.controles.crearModal(map,'Este es el contenido <a target="_blank" href="https://www.w3schools.com">Visit W3Schools</a>');
     }
 }

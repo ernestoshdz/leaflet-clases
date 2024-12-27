@@ -117,3 +117,9 @@ body {
 #myTableXL table{
     width: 650px;
 }
+
+#resultados tbody {
+    display: block;
+    height: 370px;
+    overflow: auto;
+}
