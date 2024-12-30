@@ -134,14 +134,27 @@ export default class Controles {
         };
 
         //hacer esto mas limpio
-
+        
         if (obj.geom == "1") {
             //Filtrado de Geometría
             this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
+
+            if(obj.edo != ""){
+                this.peticiones.getMunicipiosFiltrados("MX/", "cc2", ".geojson", obj, map);
+            }
         } else {
 
-            this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
+            if(obj.edo != ""){
+                this.peticiones.getMunicipiosFiltrados("MX/", "municipios_cul_plagas", ".geojson", obj, map);
+            }
 
+            if(obj.edo != "" && obj.cultivo != ""){
+                //capa de municipios
+                this.peticiones.getCapaFiltrada("MX/", "municipios_cul_plagas", this.estilos.estilo_mun, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
+            } else {
+                //capa estados
+                this.peticiones.getCapaFiltrada("MX/", "estados_cul_plagas", null, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
+            }
         }
     }
 

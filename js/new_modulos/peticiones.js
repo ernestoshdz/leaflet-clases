@@ -41,41 +41,27 @@ export default class Peticiones {
         //otra forma de filtrar capa
         let filter_data = [];
 
-        if(filtro.edo != ""){
+        /* if(filtro.edo != ""){
             this.getMunicipiosFiltrados("MX/", "municipios_cul_plagas", ".geojson", filtro, map);
-        }
+        } */
         
         data.features.map(row => {
 
             //Municipios solo para 2 casos muy especificos (cuando edo y mun estan llenos y cultivo esta o no vacio )
             if (filtro.edo != "") {
 
-                if (filtro.mun != "") {
-                    /* if (filtro.cultivo != "") {
-                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo) {
-                            filter_data.push(row);
-                        }
-                    } else {
-
-                        if (row.properties.CVE_ENT == filtro.edo && row.properties.CVEGEO == filtro.mun) {
-                            filter_data.push(row);
-                        }
-                    } */
+                if (filtro.cultivo == "") {
+                    if (row.properties.CVE_ENT == filtro.edo) {
+                        filter_data.push(row);
+                    }
                 } else {
+                    let names = row.properties.cve_cultiv.split(",");
 
-                    if (filtro.cultivo == "") {
-                        if (row.properties.CVE_ENT == filtro.edo) {
-                            filter_data.push(row);
-                        }
-                    } else {
-                        let names = row.properties.cve_cultiv.split(",");
-
-                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
-                            filter_data.push(row);
-                        }
+                    if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
+                        filter_data.push(row);
                     }
                 }
-
+            
             } else {
                 if (filtro.mun == "") {
                     if (filtro.cultivo == "") {
@@ -94,21 +80,14 @@ export default class Peticiones {
                             }
                         }
                     }
-                } else {
-                    /* if (filtro.cultivo == "") {
-                        if (row.properties.CVEGEO == filtro.mun) {
-                            filter_data.push(row);
-                        }
-                    } else {
-                        if(row.properties.CVEGEO == filtro.mun && row.properties.cve_cultiv == filtro.cultivo){
-                            filter_data.push(row);
-                        }
-                    } */
                 }
             }
         });
 
         //console.log(filter_data)
+
+        //esta línea limpiar el layergroup antes de llenarlo
+        this.lyr_filtro.clearLayers();
 
         if (filter_data.length == 0) {
 
@@ -129,9 +108,7 @@ export default class Peticiones {
                 buttonOK: "Aceptar",
             }).show(); */
         } else {
-            //esta línea limpiar el layergroup antes de llenarlo
-            this.lyr_filtro.clearLayers();
-
+            
             let geojsonLayer = L.geoJson(filter_data, {
                 style: estilo,
                 onEachFeature: pop
@@ -144,7 +121,6 @@ export default class Peticiones {
 
             this.lyr_filtro.addTo(map);
         }
-
     }
 
     //Filtra los municipios alfanúmericamente por estado
@@ -164,10 +140,26 @@ export default class Peticiones {
         </tr>
         `;
 
-        data.features.map(row => {
-            if (row.properties.CVE_ENT == filtro.edo) {
+        let filter_data = [];
 
-                let array_cultivos = row.properties.cve_cultiv.split(",");
+        data.features.map(row => {
+
+            if(filtro.edo != "" && filtro.cultivo == ""){
+                if (row.properties.CVE_ENT == filtro.edo){
+                    filter_data.push(row);
+                }
+            }
+            if(filtro.edo != "" && filtro.cultivo != ""){
+                if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_cultiv == filtro.cultivo){
+                    filter_data.push(row);
+                }
+            }
+        });
+
+        //console.log(filter_data)
+
+        filter_data.map(row => {
+            let array_cultivos = row.properties.cve_cultiv.split(",");
                 let names_cultivos = [];
 
                 array_cultivos.forEach((i) => {
@@ -207,7 +199,6 @@ export default class Peticiones {
                 document.querySelectorAll('button').forEach(button => {
                     button.onclick = function(){
                         //console.log(button.id)
-
                         let obj = {
                             edo:row.properties.CVE_ENT,
                             mun:button.value,
@@ -218,7 +209,6 @@ export default class Peticiones {
 
                     }.bind(this);
                 })
-            }
         });
 
     }
@@ -228,7 +218,7 @@ export default class Peticiones {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
-        //console.log(filtro)
+        console.log(filtro)
 
         let filter_data = [];
 
@@ -245,11 +235,14 @@ export default class Peticiones {
             onEachFeature: pop
         });
 
-        //checar por que no funciona
+        //obtener lat, long cuando la busqueda es por punto
+        console.log(geojsonLayer)
+
         map.fitBounds(geojsonLayer.getBounds());
 
         this.lyr_filtro.addLayer(geojsonLayer);
 
+        //esta no se necesita por que la búsqueda de edo la agrega primero
         //this.lyr_filtro.addTo(map);
     }
 
