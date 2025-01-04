@@ -21,7 +21,7 @@ export default class Popups {
         this.array_img = [
             {
                 plaga: "Maconellicoccus hirsutus",
-                cve: 76,
+                cve: 77,
                 images: [
                     {
                         name: "Maconellicoccus hirsutus",
@@ -220,6 +220,8 @@ export default class Popups {
 
         let filtro_array_img = this.array_img.filter((i) => i.cve == cve_plaga);
 
+        console.log(this.array_img)
+
         filtro_array_img.forEach((i) => {
 
             galeria += `<div class="row gallery">`
@@ -247,6 +249,7 @@ export default class Popups {
 
         let popupContent =
             `<table id="myTable" class="table table-striped table-hover">
+                <tr><td><b>ID:</b></td><td>${feature.properties.GID}</td></tr>
                 <tr><td><b>Cultivo:</b></td><td>${feature.properties.Cultivo}</td></tr>
                 <tr><td><b>Nombre Científico:</b></td><td><i>
                     ${feature.properties.Cientifico}
@@ -385,6 +388,14 @@ export default class Popups {
             //console.log(names_plagas);
 
             let popupContent = `<table id="myTableXL" class="table table-striped table-hover">
+                <tr>
+                    <td>
+                        <b>ID:</b>
+                    </td>
+                    <td>
+                        ${feature.properties.GID} 
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <b>Estado:</b>
