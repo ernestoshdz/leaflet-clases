@@ -120,6 +120,12 @@ body {
 
 #resultados tbody {
     display: block;
-    height: 370px;
+    height: 300px;
+    width: 390px;
     overflow: auto;
+    overflow-x: auto;
+}
+
+select {
+    max-width:80%;
 }

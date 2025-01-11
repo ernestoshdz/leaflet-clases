@@ -116,21 +116,20 @@ export default class Controles {
         this.getSelectInputs("mx_edos", 'sin_geometria/', "edos_mx", ".geojson", "NOMGEO", "CVE_ENT", null);
         //this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
         this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "cve_cultiv", null);
+        this.getSelectInputs("select_plagas", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
 
         //this.crearMostrarCapas(map);
         //this.crearSideBar(map);
     }
 
     getFiltros(map) {
-        let v_geom = document.getElementById("geom").value;
-        let v_edo = document.getElementById("mx_edos").value;
-        let v_cultivo = document.getElementById("select_cultivos").value;
 
         let obj = {
-            geom: v_geom,
-            edo: v_edo,
+            geom: document.getElementById("geom").value,
+            edo: document.getElementById("mx_edos").value,
             mun: "",
-            cultivo: v_cultivo
+            cultivo: document.getElementById("select_cultivos").value,
+            plaga: document.getElementById("select_plagas").value
         };
 
         //hacer esto mas limpio

@@ -373,6 +373,7 @@ export default class Popups {
                 });
             });
 
+            //quitar nombres test
             let test = '';
             let test2 = '';
 

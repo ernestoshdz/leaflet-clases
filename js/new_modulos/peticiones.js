@@ -44,14 +44,27 @@ export default class Peticiones {
             if (filtro.edo != "") {
 
                 if (filtro.cultivo == "") {
-                    if (row.properties.CVE_ENT == filtro.edo) {
-                        filter_data.push(row);
+                    if(filtro.plaga != ""){
+                        if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_plaga == filtro.plaga) {
+                            filter_data.push(row);
+                        }
+                    } else {
+                        if (row.properties.CVE_ENT == filtro.edo) {
+                            filter_data.push(row);
+                        }
                     }
                 } else {
+
                     let names = row.properties.cve_cultiv.split(",");
 
-                    if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
-                        filter_data.push(row);
+                    if(filtro.plaga != ""){
+                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo)) && row.properties.cve_plaga == filtro.plaga) {
+                            filter_data.push(row);
+                        }
+                    } else {
+                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
+                            filter_data.push(row);
+                        }
                     }
                 }
 
@@ -61,8 +74,14 @@ export default class Peticiones {
                         filter_data.push(row);
                     } else {
                         if (filtro.geom == "1") {
-                            if (row.properties.cve_cultiv == filtro.cultivo) {
-                                filter_data.push(row);
+                            if (filtro.plaga != "") {
+                                if (row.properties.cve_cultiv == filtro.cultivo && row.properties.cve_plaga == filtro.plaga) {
+                                    filter_data.push(row);
+                                }
+                            } else {
+                                if (row.properties.cve_cultiv == filtro.cultivo) {
+                                    filter_data.push(row);
+                                }
                             }
                         } else {
 
@@ -126,13 +145,18 @@ export default class Peticiones {
 
         data.features.map(row => {
 
-            if (filtro.edo != "" && filtro.cultivo == "") {
+            if (filtro.edo != "" && filtro.cultivo == "" && filtro.plaga == "") {
                 if (row.properties.CVE_ENT == filtro.edo) {
                     filter_data.push(row);
                 }
             }
-            if (filtro.edo != "" && filtro.cultivo != "") {
+            if (filtro.edo != "" && filtro.cultivo != "" && filtro.plaga == "") {
                 if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_cultiv == filtro.cultivo) {
+                    filter_data.push(row);
+                }
+            }
+            if (filtro.edo != "" && filtro.cultivo != "" && filtro.plaga != "") {
+                if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_cultiv == filtro.cultivo && row.properties.cve_plaga == filtro.plaga) {
                     filter_data.push(row);
                 }
             }
@@ -150,16 +174,20 @@ export default class Peticiones {
                 <th>Estado</th>
                 <th>Municipio</th>
                 <th>Cultivo</th>
+                <th>Plaga</th>
             </tr>
             `;
 
-            console.log(filter_data)
+            console.log(filter_data);
 
             document.getElementById("miConteo").innerHTML = `Se encontró ${filter_data.length} resultado(s)`;
 
             filter_data.map(row => {
                 let array_cultivos = row.properties.cve_cultiv.split(",");
+                let array_plagas = row.properties.cve_plaga.split(",");
+
                 let names_cultivos = [];
+                let names_plagas = [];
 
                 array_cultivos.forEach((i) => {
 
@@ -178,10 +206,32 @@ export default class Peticiones {
                     });
                 });
 
+                array_plagas.forEach((i) => {
+                    this.diccionario.misValoresPlagas.forEach((j) => {
+
+                        if (i == j.cve_plaga) {
+
+                            let obj = {
+                                cve_plaga: j.cve_plaga,
+                                name: j.name,
+                                autor: j.autor
+                            }
+
+                            names_plagas.push(obj);
+                        }
+                    });
+                });
+
+                //quitar nombres test
+                let test = '';
                 let test2 = '';
 
                 names_cultivos.forEach((i) => {
-                    test2 += `<li><i>${i.name}</i> ${i.cientifico}</li>`;
+                    test += `<li><i>${i.name}</i> ${i.cientifico}</li>`;
+                });
+
+                names_plagas.forEach((i) => {
+                    test2 += `<li><i>${i.name}</i> ${i.autor}</li>`;
                 });
 
                 mun_filtrados.push(row.properties.NOMGEO);
@@ -192,6 +242,7 @@ export default class Peticiones {
                     <td>${row.properties.GID}</td>
                     <td>${row.properties.Estado}</td>
                     <td>${row.properties.NOMGEO}</td>
+                    <td>${test}</td>
                     <td>${test2}</td>
                 </tr>`;
 
