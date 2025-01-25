@@ -388,15 +388,17 @@ export default class Popups {
             //console.log(names_cultivos);
             //console.log(names_plagas);
 
+            let gid = `<tr>
+                <td>
+                    <b>ID:</b>
+                </td>
+                <td>
+                    ${feature.properties.GID} 
+                </td>
+            </tr>`;
+
             let popupContent = `<table id="myTableXL" class="table table-striped table-hover">
-                <tr>
-                    <td>
-                        <b>ID:</b>
-                    </td>
-                    <td>
-                        ${feature.properties.GID} 
-                    </td>
-                </tr>
+                ${feature.properties.GID != undefined ? gid : ""}
                 <tr>
                     <td>
                         <b>Estado:</b>

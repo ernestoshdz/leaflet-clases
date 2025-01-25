@@ -39,61 +39,7 @@ export default class Peticiones {
         let filter_data = [];
 
         data.features.map(row => {
-
-            //Municipios solo para 2 casos muy especificos (cuando edo y mun estan llenos y cultivo esta o no vacio )
-            if (filtro.edo != "") {
-
-                if (filtro.cultivo == "") {
-                    if(filtro.plaga != ""){
-                        if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_plaga == filtro.plaga) {
-                            filter_data.push(row);
-                        }
-                    } else {
-                        if (row.properties.CVE_ENT == filtro.edo) {
-                            filter_data.push(row);
-                        }
-                    }
-                } else {
-
-                    let names = row.properties.cve_cultiv.split(",");
-
-                    if(filtro.plaga != ""){
-                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo)) && row.properties.cve_plaga == filtro.plaga) {
-                            filter_data.push(row);
-                        }
-                    } else {
-                        if (row.properties.CVE_ENT == filtro.edo && (names.includes(filtro.cultivo))) {
-                            filter_data.push(row);
-                        }
-                    }
-                }
-
-            } else {
-                if (filtro.mun == "") {
-                    if (filtro.cultivo == "") {
-                        filter_data.push(row);
-                    } else {
-                        if (filtro.geom == "1") {
-                            if (filtro.plaga != "") {
-                                if (row.properties.cve_cultiv == filtro.cultivo && row.properties.cve_plaga == filtro.plaga) {
-                                    filter_data.push(row);
-                                }
-                            } else {
-                                if (row.properties.cve_cultiv == filtro.cultivo) {
-                                    filter_data.push(row);
-                                }
-                            }
-                        } else {
-
-                            let names = row.properties.cve_cultiv.split(",")
-
-                            if (names.includes(filtro.cultivo)) {
-                                filter_data.push(row);
-                            }
-                        }
-                    }
-                }
-            }
+            this.filtrado(filtro,row,filter_data);
         });
 
         //console.log(filter_data)
@@ -135,6 +81,23 @@ export default class Peticiones {
         }
     }
 
+    //Función general que filtra la información y devuelve un array de objetos (filter_data)
+    filtrado(filtro,row,filter_data){
+        let names = row.properties.cve_cultiv.split(",");
+        let names_plaga = row.properties.cve_plaga.split(",");
+
+        let edo_test = (filtro.edo != "" && filtro.edo != undefined) ? row.properties.CVE_ENT == filtro.edo : 1==1;
+        let cultivo_test = (filtro.cultivo != "" && filtro.cultivo != undefined) ? names.includes(filtro.cultivo) : 1==1;
+        let plaga_test = (filtro.plaga != "" && filtro.plaga != undefined) ? names_plaga.includes(filtro.plaga) : 1==1;
+        let gid_test = (filtro.gid != "" && filtro.gid != undefined) ? row.properties.GID == filtro.gid : 1==1;
+        
+        if(edo_test && cultivo_test && plaga_test && gid_test){
+            filter_data.push(row);
+        }
+
+        return filter_data;
+    }
+
     //Filtra los municipios alfanúmericamente por estado
     getMunicipiosFiltrados = async (folder, nombre_archivo, ext, filtro, map, req, res) => {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
@@ -144,22 +107,7 @@ export default class Peticiones {
         let filter_data = [];
 
         data.features.map(row => {
-
-            if (filtro.edo != "" && filtro.cultivo == "" && filtro.plaga == "") {
-                if (row.properties.CVE_ENT == filtro.edo) {
-                    filter_data.push(row);
-                }
-            }
-            if (filtro.edo != "" && filtro.cultivo != "" && filtro.plaga == "") {
-                if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_cultiv == filtro.cultivo) {
-                    filter_data.push(row);
-                }
-            }
-            if (filtro.edo != "" && filtro.cultivo != "" && filtro.plaga != "") {
-                if (row.properties.CVE_ENT == filtro.edo && row.properties.cve_cultiv == filtro.cultivo && row.properties.cve_plaga == filtro.plaga) {
-                    filter_data.push(row);
-                }
-            }
+            this.filtrado(filtro,row,filter_data);
         });
 
         //limpia misResultados antes de llenar
@@ -178,7 +126,7 @@ export default class Peticiones {
             </tr>
             `;
 
-            console.log(filter_data);
+            //console.log(filter_data);
 
             document.getElementById("miConteo").innerHTML = `Se encontró ${filter_data.length} resultado(s)`;
 
@@ -256,8 +204,6 @@ export default class Peticiones {
 
                         let geom_value = document.getElementById("geom").value;
 
-                        //console.log(obj)
-
                         //filtrarGeomMun depende de la capa (punto o polígono)
                         if (geom_value == 1) {
                             this.filtrarGeomMun("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
@@ -277,15 +223,13 @@ export default class Peticiones {
         const response = await fetch('geojson/' + folder + nombre_archivo + ext);
         const data = await response.json();
 
-        //console.log(filtro)
-
         let filter_data = [];
 
         data.features.map(row => {
-            if (row.properties.GID == filtro.gid) {
-                filter_data.push(row);
-            }
+            this.filtrado(filtro,row,filter_data);
         });
+
+        //console.log(filter_data)
 
         this.lyr_filtro.clearLayers();
 
@@ -301,7 +245,5 @@ export default class Peticiones {
         //esta no se necesita por que la búsqueda de edo la agrega primero
         //this.lyr_filtro.addTo(map);
     }
-
-
 
 }
