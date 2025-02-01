@@ -3,13 +3,17 @@ export default class Sidebar {
         this.sidebar = L.control.sidebar({ container: 'sidebar' });
     }
 
+    cambiarTab(){
+        this.sidebar;
+    }
+
     crearSideBar(map) {
         
         //this.sidebar.addTo(map).open('layerTree');
         //this.sidebar.addTo(map).open('home');
         this.sidebar.addTo(map).open('autopan');
 
-        this.sidebar.addPanel({
+        /* this.sidebar.addPanel({
             id: 'js-api',
             tab: '<i class="fa fa-gear"></i>',
             title: 'Messages',
@@ -27,14 +31,14 @@ export default class Sidebar {
             title: 'Messages',
             button: function() { alert('opened via JS callback') },
             disabled: true
-        });
+        }); */
 
         //document.getElementById("test").onclick = this.sidebar.close
         
     }
 
-    close(){
+    /* close(){
 
         this.sidebar.close();
-    }
+    } */
 }

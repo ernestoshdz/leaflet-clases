@@ -1,8 +1,11 @@
 import Diccionario from "./diccionario.js";
+import Sidebar from "./sidebar.js";
 
 export default class Popups {
     constructor() {
         //esto resuelve el problema del this, funcion anonima layer.on('click', function (e) { no deja usar this.myFunction
+
+        this.Sidebar = new Sidebar();
 
         this.popGenerico = this.popGenerico.bind(this);
         this.mxEdosPop = this.mxEdosPop.bind(this);
@@ -37,7 +40,7 @@ export default class Popups {
             },
             {
                 plaga: "Thielaviopsis paradoxa",
-                cve: 57,
+                cve: 127,
                 images: [
                     {
                         name: "OIP",
@@ -198,7 +201,7 @@ export default class Popups {
         }
     }
 
-    crearModal(map, titulo, cve_plaga) {
+    /* crearModal(map, titulo, cve_plaga) {
         let win = L.control.window(map, {
             title: titulo,
             maxWidth: 700,
@@ -210,17 +213,20 @@ export default class Popups {
         });
 
         win.show();
-    }
+    } */
 
-    crearGaleria(cve_plaga) {
+    crearGaleria(name, cve_plaga) {
 
         let galeria = `
         
-        <div id="galeria" class="container-fluid">`;
-
+        <div id="galeria" class="container-fluid">
+        
+        <div class="jumbotron">
+            <h3>${name}</h3>
+        </div>
+        
+        `;
         let filtro_array_img = this.array_img.filter((i) => i.cve == cve_plaga);
-
-        console.log(this.array_img)
 
         filtro_array_img.forEach((i) => {
 
@@ -240,9 +246,20 @@ export default class Popups {
 
         });
 
-        galeria += `</div>`;
+        galeria += `<p>Monks spent most of their England were the work of monks.</p></div>`;
+
+        document.getElementById("miGaleria").innerHTML = galeria;
+
+        baguetteBox.run(".gallery", {
+			animation: "slideIn",
+			//noScrollbars:true,
+			buttons: true
+		});
+
+        //abrir tab gallery con sidebar o con un click al div id gallery
 
         return galeria;
+        
     }
 
     cultivosPop(feature, layer) {
@@ -279,9 +296,7 @@ export default class Popups {
         layer.on('click', function (e) {
             let btn_verImg = document.getElementById('btn_verImg');
 
-            //console.log(feature.properties.Plaga)
-
-            btn_verImg.onclick = function () { this.crearModal(map, feature.properties.Plaga, feature.properties.c_plaga) }.bind(this);
+            btn_verImg.onclick = function () { this.crearGaleria(feature.properties.Plaga, feature.properties.cve_plaga) }.bind(this);
         }.bind(this));
     }
 

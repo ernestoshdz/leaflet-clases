@@ -26,12 +26,6 @@
 
 	<!-- Font Awesome -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!-- Baguettebox -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css"> -->
-	<!-- <link rel="stylesheet" href="css/baguetteBox.css"> -->
-
 </head>
 
 <body>
@@ -81,9 +75,10 @@
 	<link rel="stylesheet" href="css/leaflet-sidebar.css" />
 	<script src="js/leaflet-sidebar-v2.js"></script>
 
-	<!-- BaguetteBox -->
-	<!-- <script src="js/baguetteBox.js" async></script>
-	<script src="js/highlight.min.js" async></script> -->
+	<!-- Baguettebox -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+	<!-- <link rel="stylesheet" href="css/baguetteBox.css"> -->
 
 	<!-- <script type="text/javascript" src="js/clases/clase_app.js" defer></script> -->
 	<!-- <script type="text/javascript" src="js/clases/clase_clusters.js" defer></script> -->
@@ -137,6 +132,7 @@
 					<ul role="tablist">
 						<li><a href="#layerTree" role="tab"><i class="fa fa-bars active"></i></a></li>
 						<li><a href="#autopan" role="tab"><i class="fa fa-filter"></i></a></li>
+						<li><a href="#gallery" role="tab"><i class="fa fa-camera"></i></a></li>
 						<li><a href="#home" role="tab"><i class="fa fa-home"></i></a></li>
 					</ul>
 
@@ -199,10 +195,20 @@
 						</div>
 						<div id="resultados">
 							<table class="table table-striped table-hover">
-                                <tbody id="misResultados"></tbody>
-                            </table>
+								<tbody id="misResultados"></tbody>
+							</table>
 						</div>
 					</div>
+
+					<div class="leaflet-sidebar-pane" id="gallery" >
+						<h1 class="leaflet-sidebar-header">
+							Galería
+							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+						</h1>
+						<div id="miGaleria">
+						</div>
+					</div>
+
 					<div class="leaflet-sidebar-pane" id="home">
 						<h1 class="leaflet-sidebar-header">
 							<div id="sidebarTitle">Título</div>
@@ -236,7 +242,8 @@
 
 					</div>
 					<div class="leaflet-sidebar-pane" id="messages">
-						<h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+						<h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i
+									class="fa fa-caret-left"></i></span></h1>
 					</div>
 				</div>
 			</div>
@@ -254,7 +261,14 @@
 			Derechos Reservados
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js" async></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+	<script>
+		baguetteBox.run(".gallery", {
+			animation: "slideIn",
+			//noScrollbars:true,
+			buttons: true
+		});
+	</script>
 </body>
 
 </html>
