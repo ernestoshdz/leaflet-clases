@@ -11,6 +11,8 @@ export default class Controles {
         this.estilos = new Estilos();
         this.capas = new Capas();
         this.popups = new Popups();
+
+        this.sideBar = L.control.sidebar({ container: 'sidebar' });
     }
 
     crearCoordenadaas(map) {
@@ -104,10 +106,6 @@ export default class Controles {
 
     }
 
-    mostrarSidebar() {
-        return this.sidebar;
-    }
-
     loadControles(map) {
         this.crearCoordenadaas(map);
         this.crearMinimap(map);
@@ -173,6 +171,17 @@ export default class Controles {
             document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
         });
 
+    }
+
+    crearSideBar(map){
+        this.sideBar.addTo(map);
+
+        //this.abrirTab('autopan')
+        
+    }
+
+    abrirTab(tab){
+        this.sideBar.open(tab);
     }
 
 }

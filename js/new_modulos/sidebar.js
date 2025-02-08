@@ -3,8 +3,8 @@ export default class Sidebar {
         this.sidebar = L.control.sidebar({ container: 'sidebar' });
     }
 
-    cambiarTab(){
-        this.sidebar;
+    cambiarTab(tab){
+        this.sidebar.open(tab);
     }
 
     crearSideBar(map) {

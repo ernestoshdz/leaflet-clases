@@ -10,7 +10,7 @@ export default class Modal {
             modal: config.modal,
             content: config.contenido,
             position: config.position,
-            closeButton: config.closeButton,
+            closeButton: true,
             //visible: false
         }).show();
     }

@@ -1,11 +1,9 @@
 import Diccionario from "./diccionario.js";
-import Sidebar from "./sidebar.js";
+import Modal from "./modal.js";
 
 export default class Popups {
     constructor() {
         //esto resuelve el problema del this, funcion anonima layer.on('click', function (e) { no deja usar this.myFunction
-
-        this.Sidebar = new Sidebar();
 
         this.popGenerico = this.popGenerico.bind(this);
         this.mxEdosPop = this.mxEdosPop.bind(this);
@@ -20,6 +18,8 @@ export default class Popups {
 
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
+
+        this.modal = new Modal();
 
         this.array_img = [
             {
@@ -201,20 +201,6 @@ export default class Popups {
         }
     }
 
-    /* crearModal(map, titulo, cve_plaga) {
-        let win = L.control.window(map, {
-            title: titulo,
-            maxWidth: 700,
-            maxheight: 100,
-            modal: true,
-            content: this.crearGaleria(cve_plaga),
-            position: "top",
-            //visible: false
-        });
-
-        win.show();
-    } */
-
     crearGaleria(name, cve_plaga) {
 
         let galeria = `
@@ -250,13 +236,22 @@ export default class Popups {
 
         document.getElementById("miGaleria").innerHTML = galeria;
 
-        baguetteBox.run(".gallery", {
-			animation: "slideIn",
-			//noScrollbars:true,
-			buttons: true
-		});
+        let config = {
+            titulo: "",
+            contenido: galeria,
+            width: 600,
+            height:600,
+            position: "top",
+            modal: true,
+        }
+        
+        this.modal.crearModal(map, config);
 
-        //abrir tab gallery con sidebar o con un click al div id gallery
+        baguetteBox.run(".gallery", {
+            animation: "slideIn",
+            //noScrollbars:true,
+            buttons: true
+        });
 
         return galeria;
         
@@ -296,7 +291,11 @@ export default class Popups {
         layer.on('click', function (e) {
             let btn_verImg = document.getElementById('btn_verImg');
 
-            btn_verImg.onclick = function () { this.crearGaleria(feature.properties.Plaga, feature.properties.cve_plaga) }.bind(this);
+            btn_verImg.onclick = function () {
+
+                this.crearGaleria(feature.properties.Plaga, feature.properties.cve_plaga); 
+
+            }.bind(this);
         }.bind(this));
     }
 
