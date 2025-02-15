@@ -2,7 +2,7 @@
 
 import Capas from "./new_modulos/capas.js";
 import Controles from "./new_modulos/controles.js";
-import Sidebar from "./new_modulos/sidebar.js"; 
+import Sidebar from "./new_modulos/sidebar.js";
 
 export default class App {
     constructor() {
@@ -21,12 +21,7 @@ export default class App {
 
         this.capas.load_capas(map);
         this.controles.loadControles(map)
-        this.capas.crearControl(map);
-        
+        this.capas.crearControl(map);        
         this.sidebar.crearSideBar(map);
-        //this.controles.crearSideBar(map);
-
-        //usar clase modal.js
-        //this.controles.crearModal(map,'Este es el contenido <a target="_blank" href="https://www.w3schools.com">Visit W3Schools</a>');
     }
 }

@@ -1,5 +1,6 @@
 import Diccionario from "./diccionario.js";
 import Modal from "./modal.js";
+import Imagenes from "./imagenes.js";
 
 export default class Popups {
     constructor() {
@@ -18,44 +19,8 @@ export default class Popups {
 
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
-
         this.modal = new Modal();
-
-        this.array_img = [
-            {
-                plaga: "Maconellicoccus hirsutus",
-                cve: 77,
-                images: [
-                    {
-                        name: "Maconellicoccus hirsutus",
-                        folder: "Maconellicoccus hirsutus",
-                        ext: "jpg"
-                    },
-                    {
-                        name: "test",
-                        folder: "Maconellicoccus hirsutus",
-                        ext: "jpg"
-                    }
-                ],
-            },
-            {
-                plaga: "Thielaviopsis paradoxa",
-                cve: 127,
-                images: [
-                    {
-                        name: "OIP",
-                        folder: "Thielaviopsis",
-                        ext: "jpg"
-                    },
-                    {
-                        name: "Figura",
-                        folder: "Thielaviopsis",
-                        ext: "png"
-                    }
-                ],
-            },
-
-        ];
+        this.imagenes = new Imagenes();
     }
 
     filtrarArray(feature, newArray, namesArray) {
@@ -201,56 +166,53 @@ export default class Popups {
         }
     }
 
-    crearGaleria(name, cve_plaga) {
+    crearGaleria(cve_plaga) {
 
-        let galeria = `
-        
-        <div id="galeria" class="container-fluid">
-        
-        <div class="jumbotron">
-            <h3>${name}</h3>
-        </div>
-        
-        `;
-        let filtro_array_img = this.array_img.filter((i) => i.cve == cve_plaga);
+        let filtro_array_img = this.imagenes.array_img.filter((i) => i.cve == cve_plaga);
 
-        filtro_array_img.forEach((i) => {
+        let galeria = `<div id="galeria" class="container-fluid">
+        
+            <div class="jumbotron">
+                <h3>${filtro_array_img[0].plaga}</h3>
+            </div>`;
+            
+            filtro_array_img.forEach((i) => {
 
             galeria += `<div class="row gallery">`
 
-            i.images.forEach((i) => {
+                i.images.forEach((i) => {
 
-                galeria += `
+                    galeria += `
                         <div class="col-sm-6 col-md-5 col-lg-6">
-                            <a href="img/Plagas/${i.folder}/${i.name}.${i.ext}" target="_blank">
-                                <img class="img-fluid" src="img/Plagas/${i.folder}/${i.name}.${i.ext}">
+                            <a href="img/Plagas/${i.folder}/${i.name_img}.${i.ext}" target="_blank">
+                                <img class="img-fluid" src="img/Plagas/${i.folder}/${i.name_img}.${i.ext}" alt="${i.name_img}">
                             </a>
                         </div>`;
-            });
+                });
 
-            galeria += `</div>`;
+            galeria += `</div><p>${filtro_array_img[0].descripcion}</p></div>`;
 
         });
 
-        galeria += `<p>Monks spent most of their England were the work of monks.</p></div>`;
-
         document.getElementById("miGaleria").innerHTML = galeria;
-
-        let config = {
+        
+        this.modal.crearModal(map, {
             titulo: "",
             contenido: galeria,
             width: 600,
             height:600,
             position: "top",
             modal: true,
-        }
-        
-        this.modal.crearModal(map, config);
+        });
 
         baguetteBox.run(".gallery", {
             animation: "slideIn",
             //noScrollbars:true,
-            buttons: true
+            //fullScreen: true,
+            buttons: true,
+            captions: function(element) {
+                return element.getElementsByTagName('img')[0].alt;
+            }
         });
 
         return galeria;
@@ -293,7 +255,7 @@ export default class Popups {
 
             btn_verImg.onclick = function () {
 
-                this.crearGaleria(feature.properties.Plaga, feature.properties.cve_plaga); 
+                this.crearGaleria(feature.properties.cve_plaga); 
 
             }.bind(this);
         }.bind(this));

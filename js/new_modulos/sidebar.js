@@ -3,10 +3,6 @@ export default class Sidebar {
         this.sidebar = L.control.sidebar({ container: 'sidebar' });
     }
 
-    cambiarTab(tab){
-        this.sidebar.open(tab);
-    }
-
     crearSideBar(map) {
         
         //this.sidebar.addTo(map).open('layerTree');
@@ -36,9 +32,4 @@ export default class Sidebar {
         //document.getElementById("test").onclick = this.sidebar.close
         
     }
-
-    /* close(){
-
-        this.sidebar.close();
-    } */
 }

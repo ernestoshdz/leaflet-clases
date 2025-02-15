@@ -3,6 +3,7 @@ import Peticiones from "./peticiones.js";
 import Estilos from "./estilos.js";
 import Capas from "./capas.js";
 import Popups from "./popups.js";
+import Modal from "./modal.js";
 
 export default class Controles {
     constructor() {
@@ -11,8 +12,7 @@ export default class Controles {
         this.estilos = new Estilos();
         this.capas = new Capas();
         this.popups = new Popups();
-
-        this.sideBar = L.control.sidebar({ container: 'sidebar' });
+        this.modal = new Modal();
     }
 
     crearCoordenadaas(map) {
@@ -50,21 +50,6 @@ export default class Controles {
         }).addTo(map);
 
     } */
-
-    //usar la clase modal.js
-    crearModal(map, contenido) {
-        let win = L.control.window(map, {
-            title: 'Hello world!',
-            maxWidth: 400,
-            maxheight: 100,
-            modal: true,
-            content: contenido,
-            position: "top",
-            //visible: false
-        });
-
-        win.show();
-    }
 
     crearAcercaDe(map) {
         L.easyButton({
@@ -115,9 +100,17 @@ export default class Controles {
         //this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
         this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "cve_cultiv", null);
         this.getSelectInputs("select_plagas", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
-
         //this.crearMostrarCapas(map);
-        //this.crearSideBar(map);
+
+        //modal para el inicio de la aplicación
+        /* this.modal.crearModal(map,{
+            titulo: "Titulo",
+            contenido: 'Este es el contenido <a target="_blank" href="https://www.w3schools.com">Visit W3Schools</a>',
+            width: 600,
+            height:600,
+            position: "top",
+            modal: true,
+        }); */
     }
 
     getFiltros(map) {
@@ -171,17 +164,6 @@ export default class Controles {
             document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
         });
 
-    }
-
-    crearSideBar(map){
-        this.sideBar.addTo(map);
-
-        //this.abrirTab('autopan')
-        
-    }
-
-    abrirTab(tab){
-        this.sideBar.open(tab);
     }
 
 }
