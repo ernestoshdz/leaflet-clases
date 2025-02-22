@@ -4,6 +4,7 @@ import Estilos from "./estilos.js";
 import Capas from "./capas.js";
 import Popups from "./popups.js";
 import Modal from "./modal.js";
+import miGaleria from "./miGaleria.js";
 
 export default class Controles {
     constructor() {
@@ -13,6 +14,7 @@ export default class Controles {
         this.capas = new Capas();
         this.popups = new Popups();
         this.modal = new Modal();
+        this.miGaleria = new miGaleria();
     }
 
     crearCoordenadaas(map) {
@@ -100,6 +102,22 @@ export default class Controles {
         //this.getSelectInputs("mx_mun", 'sin_geometria/', "mun_mx", ".geojson", "NOMGEO", "CVEGEO", null);
         this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "cve_cultiv", null);
         this.getSelectInputs("select_plagas", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
+        this.getSelectInputs("selectGallery", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
+
+        L.control.browserPrint({
+            position: 'topright',
+            title: 'Print ...',
+            documentTitle: 'Mi Mapa',
+            printModes: [
+                L.BrowserPrint.Mode.Landscape("Tabloid", { title: "Tabloid VIEW" }),
+                L.BrowserPrint.Mode.Landscape(),
+                "Portrait",
+                L.BrowserPrint.Mode.Auto("B4", { title: "Auto" }),
+                L.BrowserPrint.Mode.Custom("B5", { title: "Select area" })
+            ],
+            //customPrintStyle: { color: "green", dashArray: "5, 10", pane: "customPrintPane" }
+        }).addTo(map);
+
         //this.crearMostrarCapas(map);
 
         //modal para el inicio de la aplicación
@@ -124,21 +142,21 @@ export default class Controles {
         };
 
         //hacer esto mas limpio
-        
+
         if (obj.geom == "1") {
             //Filtrado de Geometría
             this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
 
-            if(obj.edo != ""){
+            if (obj.edo != "") {
                 this.peticiones.getMunicipiosFiltrados("MX/", "cc2", ".geojson", obj, map);
             }
         } else {
 
-            if(obj.edo != ""){
+            if (obj.edo != "") {
                 this.peticiones.getMunicipiosFiltrados("MX/", "municipios_cul_plagas", ".geojson", obj, map);
             }
 
-            if(obj.edo != "" && obj.cultivo != ""){
+            if (obj.edo != "" && obj.cultivo != "") {
                 //capa de municipios
                 this.peticiones.getCapaFiltrada("MX/", "municipios_cul_plagas", this.estilos.estilo_mun, this.popups.poligonosCultivosPlagasPop, ".geojson", obj, map);
             } else {
@@ -151,8 +169,16 @@ export default class Controles {
     cargarFiltro(map) {
 
         let button_buscar = document.getElementById('btn_buscar');
+        let btnGallery = document.getElementById('btnGallery');
 
         button_buscar.onclick = function () { this.getFiltros(map) }.bind(this);
+        btnGallery.onclick = function () { this.getFiltroGallery() }.bind(this);
+    }
+
+    getFiltroGallery() {
+        let cve_plaga = document.getElementById("selectGallery").value;
+
+        this.miGaleria.crearGaleria(cve_plaga, false);
     }
 
     getSelectInputs = async (id, folder, nombre_archivo, ext, name, value, filtro, req, res) => {
@@ -160,8 +186,8 @@ export default class Controles {
         const data = await response.json();
 
         data.features.forEach((i) => {
-            //llenar selects de estados (archivo sin geometría)
-            document.getElementById(id).add(new Option(i.properties[value]+" "+i.properties[name], i.properties[value]))
+            //llenar selects (archivo sin geometría)
+            document.getElementById(id).add(new Option(i.properties[value] + " " + i.properties[name], i.properties[value]))
         });
 
     }

@@ -80,6 +80,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
 	<!-- <link rel="stylesheet" href="css/baguetteBox.css"> -->
 
+	<!-- Leaflet Browser Print -->
+	<script src="js/leaflet.browser.print.js"></script>
+
 	<!-- <script type="text/javascript" src="js/clases/clase_app.js" defer></script> -->
 	<!-- <script type="text/javascript" src="js/clases/clase_clusters.js" defer></script> -->
 	<!-- <script type="text/javascript" src="js/clases/clase_control_layers.js" defer></script> -->
@@ -205,7 +208,13 @@
 						<h1 class="leaflet-sidebar-header">
 							Galería
 							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-						</h1>
+						</h1><br>
+						<p>Seleccione Plaga:</p>
+						<select name="selectGallery" id="selectGallery">
+							<option value="77">Maconellicoccus hirsutus</option>
+							<option value=""></option>
+						</select><br><br>
+						<input type="button" id="btnGallery" value="Buscar">
 						<div id="miGaleria">
 						</div>
 					</div>

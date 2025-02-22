@@ -1,6 +1,6 @@
 import Diccionario from "./diccionario.js";
 import Modal from "./modal.js";
-import Imagenes from "./imagenes.js";
+import miGaleria from "./miGaleria.js";
 
 export default class Popups {
     constructor() {
@@ -20,8 +20,10 @@ export default class Popups {
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
         this.modal = new Modal();
-        this.imagenes = new Imagenes();
+        this.miGaleria = new miGaleria();
     }
+
+    //mover funciones que no sean popups a otras clases
 
     filtrarArray(feature, newArray, namesArray) {
 
@@ -166,59 +168,6 @@ export default class Popups {
         }
     }
 
-    crearGaleria(cve_plaga) {
-
-        let filtro_array_img = this.imagenes.array_img.filter((i) => i.cve == cve_plaga);
-
-        let galeria = `<div id="galeria" class="container-fluid">
-        
-            <div class="jumbotron">
-                <h3>${filtro_array_img[0].plaga}</h3>
-            </div>`;
-            
-            filtro_array_img.forEach((i) => {
-
-            galeria += `<div class="row gallery">`
-
-                i.images.forEach((i) => {
-
-                    galeria += `
-                        <div class="col-sm-6 col-md-5 col-lg-6">
-                            <a href="img/Plagas/${i.folder}/${i.name_img}.${i.ext}" target="_blank">
-                                <img class="img-fluid" src="img/Plagas/${i.folder}/${i.name_img}.${i.ext}" alt="${i.name_img}">
-                            </a>
-                        </div>`;
-                });
-
-            galeria += `</div><p>${filtro_array_img[0].descripcion}</p></div>`;
-
-        });
-
-        document.getElementById("miGaleria").innerHTML = galeria;
-        
-        this.modal.crearModal(map, {
-            titulo: "",
-            contenido: galeria,
-            width: 600,
-            height:600,
-            position: "top",
-            modal: true,
-        });
-
-        baguetteBox.run(".gallery", {
-            animation: "slideIn",
-            //noScrollbars:true,
-            //fullScreen: true,
-            buttons: true,
-            captions: function(element) {
-                return element.getElementsByTagName('img')[0].alt;
-            }
-        });
-
-        return galeria;
-        
-    }
-
     cultivosPop(feature, layer) {
 
         let popupContent =
@@ -241,7 +190,7 @@ export default class Popups {
                     ${feature.properties.Plaga2}
                     ${feature.properties.Plaga3}
                 </i></td></tr>
-                <tr><td></td><td><button type="button" id="btn_verImg">Ver Plaga</button></td></tr>
+                <tr><td><b>Imagen:</b></td><td><button type="button" id="btn_verImg">Ver Plaga</button></td></tr>
                 <tr><td><b>Estado:</b></td><td>${feature.properties.Estado}, ${feature.properties.NOMGEO}</td></tr>
                 <tr><td><b>Cita:</b></td><td>${feature.properties.Cita} ${feature.properties.Cita1} ${feature.properties.Cita2}</td></tr>
                 <tr><td><b>Latitud:</b></td><td>${feature.properties.Latitud}</td></tr>
@@ -255,7 +204,7 @@ export default class Popups {
 
             btn_verImg.onclick = function () {
 
-                this.crearGaleria(feature.properties.cve_plaga); 
+                this.miGaleria.crearGaleria(feature.properties.cve_plaga,true); 
 
             }.bind(this);
         }.bind(this));
