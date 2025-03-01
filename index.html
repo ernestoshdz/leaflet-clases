@@ -167,8 +167,8 @@
 							<br>
 							<p>Seleccione Geometría:</p>
 							<select name="geom" id="geom">
-								<option value="1">Punto</option>
 								<option value="2">Polígono</option>
+								<option value="1">Punto</option>
 							</select>
 							<br></br>
 							<p>Seleccione Estado:</p>
@@ -190,7 +190,7 @@
 							<br></br>
 							<p>Seleccione Plaga:</p>
 							<select name="select_plagas" id="select_plagas">
-								<option value="77">Maconellicoccus hirsutus</option>
+								<!-- <option value="77">Maconellicoccus hirsutus</option> -->
 								<option value="">Todo</option>
 							</select>
 							<br></br>
@@ -204,7 +204,7 @@
 						</div>
 					</div>
 
-					<div class="leaflet-sidebar-pane" id="gallery" >
+					<div class="leaflet-sidebar-pane" id="gallery">
 						<h1 class="leaflet-sidebar-header">
 							Galería
 							<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
@@ -257,11 +257,21 @@
 					</div>
 				</div>
 			</div>
-
-			<div id="map" class="caja mapa">
-				<!-- Mapa -->
-			</div>
-
+			<!-- Mapa -->
+			<div id="map" class="caja mapa"></div>
+			<div id=""></div>
+			<table leaflet-browser-print-pages class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Estado</th>
+						<th>Municipio</th>
+						<th>Cultivo</th>
+						<th>Plaga</th>
+					</tr>
+				</thead>
+				<tbody id="misResultadosPrint"></tbody>
+			</table>
 			<!-- <div class="caja derechos">
 			Derechos Reservados
 		</div> -->

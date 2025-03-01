@@ -102,7 +102,7 @@ body {
     height: 70px;
     margin: 10px 0;
     background-color: lightgray;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 .gallery {
@@ -116,7 +116,7 @@ body {
 }
 
 
-#myTableXL table{
+#myTableXL table {
     width: 650px;
 }
 
@@ -129,5 +129,13 @@ body {
 }
 
 select {
-    max-width:80%;
+    max-width: 80%;
+}
+
+[leaflet-browser-print-pages] {
+    display: none;
+}
+
+.pages-print-container [leaflet-browser-print-pages] {
+    display: block;
 }

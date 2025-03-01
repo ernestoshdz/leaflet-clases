@@ -112,6 +112,7 @@ export default class Peticiones {
 
         //limpia misResultados antes de llenar
         document.getElementById("misResultados").innerHTML = "";
+        document.getElementById("misResultadosPrint").innerHTML = "";
 
         if (filter_data.length > 0) {
             document.getElementById("misResultados").innerHTML = `
@@ -126,7 +127,7 @@ export default class Peticiones {
             </tr>
             `;
 
-            //console.log(filter_data);
+            console.log(filter_data);
 
             document.getElementById("miConteo").innerHTML = `Se encontró ${filter_data.length} resultado(s)`;
 
@@ -187,6 +188,15 @@ export default class Peticiones {
                 document.getElementById("misResultados").innerHTML += `
                 <tr>
                     <td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.GID}">Ver</button></td>
+                    <td>${row.properties.GID}</td>
+                    <td>${row.properties.Estado}</td>
+                    <td>${row.properties.NOMGEO}</td>
+                    <td>${test}</td>
+                    <td>${test2}</td>
+                </tr>`;
+
+                document.getElementById("misResultadosPrint").innerHTML += `
+                <tr>
                     <td>${row.properties.GID}</td>
                     <td>${row.properties.Estado}</td>
                     <td>${row.properties.NOMGEO}</td>
