@@ -303,7 +303,7 @@ export default class Popups {
             let test2 = '';
 
             names_plagas.forEach((i) => {
-                test += `<li><i>${i.name}</i> ${i.autor}</li>`;
+                test += `<tr><li><i>${i.name}</i> ${i.autor}</li></tr>`;
             });
 
             names_cultivos.forEach((i) => {
@@ -313,17 +313,17 @@ export default class Popups {
             //console.log(names_cultivos);
             //console.log(names_plagas);
 
-            let gid = `<tr>
+            let cve_edo = `<tr>
                 <td>
                     <b>ID:</b>
                 </td>
                 <td>
-                    ${feature.properties.GID} 
+                    ${feature.properties.CVEGEO} 
                 </td>
             </tr>`;
 
             let popupContent = `<table id="myTableXL" class="table table-striped table-hover">
-                ${feature.properties.GID != undefined ? gid : ""}
+                ${feature.properties.CVEGEO != undefined ? cve_edo : ""}
                 <tr>
                     <td>
                         <b>Estado:</b>
@@ -336,15 +336,16 @@ export default class Popups {
                     <td>
                         <b>Plagas:</b>
                     </td>
-                    <td>
-                        <ul>${test}</ul>
+                    <td> 
+                       <table><tbody>${test}</tbody></table>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <b>Cultivos:</b>
                     </td>
-                    <td><ul>${test2}</ul>
+                    <td>
+                        <table><tbody>${test2}</tbody></table>
                     </td>
                 </tr>
             </table>`;

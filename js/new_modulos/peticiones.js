@@ -89,9 +89,9 @@ export default class Peticiones {
         let edo_test = (filtro.edo != "" && filtro.edo != undefined) ? row.properties.CVE_ENT == filtro.edo : 1 == 1;
         let cultivo_test = (filtro.cultivo != "" && filtro.cultivo != undefined) ? names.includes(filtro.cultivo) : 1 == 1;
         let plaga_test = (filtro.plaga != "" && filtro.plaga != undefined) ? names_plaga.includes(filtro.plaga) : 1 == 1;
-        let gid_test = (filtro.gid != "" && filtro.gid != undefined) ? row.properties.GID == filtro.gid : 1 == 1;
+        let cvegeo_test = (filtro.cvegeo != "" && filtro.cvegeo != undefined) ? row.properties.CVEGEO == filtro.cvegeo : 1 == 1;
 
-        if (edo_test && cultivo_test && plaga_test && gid_test) {
+        if (edo_test && cultivo_test && plaga_test && cvegeo_test) {
             filter_data.push(row);
         }
 
@@ -109,8 +109,8 @@ export default class Peticiones {
             this.filtrado(filtro, row, filter_data);
         });
 
-        this.crearTablaContenido("misResultados",filter_data, map);
-        this.crearTablaContenido("misResultadosPrint",filter_data, map);
+        this.crearTablaContenido("misResultados", filter_data, map, true);
+        this.crearTablaContenido("misResultadosPrint", filter_data, map, false);
     }
 
     //Filtra la geometria del municipio con base a la selección de los resultados alfanúmericos
@@ -123,6 +123,8 @@ export default class Peticiones {
         data.features.map(row => {
             this.filtrado(filtro, row, filter_data);
         });
+
+        console.log(filtro)
 
         //console.log(filter_data);
 
@@ -194,7 +196,7 @@ export default class Peticiones {
 
     }
 
-    crearTablaContenido(ElementID,filter_data,map) {
+    crearTablaContenido(ElementID, filter_data, map, mostrarBtn) {
         //limpia misResultados antes de llenar
         document.getElementById(ElementID).innerHTML = "";
 
@@ -204,7 +206,7 @@ export default class Peticiones {
             document.getElementById(ElementID).innerHTML = `
             <div id="miConteo"></div>
             <tr>
-                <th>Mapa</th>
+                ${mostrarBtn == true ? "<th>Mapa</th>" : ""}
                 <th>ID</th>
                 <th>Estado</th>
                 <th>Municipio</th>
@@ -276,8 +278,8 @@ export default class Peticiones {
 
                 document.getElementById(ElementID).innerHTML += `
                 <tr>
-                    <td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.GID}">Ver</button></td>
-                    <td>${row.properties.GID}</td>
+                    ${mostrarBtn == true ? `<td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.CVEGEO}">Ver</button></td>` : ""}
+                    <td>${row.properties.CVEGEO}</td>
                     <td>${row.properties.Estado}</td>
                     <td>${row.properties.NOMGEO}</td>
                     <td>${obj.cultivos}</td>
@@ -289,7 +291,7 @@ export default class Peticiones {
                     button.onclick = function () {
 
                         let obj = {
-                            gid: button.value
+                            cvegeo: button.value
                         }
 
                         let geom_value = document.getElementById("geom").value;
@@ -305,19 +307,5 @@ export default class Peticiones {
                 })
             });
         }
-
-        else {
-            this.modal.crearModal(map, {
-                titulo: "Advertencia",
-                icon: "fa fa-exclamation-triangle",
-                width: 400,
-                height: 80,
-                modal: true,
-                contenido: "La búsqueda no generó resultados de municipios",
-                position: "top",
-                closeButton: true
-            });
-        }
     }
-
 }

@@ -77,7 +77,8 @@ body {
 }
 
 .leaflet-popup-content-wrapper {
-    min-width: 300px;
+    min-width: 250px;
+    max-width: 700px;
     max-height: 300px;
     overflow-x: auto;
     overflow-y: auto;
@@ -117,7 +118,7 @@ body {
 
 
 #myTableXL table {
-    width: 650px;
+    width: 550px;
 }
 
 #resultados tbody {

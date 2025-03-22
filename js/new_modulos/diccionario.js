@@ -1032,7 +1032,6 @@ export default class Diccionario {
                 name: 'Pastizal',
 				cientifico:''
             },
-			,
             {
                 cve_cultiv: '80bp',
                 name: 'Mostacilla',
@@ -1091,11 +1090,6 @@ export default class Diccionario {
             {
                 cve_cultiv: '80cb',
                 name: 'Parque recreativo',
-				cientifico:''
-            },
-            {
-                cve_cultiv: '80cc',
-                name: 'Pastizal',
 				cientifico:''
             },
             {
