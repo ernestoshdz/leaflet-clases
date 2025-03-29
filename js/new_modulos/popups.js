@@ -281,6 +281,12 @@ export default class Popups {
                 });
             });
 
+            //array de claves
+            //console.log(array_cultivos)
+
+            //array de objetos de cultivo
+            //console.log(names_cultivos)
+
             array_plagas.forEach((i) => {
 
                 this.diccionario.misValoresPlagas.forEach((j) => {
@@ -303,7 +309,7 @@ export default class Popups {
             let test2 = '';
 
             names_plagas.forEach((i) => {
-                test += `<tr><li><i>${i.name}</i> ${i.autor}</li></tr>`;
+                test += `<li><i>${i.name}</i> ${i.autor}</li>`;
             });
 
             names_cultivos.forEach((i) => {
@@ -313,23 +319,27 @@ export default class Popups {
             //console.log(names_cultivos);
             //console.log(names_plagas);
 
-            let cve_edo = `<tr>
-                <td>
-                    <b>ID:</b>
-                </td>
-                <td>
-                    ${feature.properties.CVEGEO} 
-                </td>
-            </tr>`;
-
             let popupContent = `<table id="myTableXL" class="table table-striped table-hover">
-                ${feature.properties.CVEGEO != undefined ? cve_edo : ""}
+                <tr>
+                        <td><b>Resultados:</b></td>
+                        <td>
+                            Tienes ${array_plagas.length} Plagas y ${array_cultivos.length} Cultivos
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>ID:</b>
+                    </td>
+                    <td>
+                        ${feature.properties.CVEGEO} 
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <b>Estado:</b>
                     </td>
                     <td>
-                        ${feature.properties.Estado}, ${feature.properties.NOMGEO} 
+                        ${feature.properties.cve_edo == undefined ? `${feature.properties.Estado}, ${feature.properties.NOMGEO}` : feature.properties.Estado}
                     </td>
                 </tr>
                 <tr>     
@@ -337,7 +347,7 @@ export default class Popups {
                         <b>Plagas:</b>
                     </td>
                     <td> 
-                       <table><tbody>${test}</tbody></table>
+                       <table>${test}</table>
                     </td>
                 </tr>
                 <tr>
@@ -345,7 +355,7 @@ export default class Popups {
                         <b>Cultivos:</b>
                     </td>
                     <td>
-                        <table><tbody>${test2}</tbody></table>
+                        <table>${test2}</table>
                     </td>
                 </tr>
             </table>`;
