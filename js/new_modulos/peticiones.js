@@ -109,8 +109,10 @@ export default class Peticiones {
             this.filtrado(filtro, row, filter_data);
         });
 
+        //console.log(filtro)
+
         this.crearTablaContenido("misResultados", filter_data, map, true);
-        this.crearTablaContenido("misResultadosPrint", filter_data, map, false);
+        //this.crearTablaContenido("misResultadosPrint", filter_data, map, false);
     }
 
     //Filtra la geometria del municipio con base a la selección de los resultados alfanúmericos
@@ -200,6 +202,8 @@ export default class Peticiones {
         //limpia misResultados antes de llenar
         document.getElementById(ElementID).innerHTML = "";
 
+        //console.log('test')
+
         let mun_filtrados = [];
 
         if (filter_data.length > 0) {
@@ -218,6 +222,9 @@ export default class Peticiones {
 
             document.getElementById("miConteo").innerHTML = `Se encontró ${filter_data.length} resultado(s)`;
 
+            let cultivos_totales = [];
+
+            // corregir names_cultivos y usar cultivos_totales
             filter_data.map(row => {
                 let array_cultivos = row.properties.cve_cultiv.split(",");
                 let array_plagas = row.properties.cve_plaga.split(",");
@@ -226,7 +233,7 @@ export default class Peticiones {
                 let names_plagas = [];
 
                 array_cultivos.forEach((i) => {
-
+                    //console.log('cultivos')
                     this.diccionario.misValoresCultivos.forEach((j) => {
 
                         if (i == j.cve_cultiv) {
@@ -238,11 +245,15 @@ export default class Peticiones {
                             }
 
                             names_cultivos.push(obj);
+                            cultivos_totales.push(obj);
                         }
                     });
                 });
 
+                //console.log(array_cultivos)
+
                 array_plagas.forEach((i) => {
+                    //console.log('plagas')
                     this.diccionario.misValoresPlagas.forEach((j) => {
 
                         if (i == j.cve_plaga) {
@@ -273,6 +284,8 @@ export default class Peticiones {
                 names_plagas.forEach((i) => {
                     obj.plagas += `<li><i>${i.name}</i> ${i.autor}</li>`;
                 });
+
+                //console.log(obj.cultivos)
 
                 mun_filtrados.push(row.properties.NOMGEO);
 
@@ -306,6 +319,85 @@ export default class Peticiones {
                     }.bind(this);
                 })
             });
+
+            let miArrayCultivos = [];
+            let arrayCultivosValores = [];
+            let contadorCultivos = [];
+
+            //console.log(cultivos_totales)
+
+            let array = []
+            cultivos_totales.forEach((i) => {
+                array.push(i.cve_cultivo)
+            })
+
+            //console.log(array)
+
+            cultivos_totales.forEach((i) => {
+                //console.log(i)
+                array.forEach((j) => {
+
+                    //console.log(i.cve_cultivo)
+                    //console.log(j)
+
+                    if (i.cve_cultivo == j) {
+
+                        let obj = {
+                            cve_cultivo: i.cve_cultivo.length
+                        }
+
+                        //console.log(obj)
+
+                        contadorCultivos.push(obj);
+                    }
+                });
+
+            });
+
+            console.log(contadorCultivos)
+
+            this.modal.crearModal(map, {
+                titulo: "Gráfico",
+                icon: "fa fa-exclamation-triangle",
+                width: 400,
+                height: 80,
+                modal: false,
+                contenido: `<canvas id="GraficosModal"></canvas>`,
+                position: "top",
+                closeButton: true
+            });
+
+            // remover esta lógica después
+            let chartData = {
+                type: 'doughnut',
+                data: {
+                    labels: miArrayCultivos,
+                    datasets: [
+                        {
+                            backgroundColor: ['red'],
+                            label: 'Acquisitions by year',
+                            data: [1,2],
+                        }
+                    ]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Positivos'
+                    }
+                }
+            }
+    
+            //sirve para actualizar el gráfico y evitar sobreponer gráficos
+            if (typeof graph === "undefined") {
+                window.graph = new Chart(document.getElementById('GraficosModal'), chartData);
+            } else {
+                window.graph.config = chartData;
+                window.graph.update();
+            }
         }
     }
 }
