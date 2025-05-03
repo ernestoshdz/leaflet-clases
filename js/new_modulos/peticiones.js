@@ -331,7 +331,62 @@ export default class Peticiones {
                 array.push(i.cve_cultivo)
             })
 
-            //console.log(array)
+            let cultivosUnicos = array.reduce((acc, item) => {
+                if (!acc.includes(item)) {
+                    acc.push(item);
+                }
+                return acc;
+            }, []);
+
+            console.log(cultivosUnicos)
+            console.log(cultivos_totales)
+
+            const contarCultivos = (valoresUnicos, arrayGeneral) => {
+                let counts = 0;
+
+                let arrayContado = []
+                let obj = {};
+
+                valoresUnicos.forEach((value) => {
+
+                    let array = [];
+
+                    arrayGeneral.forEach((j) => {
+                        //console.log(j)
+                        //console.log(value.cve_cultivo)
+                        if (value == j.cve_cultivo) {
+
+                            //console.log('son iguales')
+
+                            array.push(j.name)
+
+                            //console.log(array)
+                            
+                            obj = {
+                                cultivo: j.name,
+                                contador: counts++
+                            }
+
+                            //console.log(obj)
+                            //counts++;
+                        } else {
+                            //console.log('no son iguales')
+                        }
+                    });
+
+                    console.log(array.length)
+
+                    //arrayContado.push(obj)
+
+
+                });
+
+                //console.log(arrayContado)
+
+                //return Object.fromEntries(counts);
+            }
+
+            contarCultivos(cultivosUnicos, cultivos_totales)
 
             cultivos_totales.forEach((i) => {
                 //console.log(i)
@@ -343,7 +398,7 @@ export default class Peticiones {
                     if (i.cve_cultivo == j) {
 
                         let obj = {
-                            cve_cultivo: i.cve_cultivo.length
+                            cve_cultivo: i.cve_cultivo
                         }
 
                         //console.log(obj)
@@ -354,9 +409,9 @@ export default class Peticiones {
 
             });
 
-            console.log(contadorCultivos)
+            //console.log(contadorCultivos)
 
-            this.modal.crearModal(map, {
+            /* this.modal.crearModal(map, {
                 titulo: "Gráfico",
                 icon: "fa fa-exclamation-triangle",
                 width: 400,
@@ -365,10 +420,10 @@ export default class Peticiones {
                 contenido: `<canvas id="GraficosModal"></canvas>`,
                 position: "top",
                 closeButton: true
-            });
+            }); */
 
             // remover esta lógica después
-            let chartData = {
+            /* let chartData = {
                 type: 'doughnut',
                 data: {
                     labels: miArrayCultivos,
@@ -397,7 +452,7 @@ export default class Peticiones {
             } else {
                 window.graph.config = chartData;
                 window.graph.update();
-            }
+            } */
         }
     }
 }
