@@ -2,6 +2,7 @@ import Diccionario from "./diccionario.js";
 import Popups from "./popups.js";
 import Estilos from "./estilos.js";
 import Modal from "./modal.js";
+import Funciones from "./funciones.js";
 
 export default class Peticiones {
 
@@ -10,9 +11,11 @@ export default class Peticiones {
 
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
+        
         this.popups = new Popups();
         this.estilos = new Estilos();
         this.modal = new Modal();
+        this.funciones = new Funciones();
 
         this.filtrarGeomMun = this.filtrarGeomMun.bind(this);
     }
@@ -320,12 +323,6 @@ export default class Peticiones {
                 })
             });
 
-            let miArrayCultivos = [];
-            let arrayCultivosValores = [];
-            let contadorCultivos = [];
-
-            //console.log(cultivos_totales)
-
             let array = []
             cultivos_totales.forEach((i) => {
                 array.push(i.cve_cultivo)
@@ -338,80 +335,45 @@ export default class Peticiones {
                 return acc;
             }, []);
 
-            console.log(cultivosUnicos)
-            console.log(cultivos_totales)
+            //console.log(cultivosUnicos)
+            //console.log(cultivos_totales)
 
-            const contarCultivos = (valoresUnicos, arrayGeneral) => {
-                let counts = 0;
+            let obj = {};
+            let arry = [];
+    
+            cultivosUnicos.forEach((value) => {
 
-                let arrayContado = []
-                let obj = {};
+                let array = [];
 
-                valoresUnicos.forEach((value) => {
+                cultivos_totales.forEach((j) => {
 
-                    let array = [];
+                    if (value == j.cve_cultivo) {
 
-                    arrayGeneral.forEach((j) => {
-                        //console.log(j)
-                        //console.log(value.cve_cultivo)
-                        if (value == j.cve_cultivo) {
+                        //console.log('son iguales')
+                        array.push(j.name)
 
-                            //console.log('son iguales')
-
-                            array.push(j.name)
-
-                            //console.log(array)
-                            
-                            obj = {
-                                cultivo: j.name,
-                                contador: counts++
-                            }
-
-                            //console.log(obj)
-                            //counts++;
-                        } else {
-                            //console.log('no son iguales')
-                        }
-                    });
-
-                    console.log(array.length)
-
-                    //arrayContado.push(obj)
-
-
-                });
-
-                //console.log(arrayContado)
-
-                //return Object.fromEntries(counts);
-            }
-
-            contarCultivos(cultivosUnicos, cultivos_totales)
-
-            cultivos_totales.forEach((i) => {
-                //console.log(i)
-                array.forEach((j) => {
-
-                    //console.log(i.cve_cultivo)
-                    //console.log(j)
-
-                    if (i.cve_cultivo == j) {
-
-                        let obj = {
-                            cve_cultivo: i.cve_cultivo
-                        }
-
-                        //console.log(obj)
-
-                        contadorCultivos.push(obj);
                     }
                 });
 
+                obj = {
+                    cultivo: array[0],
+                    contador: array.length
+                }
+
+                arry.push(obj);
+
             });
 
-            //console.log(contadorCultivos)
+            let etiquetas_cultivos = [];
+            let valores_cultivos = [];
 
-            /* this.modal.crearModal(map, {
+            arry.forEach((i) => {
+                etiquetas_cultivos.push(i.cultivo)
+                valores_cultivos.push(i.contador)
+            });
+
+            //Evitar que el popup se duplique cada que das clic en buscar
+            this.modal.crearModal(map, {
                 titulo: "Gráfico",
                 icon: "fa fa-exclamation-triangle",
                 width: 400,
@@ -420,39 +382,10 @@ export default class Peticiones {
                 contenido: `<canvas id="GraficosModal"></canvas>`,
                 position: "top",
                 closeButton: true
-            }); */
+            });
 
-            // remover esta lógica después
-            /* let chartData = {
-                type: 'doughnut',
-                data: {
-                    labels: miArrayCultivos,
-                    datasets: [
-                        {
-                            backgroundColor: ['red'],
-                            label: 'Acquisitions by year',
-                            data: [1,2],
-                        }
-                    ]
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Positivos'
-                    }
-                }
-            }
-    
-            //sirve para actualizar el gráfico y evitar sobreponer gráficos
-            if (typeof graph === "undefined") {
-                window.graph = new Chart(document.getElementById('GraficosModal'), chartData);
-            } else {
-                window.graph.config = chartData;
-                window.graph.update();
-            } */
+            this.funciones.crearGrafico('GraficosModal','doughnut',etiquetas_cultivos,valores_cultivos)
+
         }
     }
 }

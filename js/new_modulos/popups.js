@@ -1,6 +1,7 @@
 import Diccionario from "./diccionario.js";
 import Modal from "./modal.js";
 import miGaleria from "./miGaleria.js";
+import Funciones from "./funciones.js";
 
 export default class Popups {
     constructor() {
@@ -15,12 +16,12 @@ export default class Popups {
         this.newArray = [];
         this.namesArray = [];
 
-        this.barColors = ["red", "green", "blue", "orange", "brown"];
-
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
+        
         this.modal = new Modal();
         this.miGaleria = new miGaleria();
+        this.funciones = new Funciones();
     }
 
     //mover funciones que no sean popups a otras clases
@@ -40,41 +41,7 @@ export default class Popups {
             }
         });
 
-        this.crearGrafico('doughnut', newArray, namesArray);
-    }
-
-    crearGrafico(tipo, newArray, namesArray) {
-
-        let chartData = {
-            type: tipo,
-            data: {
-                labels: namesArray,
-                datasets: [
-                    {
-                        backgroundColor: this.barColors,
-                        label: 'Acquisitions by year',
-                        data: newArray,
-                    }
-                ]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Positivos'
-                }
-            }
-        }
-
-        //sirve para actualizar el gráfico y evitar sobreponer gráficos
-        if (typeof graph === "undefined") {
-            window.graph = new Chart(document.getElementById('sidebarGraficos'), chartData);
-        } else {
-            window.graph.config = chartData;
-            window.graph.update();
-        }
+        this.funciones.crearGrafico('sidebarGraficos','doughnut',namesArray,newArray)
     }
 
     actualizarDivs(titulo, contenido, ruta_img) {
