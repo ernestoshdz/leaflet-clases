@@ -11,7 +11,7 @@ export default class Peticiones {
 
         //Diccionario de datos para Estados Cultivos, plagas, etc
         this.diccionario = new Diccionario();
-        
+
         this.popups = new Popups();
         this.estilos = new Estilos();
         this.modal = new Modal();
@@ -340,7 +340,7 @@ export default class Peticiones {
 
             let obj = {};
             let arry = [];
-    
+
             cultivosUnicos.forEach((value) => {
 
                 let array = [];
@@ -372,20 +372,21 @@ export default class Peticiones {
                 valores_cultivos.push(i.contador)
             });
 
-            //Evitar que el popup se duplique cada que das clic en buscar
-            this.modal.crearModal(map, {
-                titulo: "Gráfico",
-                icon: "fa fa-exclamation-triangle",
-                width: 400,
-                height: 80,
-                modal: false,
-                contenido: `<canvas id="GraficosModal"></canvas>`,
-                position: "top",
-                closeButton: true
-            });
+            //Esto resuelve que el popup se duplique cada que das buscar, solo refresca el modal
+            if (typeof graph === "undefined") {                
+                this.modal.crearModal(map, {
+                    titulo: "Gráfico",
+                    icon: "fa fa-exclamation-triangle",
+                    width: 400,
+                    height: 80,
+                    modal: false,
+                    contenido: `<canvas id="GraficosModal"></canvas>`,
+                    position: "top",
+                    closeButton: true
+                });
+            }
 
-            this.funciones.crearGrafico('GraficosModal','doughnut',etiquetas_cultivos,valores_cultivos)
-
+            this.funciones.crearGrafico('GraficosModal', 'doughnut', etiquetas_cultivos, valores_cultivos);
         }
     }
 }
