@@ -140,3 +140,7 @@ select {
 .pages-print-container [leaflet-browser-print-pages] {
     display: block;
 }
+
+#myTitulo {
+    text-align: center;
+}

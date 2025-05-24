@@ -3,7 +3,7 @@ export default class Funciones {
 
     }
 
-    crearGrafico(div, tipo, etiquetas, valores) {
+    crearGrafico(div, tipo, etiquetas, valores, descripcion) {
 
         let barColors = ["red", "green", "blue", "orange", "brown"];
     
@@ -25,7 +25,7 @@ export default class Funciones {
                 },
                 title: {
                     display: true,
-                    text: 'Positivos'
+                    text: descripcion
                 }
             }
         }

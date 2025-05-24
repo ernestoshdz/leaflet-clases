@@ -143,9 +143,6 @@ export default class Peticiones {
         map.fitBounds(geojsonLayer.getBounds());
 
         this.lyr_filtro.addLayer(geojsonLayer);
-
-        //esta no se necesita por que la búsqueda de edo la agrega primero
-        //this.lyr_filtro.addTo(map);
     }
 
     crearGaleria(cve_plaga) {
@@ -205,8 +202,6 @@ export default class Peticiones {
         //limpia misResultados antes de llenar
         document.getElementById(ElementID).innerHTML = "";
 
-        //console.log('test')
-
         let mun_filtrados = [];
 
         if (filter_data.length > 0) {
@@ -214,7 +209,6 @@ export default class Peticiones {
             <div id="miConteo"></div>
             <tr>
                 ${mostrarBtn == true ? "<th>Mapa</th>" : ""}
-                <th>ID</th>
                 <th>Estado</th>
                 <th>Municipio</th>
                 <th>Cultivo</th>
@@ -295,7 +289,6 @@ export default class Peticiones {
                 document.getElementById(ElementID).innerHTML += `
                 <tr>
                     ${mostrarBtn == true ? `<td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.CVEGEO}">Ver</button></td>` : ""}
-                    <td>${row.properties.CVEGEO}</td>
                     <td>${row.properties.Estado}</td>
                     <td>${row.properties.NOMGEO}</td>
                     <td>${obj.cultivos}</td>
@@ -342,16 +335,12 @@ export default class Peticiones {
             let arry = [];
 
             cultivosUnicos.forEach((value) => {
-
                 let array = [];
 
                 cultivos_totales.forEach((j) => {
 
                     if (value == j.cve_cultivo) {
-
-                        //console.log('son iguales')
                         array.push(j.name)
-
                     }
                 });
 
@@ -361,7 +350,6 @@ export default class Peticiones {
                 }
 
                 arry.push(obj);
-
             });
 
             let etiquetas_cultivos = [];
@@ -375,18 +363,25 @@ export default class Peticiones {
             //Esto resuelve que el popup se duplique cada que das buscar, solo refresca el modal
             if (typeof graph === "undefined") {                
                 this.modal.crearModal(map, {
-                    titulo: "Gráfico",
-                    icon: "fa fa-exclamation-triangle",
+                    titulo: '<div id="myTitulo">Prueba</div>',
+                    //icon: "fa fa-exclamation-triangle",
                     width: 400,
                     height: 80,
                     modal: false,
                     contenido: `<canvas id="GraficosModal"></canvas>`,
-                    position: "top",
+                    position: "topRight",
                     closeButton: true
                 });
             }
 
-            this.funciones.crearGrafico('GraficosModal', 'doughnut', etiquetas_cultivos, valores_cultivos);
+            let selectText = document.getElementById("mx_edos");
+            let index = parseInt(selectText.value) + 1;
+
+            let edo_selected = selectText.options[index].text;
+
+            document.getElementById("myTitulo").innerHTML = edo_selected
+
+            this.funciones.crearGrafico('GraficosModal', 'doughnut', etiquetas_cultivos, valores_cultivos, "Total de Cultivos por Municipio");
         }
     }
 }

@@ -41,7 +41,7 @@ export default class Popups {
             }
         });
 
-        this.funciones.crearGrafico('sidebarGraficos','doughnut',namesArray,newArray)
+        this.funciones.crearGrafico('sidebarGraficos','doughnut',namesArray,newArray, "Total de positivos por OISA")
     }
 
     actualizarDivs(titulo, contenido, ruta_img) {

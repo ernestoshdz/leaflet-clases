@@ -203,7 +203,8 @@ export default class Controles {
 
         data.features.forEach((i) => {
             //llenar selects (archivo sin geometría)
-            document.getElementById(id).add(new Option(i.properties[value] + " " + i.properties[name], i.properties[value]))
+            /* i.properties[value] + " " +  */ //obtener el valor del edo
+            document.getElementById(id).add(new Option(i.properties[name], i.properties[value]))
         });
 
     }
