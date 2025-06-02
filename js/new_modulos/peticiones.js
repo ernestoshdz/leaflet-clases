@@ -206,10 +206,9 @@ export default class Peticiones {
 
         if (filter_data.length > 0) {
             document.getElementById(ElementID).innerHTML = `
-            <div id="miConteo"></div>
+            
             <tr>
                 ${mostrarBtn == true ? "<th>Mapa</th>" : ""}
-                <th>Estado</th>
                 <th>Municipio</th>
                 <th>Cultivo</th>
                 <th>Plaga</th>
@@ -289,7 +288,7 @@ export default class Peticiones {
                 document.getElementById(ElementID).innerHTML += `
                 <tr>
                     ${mostrarBtn == true ? `<td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.CVEGEO}">Ver</button></td>` : ""}
-                    <td>${row.properties.Estado}</td>
+                    
                     <td>${row.properties.NOMGEO}</td>
                     <td>${obj.cultivos}</td>
                     <td>${obj.plagas}</td>
@@ -368,7 +367,7 @@ export default class Peticiones {
                     width: 400,
                     height: 80,
                     modal: false,
-                    contenido: `<canvas id="GraficosModal"></canvas>`,
+                    contenido: `<canvas id="GraficosModal"></canvas><br><div class="small" id="etiqueta_grafico"></div>`,
                     position: "topRight",
                     closeButton: true
                 });
@@ -376,12 +375,16 @@ export default class Peticiones {
 
             let selectText = document.getElementById("mx_edos");
             let index = parseInt(selectText.value) + 1;
-
             let edo_selected = selectText.options[index].text;
 
-            document.getElementById("myTitulo").innerHTML = edo_selected
+            //cantidad de cultivos totales
+            let cultv_tot = valores_cultivos.reduce((a, b) => a + b, 0);
 
-            this.funciones.crearGrafico('GraficosModal', 'doughnut', etiquetas_cultivos, valores_cultivos, "Total de Cultivos por Municipio");
+            document.getElementById("etiqueta_grafico").innerHTML = `<b>${cultv_tot} Cultivos por Municipio<b/>`;
+
+            document.getElementById("myTitulo").innerHTML = edo_selected;
+
+            this.funciones.crearGrafico('GraficosModal', 'doughnut', etiquetas_cultivos, valores_cultivos, "");
         }
     }
 }

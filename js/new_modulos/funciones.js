@@ -24,7 +24,7 @@ export default class Funciones {
                     display: false
                 },
                 title: {
-                    display: true,
+                    display: false,
                     text: descripcion
                 }
             }

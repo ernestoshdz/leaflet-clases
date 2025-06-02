@@ -17,7 +17,7 @@ body {
         'footer footer';
     grid-template-columns: 0% auto;
     /* dejar 20% para caja 3 */
-    grid-template-rows: 5% 10% 80% auto;
+    grid-template-rows: 0% 8% 87% auto;
     background-color: lightgreen;
     border: 1px solid black;
 }
@@ -123,7 +123,7 @@ body {
 
 #resultados tbody {
     display: block;
-    height: 300px;
+    height: 390px;
     width: 390px;
     overflow: auto;
     overflow-x: auto;
