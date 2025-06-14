@@ -115,7 +115,7 @@ export default class Peticiones {
         //console.log(filtro)
 
         this.crearTablaContenido("misResultados", filter_data, map, true);
-        //this.crearTablaContenido("misResultadosPrint", filter_data, map, false);
+        this.crearTablaContenido("misResultadosPrint", filter_data, map, false);
     }
 
     //Filtra la geometria del municipio con base a la selección de los resultados alfanúmericos
@@ -202,23 +202,27 @@ export default class Peticiones {
         //limpia misResultados antes de llenar
         document.getElementById(ElementID).innerHTML = "";
 
+        let selectText = document.getElementById("mx_edos");
+        let index = parseInt(selectText.value) + 1;
+        let edo_selected = selectText.options[index].text;
         let mun_filtrados = [];
 
+        //console.log(filter_data);
         if (filter_data.length > 0) {
+
+            let cultivos_totales = [];
+            let plagas_totales = [];
+
+            //myTableResults corrige el problema de la variable plagasUnicas que se declara despues de que se definen los encabezados
             document.getElementById(ElementID).innerHTML = `
             
+            <td id="myTableResults" colspan="4"></td>
             <tr>
                 ${mostrarBtn == true ? "<th>Mapa</th>" : ""}
                 <th>Municipio</th>
                 <th>Cultivo</th>
                 <th>Plaga</th>
             </tr>`;
-
-            //console.log(filter_data);
-
-            document.getElementById("miConteo").innerHTML = `Se encontró ${filter_data.length} resultado(s)`;
-
-            let cultivos_totales = [];
 
             // corregir names_cultivos y usar cultivos_totales
             filter_data.map(row => {
@@ -245,9 +249,7 @@ export default class Peticiones {
                         }
                     });
                 });
-
-                //console.log(array_cultivos)
-
+                
                 array_plagas.forEach((i) => {
                     //console.log('plagas')
                     this.diccionario.misValoresPlagas.forEach((j) => {
@@ -261,6 +263,7 @@ export default class Peticiones {
                             }
 
                             names_plagas.push(obj);
+                            plagas_totales.push(obj);
                         }
                     });
                 });
@@ -315,10 +318,10 @@ export default class Peticiones {
                 })
             });
 
-            let array = []
+            let array = [];
             cultivos_totales.forEach((i) => {
                 array.push(i.cve_cultivo)
-            })
+            });
 
             let cultivosUnicos = array.reduce((acc, item) => {
                 if (!acc.includes(item)) {
@@ -327,10 +330,26 @@ export default class Peticiones {
                 return acc;
             }, []);
 
-            //console.log(cultivosUnicos)
-            //console.log(cultivos_totales)
+            let array2 = [];
+            plagas_totales.forEach((i) => {
+                array2.push(i.cve_plaga)
+            });
 
-            let obj = {};
+            let plagasUnicas = array2.reduce((acc, item) => {
+                if (!acc.includes(item)) {
+                    acc.push(item);
+                }
+                return acc;
+            }, []);
+
+            document.getElementById("myTableResults").innerHTML = `Se encontraron ${plagasUnicas.length} plagas en ${filter_data.length} municipios de ${edo_selected}`;
+
+            //console.log(plagasUnicas)
+            //console.log(cultivosUnicos)
+
+            //console.log(cultivos_totales)
+            //console.log(plagas_totales)
+
             let arry = [];
 
             cultivosUnicos.forEach((value) => {
@@ -342,6 +361,8 @@ export default class Peticiones {
                         array.push(j.name)
                     }
                 });
+
+                let obj = {};
 
                 obj = {
                     cultivo: array[0],
@@ -373,14 +394,7 @@ export default class Peticiones {
                 });
             }
 
-            let selectText = document.getElementById("mx_edos");
-            let index = parseInt(selectText.value) + 1;
-            let edo_selected = selectText.options[index].text;
-
-            //cantidad de cultivos totales
-            let cultv_tot = valores_cultivos.reduce((a, b) => a + b, 0);
-
-            document.getElementById("etiqueta_grafico").innerHTML = `<b>${cultv_tot} Cultivos por Municipio<b/>`;
+            document.getElementById("etiqueta_grafico").innerHTML = `<b>${cultivos_totales.length} Cultivos por Municipio<b/>`;
 
             document.getElementById("myTitulo").innerHTML = edo_selected;
 
