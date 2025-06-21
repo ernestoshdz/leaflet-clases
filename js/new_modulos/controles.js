@@ -107,18 +107,24 @@ export default class Controles {
         L.control.browserPrint({
             position: 'topright',
             title: 'Imprimir ...',
-            //documentTitle: 'Mi Mapa',
+            documentTitle: 'Mi Mapa',
             printModes: [
-                L.BrowserPrint.Mode.Landscape("Tabloid", { title: "Tabloid VIEW" }),
+                /* L.BrowserPrint.Mode.Landscape("Tabloid", { title: "Tabloid VIEW" }),
                 L.BrowserPrint.Mode.Landscape("A6", { title: "Landscape" }),
                 L.BrowserPrint.Mode.Auto("A6", { title: "Auto" }),
                 L.BrowserPrint.Mode.Auto("Letter", { title: "Carta" }),
-                L.BrowserPrint.Mode.Custom("A6", { title: "Select area" }),
-                L.BrowserPrint.Mode.Landscape('A6', {
-                    margin: { left: 20, top: 5, bottom:5, right:10 },
+                L.BrowserPrint.Mode.Custom("A6", { title: "Select area" }), */
+                L.BrowserPrint.Mode.Auto('A6', {
+                    margin: { left: 5, top: 5, bottom:5, right:5 },
                     title: 'Header / Footer', header: {
                         enabled: true,
-                        text: "<span>A wonderful print Plugin</span>",
+                        text: `
+                        <div class="header">
+                            <div class="logo"></div>
+                            <div class="texto">Plagas Presentes en México</div>
+                            <div class="logo_senasica"></div>
+                        </div>
+                        `,
                         size: "10mm",
                         overTheMap: false,
                     },
@@ -126,7 +132,7 @@ export default class Controles {
                         enabled: true,
                         text: "<span>Created by Leaflet-Browser-Plugin</span>",
                         size: "10mm",
-                        overTheMap: false,
+                        overTheMap: true,
                     }
                 })
 

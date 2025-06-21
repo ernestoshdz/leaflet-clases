@@ -103,7 +103,7 @@
 .leaflet-sidebar-tabs>li.active,
 .leaflet-sidebar-tabs>ul>li.active {
     color: #fff;
-    background-color: #0074d9;
+    background-color: #611232;
 }
 
 .leaflet-sidebar-tabs>li.disabled,
@@ -201,7 +201,7 @@
     line-height: 40px;
     font-size: 14.4pt;
     color: #fff;
-    background-color: #0074d9;
+    background-color: #611232;
 }
 
 .leaflet-sidebar-right .leaflet-sidebar-header {

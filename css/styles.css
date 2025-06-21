@@ -24,7 +24,7 @@ body {
 
 .caja {
     border: 1px solid black;
-    background-color: lightgray;
+    /* background-color: lightgray; */
     text-align: left;
     padding: 10px;
 }
@@ -42,11 +42,11 @@ body {
 
 .c2_5 {
     grid-area: menu2;
-    background-color: lightgreen;
+    background-color: #611232;
     background-image: url("../img/banner_mapa_titulo.jpg");
-    background-size: 900px;
+    /* background-size: 900px; */
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: left;
     /* background-size: cover; */
 }
 
@@ -57,13 +57,42 @@ body {
 
 .c4 {
     grid-area: mapa;
-    background-color: lightpink;
+    background-color: white;
 }
 
 .c5 {
     grid-area: footer;
     background-image: url("../img/footer.jpg");
     background-size: cover;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    height: 100%;
+    display: grid;
+    grid-template-areas: 'logo texto logo2';
+    grid-template-columns: 20% auto 17%;
+    /* dejar 20% para caja 3 */
+    grid-template-rows: 100%;
+    border: 1px solid black;
+}
+
+.logo {
+    grid-area: 'logo';
+    width: 200px;
+    background-image: url("../img/logo_agricultura.jpg");
+    background-size: 160px;
+    background-repeat: no-repeat;
+}
+
+.logo_senasica {
+    grid-area: 'logo2';
+    width: 250px;
+    background-image: url("../img/senasica_logo.jpg");
+    background-size: 120px;
+    background-repeat: no-repeat;
 }
 
 .mapa {
