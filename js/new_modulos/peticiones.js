@@ -114,8 +114,8 @@ export default class Peticiones {
 
         //console.log(filtro)
 
-        this.crearTablaContenido("misResultados", filter_data, map, true);
-        this.crearTablaContenido("misResultadosPrint", filter_data, map, false);
+        this.crearTablaContenido("misResultados", filter_data, map, true, "miConteo");
+        this.crearTablaContenido("misResultadosPrint", filter_data, map, false, "miConteoPrint");
     }
 
     //Filtra la geometria del municipio con base a la selección de los resultados alfanúmericos
@@ -198,7 +198,7 @@ export default class Peticiones {
 
     }
 
-    crearTablaContenido(ElementID, filter_data, map, mostrarBtn) {
+    crearTablaContenido(ElementID, filter_data, map, mostrarBtn, conteoID) {
         //limpia misResultados antes de llenar
         document.getElementById(ElementID).innerHTML = "";
 
@@ -213,10 +213,10 @@ export default class Peticiones {
             let cultivos_totales = [];
             let plagas_totales = [];
 
-            //myTableResults corrige el problema de la variable plagasUnicas que se declara despues de que se definen los encabezados
-            document.getElementById(ElementID).innerHTML = `
+            //únicamente para misResultadosPrint
+            document.getElementById("misResultadosPrint").innerHTML = `
             
-            <td id="myTableResults" colspan="4"></td>
+            <td id="miConteoPrint" colspan="4">Texto de Prueba</td>
             <tr>
                 ${mostrarBtn == true ? "<th>Mapa</th>" : ""}
                 <th>Municipio</th>
@@ -342,7 +342,7 @@ export default class Peticiones {
                 return acc;
             }, []);
 
-            document.getElementById("myTableResults").innerHTML = `Se encontraron ${plagasUnicas.length} plagas en ${filter_data.length} municipios de ${edo_selected}`;
+            document.getElementById(conteoID).innerHTML = `Se encontraron ${plagasUnicas.length} plagas en ${filter_data.length} municipios de ${edo_selected}`;
 
             //console.log(plagasUnicas)
             //console.log(cultivosUnicos)

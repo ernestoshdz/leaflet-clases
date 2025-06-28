@@ -197,9 +197,24 @@
 							<br></br>
 							<input type="button" id="btn_buscar" value="Buscar">
 						</div>
+						<!-- apagar al inicio -->
+						<div id="tableHeader">
+							<table class="table table-striped table-hover">
+								<tbody id="misResultados2">
+									<td id="miConteo" colspan="4"></td>
+									<tr>
+										<th></th>
+										<th>Municipio</th>
+										<th>Cultivo</th>
+										<th>Plaga</th>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 						<div id="resultados">
 							<table class="table table-striped table-hover">
-								<tbody id="misResultados"></tbody>
+								<tbody id="misResultados">
+								</tbody>
 							</table>
 						</div>
 					</div>
@@ -260,8 +275,10 @@
 			<!-- Mapa -->
 			<div id="map" class="caja mapa"></div>
 			<div id=""></div>
+			<!-- corregir encabezados en la impresión -->
 			<table leaflet-browser-print-pages class="table table-striped table-hover">
-				<tbody id="misResultadosPrint"></tbody>
+				<tbody id="misResultadosPrint">
+				</tbody>
 			</table>
 			<!-- <div class="caja derechos">
 			Derechos Reservados
