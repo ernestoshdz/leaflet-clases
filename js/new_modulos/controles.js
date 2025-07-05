@@ -104,6 +104,8 @@ export default class Controles {
         this.getSelectInputs("select_plagas", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
         this.getSelectInputs("selectGallery", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
 
+        let edo = 'Jalisco';
+
         L.control.browserPrint({
             position: 'topright',
             title: 'Imprimir ...',
@@ -121,11 +123,11 @@ export default class Controles {
                         text: `
                         <div class="header">
                             <div class="logo"></div>
-                            <div class="texto">Plagas Presentes en México</div>
+                            <div id="titulo_impresion" class="texto">Plagas Presentes en ${edo}</div>
                             <div class="logo_senasica"></div>
                         </div>
                         `,
-                        size: "10mm",
+                        size: "15mm",
                         overTheMap: false,
                     },
                     footer: {

@@ -198,7 +198,7 @@ export default class Peticiones {
 
     }
 
-    crearTablaContenido(ElementID, filter_data, map, mostrarBtn, conteoID) {
+    crearTablaContenido(ElementID, filter_data, map, sidebar, conteoID) {
         //limpia misResultados antes de llenar
         document.getElementById(ElementID).innerHTML = "";
 
@@ -210,15 +210,20 @@ export default class Peticiones {
         //console.log(filter_data);
         if (filter_data.length > 0) {
 
+            /* muestra div de misResultados2, se ejecuta 2 veces, corregir */
+            document.getElementById("tableHeader").style.display = "";
+
             let cultivos_totales = [];
             let plagas_totales = [];
 
             //únicamente para misResultadosPrint
             document.getElementById("misResultadosPrint").innerHTML = `
-            
+            <tr>
+                <td colspan="4">Información Por Municipio:</td>
+            </tr>
             <td id="miConteoPrint" colspan="4">Texto de Prueba</td>
             <tr>
-                ${mostrarBtn == true ? "<th>Mapa</th>" : ""}
+                ${sidebar == true ? "<th>Mapa</th>" : ""}
                 <th>Municipio</th>
                 <th>Cultivo</th>
                 <th>Plaga</th>
@@ -290,7 +295,7 @@ export default class Peticiones {
 
                 document.getElementById(ElementID).innerHTML += `
                 <tr>
-                    ${mostrarBtn == true ? `<td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.CVEGEO}">Ver</button></td>` : ""}
+                    ${sidebar == true ? `<td><button type="button" id="btn_ver${row.properties.CVEGEO}" value="${row.properties.CVEGEO}">Ver</button></td>` : ""}
                     
                     <td>${row.properties.NOMGEO}</td>
                     <td>${obj.cultivos}</td>
@@ -399,6 +404,9 @@ export default class Peticiones {
             document.getElementById("myTitulo").innerHTML = edo_selected;
 
             this.funciones.crearGrafico('GraficosModal', 'doughnut', etiquetas_cultivos, valores_cultivos, "");
+
+        } else {
+            document.getElementById("tableHeader").style.display = "none";
         }
     }
 }
