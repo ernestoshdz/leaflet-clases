@@ -20,8 +20,9 @@ export default class App {
         }).setView([22.548165, -106.833008], 5);
 
         this.capas.load_capas(map);
-        this.controles.loadControles(map)
+        
         this.capas.crearControl(map);        
         this.sidebar.crearSideBar(map);
+        this.controles.loadControles(map)
     }
 }

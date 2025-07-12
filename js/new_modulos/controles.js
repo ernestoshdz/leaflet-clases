@@ -93,6 +93,17 @@ export default class Controles {
 
     }
 
+    myFunction(context, mode){
+        return function() {
+            context._printMode(mode);
+
+            let selectText = document.getElementById("mx_edos");
+            let index = parseInt(selectText.value) + 1;
+            let edo_selected = selectText.options[index].text;
+            document.getElementById("titulo_impresion").innerHTML = `Plagas Presentes en el Estado de ${edo_selected}`
+        }
+    }
+
     loadControles(map) {
         this.crearCoordenadaas(map);
         this.crearMinimap(map);
@@ -105,7 +116,7 @@ export default class Controles {
         this.getSelectInputs("selectGallery", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
 
         let edo = 'Jalisco';
-
+        
         L.control.browserPrint({
             position: 'topright',
             title: 'Imprimir ...',
@@ -115,7 +126,8 @@ export default class Controles {
                 L.BrowserPrint.Mode.Landscape("A6", { title: "Landscape" }),
                 L.BrowserPrint.Mode.Auto("A6", { title: "Auto" }),
                 L.BrowserPrint.Mode.Auto("Letter", { title: "Carta" }),
-                L.BrowserPrint.Mode.Custom("A6", { title: "Select area" }), */
+                L.BrowserPrint.Mode.Custom("A6", { title: "Select area" }),
+                L.BrowserPrint.Mode.Landscape("Tabloid",{title: "Tabloid VIEW",action: this.myFunction}), */
                 L.BrowserPrint.Mode.Auto('A6', {
                     margin: { left: 5, top: 5, bottom:5, right:5 },
                     title: 'Header / Footer', header: {
@@ -123,7 +135,7 @@ export default class Controles {
                         text: `
                         <div class="header">
                             <div class="logo"></div>
-                            <div id="titulo_impresion" class="texto">Plagas Presentes en ${edo}</div>
+                            <div id="titulo_impresion" class="texto"></div>
                             <div class="logo_senasica"></div>
                         </div>
                         `,
@@ -135,11 +147,11 @@ export default class Controles {
                         text: "<span>Created by Leaflet-Browser-Plugin</span>",
                         size: "10mm",
                         overTheMap: true,
-                    }
+                    },
+                    action: this.myFunction
                 })
 
-            ],
-            //customPrintStyle: { color: "green", dashArray: "5, 10", pane: "customPrintPane" }
+            ]
         }).addTo(map);
 
         //this.crearMostrarCapas(map);
