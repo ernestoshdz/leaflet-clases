@@ -114,8 +114,6 @@ export default class Controles {
         this.getSelectInputs("select_cultivos", 'sin_geometria/', "cultivos", ".geojson", "Cultivo", "cve_cultiv", null);
         this.getSelectInputs("select_plagas", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
         this.getSelectInputs("selectGallery", 'sin_geometria/', "plagas", ".geojson", "Plaga", "cve_plaga", null);
-
-        let edo = 'Jalisco';
         
         L.control.browserPrint({
             position: 'topright',

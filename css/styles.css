@@ -40,7 +40,7 @@ body {
     background-color: lightseagreen;
 }
 
-.c2_5 {
+.c2_5 {    
     grid-area: menu2;
     background-color: #611232;
     background-image: url("../img/banner_mapa_titulo.jpg");
@@ -57,7 +57,7 @@ body {
 
 .c4 {
     grid-area: mapa;
-    background-color: white;
+    background-color: lightslategray;
 }
 
 .c5 {
@@ -73,7 +73,7 @@ body {
     height: 100%;
     display: grid;
     grid-template-areas: 'logo texto logo2';
-    grid-template-columns: 20% auto 17%;
+    grid-template-columns: 26% auto 20%;
     /* dejar 20% para caja 3 */
     grid-template-rows: 100%;
     border: 1px solid black;
@@ -81,17 +81,15 @@ body {
 
 .logo {
     grid-area: 'logo';
-    width: 200px;
     background-image: url("../img/logo_agricultura.jpg");
-    background-size: 160px;
+    background-size: 185px;
     background-repeat: no-repeat;
 }
 
 .logo_senasica {
     grid-area: 'logo2';
-    width: 250px;
+    background-size: 145px;
     background-image: url("../img/senasica_logo.jpg");
-    background-size: 120px;
     background-repeat: no-repeat;
 }
 
@@ -153,13 +151,12 @@ body {
 #resultados tbody {
     display: block;
     height: 390px;
-    width: 390px;
-    overflow: auto;
-    overflow-x: auto;
+    width: 380px;
+    overflow-y: auto;
 }
 
 select {
-    max-width: 80%;
+    max-width: 70%;
 }
 
 [leaflet-browser-print-pages] {
