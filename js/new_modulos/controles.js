@@ -177,6 +177,7 @@ export default class Controles {
 
         //hacer esto mas limpio
 
+        //si es punto
         if (obj.geom == "1") {
             //Filtrado de Geometría
             this.peticiones.getCapaFiltrada("MX/", "cc2", null, this.popups.cultivosPop, ".geojson", obj, map);
@@ -184,7 +185,9 @@ export default class Controles {
             if (obj.edo != "") {
                 this.peticiones.getMunicipiosFiltrados("MX/", "cc2", ".geojson", obj, map);
             }
-        } else {
+        } 
+        // si es poligono
+        else {
 
             if (obj.edo != "") {
                 this.peticiones.getMunicipiosFiltrados("MX/", "municipios_cul_plagas", ".geojson", obj, map);

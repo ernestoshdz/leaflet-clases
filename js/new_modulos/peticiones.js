@@ -45,6 +45,7 @@ export default class Peticiones {
             this.filtrado(filtro, row, filter_data);
         });
 
+        //console.log(filtro)
         //console.log(filter_data)
 
         //esta línea limpiar el layergroup antes de llenarlo
@@ -89,14 +90,18 @@ export default class Peticiones {
         let names = row.properties.cve_cultiv.split(",");
         let names_plaga = row.properties.cve_plaga.split(",");
 
-        let edo_test = (filtro.edo != "" && filtro.edo != undefined) ? row.properties.CVE_ENT == filtro.edo : 1 == 1;
+        let edo_test = (filtro.edo != "" && filtro.edo != undefined ) ? row.properties.CVE_ENT == filtro.edo : 1 == 1;
         let cultivo_test = (filtro.cultivo != "" && filtro.cultivo != undefined) ? names.includes(filtro.cultivo) : 1 == 1;
         let plaga_test = (filtro.plaga != "" && filtro.plaga != undefined) ? names_plaga.includes(filtro.plaga) : 1 == 1;
         let cvegeo_test = (filtro.cvegeo != "" && filtro.cvegeo != undefined) ? row.properties.CVEGEO == filtro.cvegeo : 1 == 1;
 
+        //console.log(`${edo_test} && ${cultivo_test} && ${plaga_test} && ${cvegeo_test}`)
+
         if (edo_test && cultivo_test && plaga_test && cvegeo_test) {
             filter_data.push(row);
         }
+
+        //console.log(filter_data)
 
         return filter_data;
     }
@@ -112,7 +117,7 @@ export default class Peticiones {
             this.filtrado(filtro, row, filter_data);
         });
 
-        //console.log(filtro)
+        console.log(filtro)
 
         this.crearTablaContenido("misResultados", filter_data, map, true, "miConteo");
         this.crearTablaContenido("misResultadosPrint", filter_data, map, false, "miConteoPrint");
